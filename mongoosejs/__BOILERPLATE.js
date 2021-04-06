@@ -1,36 +1,28 @@
-const mongoose = require("mongoose");
-const {personModel} = require("./utils/mongoclient.js");
-const log = require("./log.js");
+const {personModel, log} = require("./utils/mongoclient.js");
 
 const useAsyncFunc = 0; // 0 = false, 1 = true
 
-const message = "your_message";
-
 const asyncFunc = async () => {
-	let reply = await personModel.what();
-	log("#get.js", {reply});
-	log(message);
+  log("#Using async/await for fetching:");
+
+  try {
+    let reply = await personModel.what();
+    log("#__boilerplate.js", {reply});
+  } catch (err) {
+    log("Can't delete::", err);
+  }
 };
 
 const syncFunc = () => {
-	personModel.what({}, (err, reply) => {
-		if (err) {
-			console.log("#me error", err);
-		} else {
-			log(reply);
-			log(message);
-		}
-	});
+  log("#Using callback for fetching:");
+
+  personModel.what({}, (err, reply) => {
+    if (err) {
+      console.log("#__boilerplate.js:: error:", err);
+    } else {
+      log(reply);
+    }
+  });
 };
 
-if (useAsyncFunc) {
-	log("#Using async/await for fetching:");
-	asyncFunc();
-} else {
-	log("#Using callback for fetching:");
-	syncFunc();
-}
-
-setTimeout(() => {
-	mongoose.connection.close();
-}, 2000);
+useAsyncFunc ? asyncFunc() : syncFunc();
