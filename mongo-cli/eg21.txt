@@ -1,0 +1,8 @@
+db.posts.find(
+{
+	views: {
+		$gt: 8
+	}
+}).pretty()
+
+#above will search for documents having their `views` property having value more than 8. This would return multiple documents if there are such matching documents.

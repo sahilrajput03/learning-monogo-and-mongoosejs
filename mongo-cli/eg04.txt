@@ -1,0 +1,2 @@
+db.posts.find()
+db.posts.find().pretty()

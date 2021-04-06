@@ -1,0 +1,16 @@
+db.posts.find({title: 'Post Two'}).pretty()
+
+db.posts.update(
+{ title: 'Post Two' },
+{
+	$set:{
+	body: 'Body of post 2',
+	category: 'Techonology',
+	}
+}
+)
+
+db.posts.find({title: 'Post Two'}).pretty()
+
+
+#(Literally adding content to document)Update a document keeping earlier content like they were.

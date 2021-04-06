@@ -1,0 +1,9 @@
+db.posts.find({title: 'Post One'}).pretty()
+
+db.posts.update(
+{title: 'Post One'},
+{
+	$inc: { likes: 2}
+})
+
+db.posts.find({title: 'Post One'}).pretty()

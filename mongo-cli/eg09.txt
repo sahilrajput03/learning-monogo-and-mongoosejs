@@ -1,0 +1,2 @@
+db.posts.findOne({category: 'News'})
+#shows only the first found document.

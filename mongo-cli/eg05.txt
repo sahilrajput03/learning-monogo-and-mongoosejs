@@ -1,0 +1,2 @@
+db.posts.find({category: 'News'})
+db.posts.find({category: 'News'}).pretty()

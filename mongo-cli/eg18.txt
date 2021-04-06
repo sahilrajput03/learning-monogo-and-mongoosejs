@@ -1,0 +1,8 @@
+db.posts.find(
+{
+	comments: {
+	$elemMatch:{
+		user: 'Mary Williams'
+		}
+	}
+})

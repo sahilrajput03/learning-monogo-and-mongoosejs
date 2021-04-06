@@ -1,0 +1,19 @@
+db.posts.createIndex({ title: 'text' })
+
+db.posts.find(
+{
+	$text: {
+		$search: "\"Post O\""
+	}
+}).pretty()
+
+#Above serach will match two posts i.e, Post Two and Post Three.
+
+db.posts.find(
+{
+	$text: {
+		$search: "\"Post O\""
+	}
+}).pretty()
+
+#Above search will match one posts i.e, Post One.
