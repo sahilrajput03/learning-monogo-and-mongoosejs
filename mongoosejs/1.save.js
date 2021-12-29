@@ -3,14 +3,9 @@ const {personModel, log} = require('./0.mongoclient')
 const useAsyncFunc = 1 // * 1 is true, 0 is false.
 
 const ManchandaGoyal = new personModel({
-	name: 'old Bigyan 7',
-	phoneNumber: 8360267243,
-	address: 'Boooo',
-	// gadgetlist: [
-	// 	'60096d427d8b711e40ecf6c6',
-	// 	'60096102b684d8259c8cd527',
-	// 	'60096d427d8b711e40ecf6c6',
-	// ],
+	name: 'Bigyan 1',
+	phoneNumber: 123456789,
+	address: 'Some address here',
 })
 
 // log("#debug manchandagoyal before saving: 'Object.keys(ManchandaGoyal)'", Object.keys(ManchandaGoyal));
