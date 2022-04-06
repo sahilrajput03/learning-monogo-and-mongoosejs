@@ -1,18 +1,55 @@
+Case study:
+
+db.posts.insertMany([
+{
+	title: 'Post Two',
+	body: 'Body of post two',
+	category: 'Technology',
+	data: Date()
+},
+{
+	title: 'Post Two',
+	body: 'Body of post two - DUPLICATE',
+	category: 'Technology - DUPLICATE',
+	data: Date()
+},
+{
+	title: 'Post Two - a',
+	body: 'Body of post three',
+	category: 'News',
+	data: Date()
+}
+])
+
+
 db.posts.find({title: 'Post Two'})
 
 db.posts.update(
-{ title: 'Post Two' },
-{
-	title: 'Post Two',
-	body: 'New Post 2 body',
-	date: Date()
-},{
-	upsert: true
-})
+	{ title: 'Post Two' },
+	{
+		title: 'Post Two',
+		body: 'New Post 2 body',
+		date: Date()
+	},
+	{ upsert: true}
+)
+# Output: WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+# Observation: Only the first post(i.e., a single document) that matched the filter is only updated!
+
 
 db.posts.find({title: 'Post Two'})
-
+# Obeservation: Shows only the exact two posts that matches i.e., first two posts in the above three posts we added.
 
 #Here, all of the data of previous document will be OVERWRITTEN.
 #Here, the second object is **OPTIONAL**. The second options object in current example tells that if the record doesn't exist then, create it. (upsert name comes from like INSERt and UPdate)
 ##Watch for next example for CLARIFICATION.
+
+
+
+# ___ Debugging commands
+
+# Delete all posts
+db.posts.deleteMany({})
+
+# Get all posts
+db.posts.find()
