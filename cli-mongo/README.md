@@ -131,6 +131,27 @@ db.posts.findOne({category: 'News'})
 ## Case 1 - `update()` method
 
 ```bash
+db.posts.find({title: 'Post Random'})
+
+db.posts.update(
+	{ title: 'Post Random' },
+	{
+		title: 'Post Two',
+		body: 'New Post 2 body',
+		date: Date()
+	}
+)
+
+db.posts.find({title: 'Post Two'})
+```
+
+## Case 2 - `update()` method with `upsert: true`
+
+> *tldr:*
+> 1. `update()` method in **Case 1** doesn't create a new document if the searched document doesn't exists.
+> 2. `upsert: true` in `update()` method creates a completely new document if the matching document is not found.
+
+```bash
 # Reset our posts collection
 db.posts.deleteMany({})
 
@@ -175,10 +196,11 @@ db.posts.update(
 db.posts.find({title: 'Post Two'})
 # Observaion 2: VERIFIED
 
-# IMPORTANT:
-# previous document's data will be OVERWRITTEN.
+###IMPORTANT:
+# Previous document's data will be OVERWRITTEN.
 # The second object is **OPTIONAL**. The second options object in current example tells that if the record doesn't exist then, create it. (upsert name comes from like UPdate OR insERT )
 ##Watch for next example for CLARIFICATION.
+
 
 # ___ Debugging commands
 
@@ -186,50 +208,56 @@ db.posts.find({title: 'Post Two'})
 db.posts.find()
 ```
 
-## Case 2 - `update()` method
-
-```bash
-db.posts.find({title: 'Post Random'})
-
-db.posts.update(
-	{ title: 'Post Random' },
-	{
-		title: 'Post Two',
-		body: 'New Post 2 body',
-		date: Date()
-	}
-)
-
-db.posts.find({title: 'Post Two'})
-
-#Note this will not create a new document if title with text 'Post Two' doesn't exists.
-```
-
-
 ## Case 3 - `update()` method
 
+*tldr*: Add content to document.
+
 ```bash
 db.posts.find({title: 'Post Two'}).pretty()
 
+# So this will update a document keeping all the earlier content as it is.
 db.posts.update(
-{ title: 'Post Two' },
-{
-	$set:{
-	body: 'Body of post 2',
-	category: 'Techonology',
+	{ title: 'Post Two' },
+	{
+		$set: {
+				body: 'Body of post 2',
+				category: 'Techonology',
+			  }
 	}
-}
 )
 
 db.posts.find({title: 'Post Two'}).pretty()
-
-
-#(Literally adding content to document)Update a document keeping earlier content like they were.
 ```
 
-## Case 4 - `update()` method
+## Case 4 - `$inc` operator with `update()` method
+
+*tldr:* The first matching document's likes property will be incremented by 2(if the property doesn't exists then the property will be set to 2).
 
 ```bash
+# Reset our posts collection
+db.posts.deleteMany({})
+
+db.posts.insertMany([
+{
+	title: 'Post One',
+	body: 'Body of post One',
+	category: 'Technology',
+	data: Date()
+},
+{
+	title: 'Post One',
+	body: 'Body of post One - DUPLICATE',
+	category: 'Technology - DUPLICATE',
+	data: Date()
+},
+{
+	title: 'Post One - a',
+	body: 'Body of post One - DUPLICATE - DUPLICATE',
+	category: 'News',
+	data: Date()
+}
+])
+
 db.posts.find({title: 'Post One'}).pretty()
 
 db.posts.update(
@@ -237,72 +265,202 @@ db.posts.update(
 {
 	$inc: { likes: 2}
 })
+# Output: WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+# Observation1 : 1 document updated.
 
 db.posts.find({title: 'Post One'}).pretty()
+#Observation2 : The very first post is updated with property `likes: 2`.
+#Observattion3 : Re-running the last update command will make the property to `likes: 4`
 ```
 
 ## Case 5 - `update()` method
 
 ```bash
+# Reset our posts collection
+db.posts.deleteMany({})
+
+db.posts.insertMany([
+{
+	title: 'Post One',
+	likes: 10
+},
+{
+	title: 'Post One',
+	likes: 10
+},
+{
+	title: 'Post One - a',
+	likes: 10
+}
+])
+
 db.posts.find({title: 'Post One'}).pretty()
+#Observation1: Finds first two document which we added using above command.
 
 db.posts.update(
-{title: 'Post One'},
-{
-	$rename: { likes: 'views'}
-})
+	{title: 'Post One'},
+	{
+		$rename: { likes: 'views'}
+	}
+)
+# Output: WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+# Observation2: 1 Document updated.
 
 db.posts.find({title: 'Post One'}).pretty()
+# PROVES (Observation2): Only the first matched document's property name i.e., `likes` updated to `views`.
 ```
 
 ## `remove()` method
 
 ```bash
-db.posts.remove({title: 'Post Four'})
-# todo: move this into top basic command for easy inclusiveness to mind
+# Reset our posts collection
+db.posts.deleteMany({})
+
+db.posts.insertMany([
+{
+	title: 'Post One',
+	likes: 10
+},
+{
+	title: 'Post One',
+	likes: 10
+},
+{
+	title: 'Post One - a',
+	likes: 10
+}
+])
+
+db.posts.find({title: 'Post One'}).pretty()
+#Observation1: Finds first two document which we added using above command.
+
+db.posts.remove({title: 'Post One'})
+# Output: WriteResult({ "nRemoved" : 2 })
+# Observation: Two documents updated.
 ```
 
 ## `$set` operator ( subdocuments )
 
 ```bash
-db.posts.find({title: 'Post One'}).pretty()
+# Reset our posts collection
+db.posts.deleteMany({})
 
-db.posts.update(
+db.posts.insertMany([
 {
-	title: 'Post One'
+	title: 'Post One',
+	likes: 10
 },
 {
-	$set: {
-	comments: [
-			{
-				user: 'Mary Williams',
-				body: 'Comment One',
-				date: Date()
-			},
-			{
-				user: 'Harry White',
-				body: 'Comment Two',
-				date: Date()
-			}
-		]
-	}
-})
+	title: 'Post One',
+	likes: 10
+},
+{
+	title: 'Post One - a',
+	likes: 10
+}
+])
 
 db.posts.find({title: 'Post One'}).pretty()
+#Observation0: Finds first two document which we added using above command.
+
+db.posts.update(
+	{ 	title: 'Post One' },
+	{ 	$set:	{
+					comments:	[
+									{
+										user: 'Mary Williams',
+										body: 'Comment One',
+										date: Date()
+									},
+									{
+										user: 'Harry White',
+										body: 'Comment Two',
+										date: Date()
+									}
+								]
+				}
+	}
+)
+# Observation1: The first matching document is now has new comment property as added.
+
+db.posts.find({title: 'Post One'}).pretty()
+# Below ouput PROVES Observation1
+# Output: 
+# {
+#         "_id" : ObjectId("624de10adfa76c8c1b1fdf35"),
+#         "title" : "Post One",
+#         "likes" : 10,
+#         "comments" : [
+#                 {
+#                         "user" : "Mary Williams",
+#                         "body" : "Comment One",
+#                         "date" : "Thu Apr 07 2022 00:20:53 GMT+0530 (IST)"
+#                 },
+#                 {
+#                         "user" : "Harry White",
+#                         "body" : "Comment Two",
+#                         "date" : "Thu Apr 07 2022 00:20:53 GMT+0530 (IST)"
+#                 }
+#         ]
+# }
+# {
+#         "_id" : ObjectId("624de10adfa76c8c1b1fdf36"),
+#         "title" : "Post One",
+#         "likes" : 10
+# }
+# 
 ```
 
 ## `$elemMatch` operator
 
+*tldr:* `$elemMatch` finds a document by searching for the filter against each array element as specified in the search query.
+
 ```bash
-db.posts.find(
-{
-	comments: {
-	$elemMatch:{
-		user: 'Mary Williams'
-		}
+# Reset our posts collection
+db.posts.deleteMany({})
+
+db.posts.insertMany([
+	{
+			"title" : "Post One",
+			"likes" : 10,
+			"comments" : [
+					{
+							"user" : "Mary Williams",
+							"body" : "Comment One",
+							"date" : "Thu Apr 07 2022 00:20:53 GMT+0530 (IST)"
+					},
+					{
+							"user" : "Harry White",
+							"body" : "Comment Two",
+							"date" : "Thu Apr 07 2022 00:20:53 GMT+0530 (IST)"
+					}
+			]
 	}
-})
+])
+
+
+db.posts.find({ comments: 	{ $elemMatch: {user: 'Mary Williams'}}	}).pretty()
+# Output:
+# {
+#         "_id" : ObjectId("624de303dfa76c8c1b1fdf38"),
+#         "title" : "Post One",
+#         "likes" : 10,
+#         "comments" : [
+#                 {
+#                         "user" : "Mary Williams",
+#                         "body" : "Comment One",
+#                         "date" : "Thu Apr 07 2022 00:20:53 GMT+0530 (IST)"
+#                 },
+#                 {
+#                         "user" : "Harry White",
+#                         "body" : "Comment Two",
+#                         "date" : "Thu Apr 07 2022 00:20:53 GMT+0530 (IST)"
+#                 }
+#         ]
+# }
 ```
+
+***->>>> TODO: clean below notes***
 
 ## `createIndex()` method
 
