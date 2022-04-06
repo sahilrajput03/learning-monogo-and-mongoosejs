@@ -1,4 +1,4 @@
-**Windows User Note:** (Bash isn't performing good with mongo shell environment, so prefer cmd for now).
+Windows User Note: Bash isn't performing good with mongo shell environment, so prefer cmd for now.
 
 # To open a mongo shell environment.
 mongo
