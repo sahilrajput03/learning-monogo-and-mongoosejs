@@ -1,24 +1,34 @@
-Open cmd and type mongo, to open a mongo shell environment.
-(Bash isn't performing good with mongo shell environment, so prefer cmd for now).
+**Windows User Note:** (Bash isn't performing good with mongo shell environment, so prefer cmd for now).
 
-show dbs
+# To open a mongo shell environment.
+mongo
+
+
 #show all dbs
+show dbs
 
+
+#To select db (or create **new db** if doesn't exist)
 use test1
-#to select/(create new) db
 
-show collections
-#It'll show the collections of currently selected db.
 
-db.dropDatabase()
-#Will delete currently selected database.
-
+#shows currently selected db name
 db
-#shows the current db name.
 
-db.createCollection('posts')
-#creates new collection 'posts' in currently selected db.
 
+#Show the collections of currently selected db.
 show collections
-#To show collections in currently selected db.
 
+
+#creates new collection 'posts' in currently selected db.
+db.createCollection('posts')
+
+
+#Drop a collection named `mycollection`
+use myDb # Select a database
+db.mycollection.drop() # Drop collection.
+
+
+# Dropping a db:
+use myDb # Select a database
+db.dropDatabase() # Drop selected database.
