@@ -8,6 +8,7 @@ const log = console.log
 // Config values, We are connecting to database with name `db-project1`
 const MONGODB_URI = 'mongodb://localhost:27017/db-project1'
 const PORT = 3001
+const commonErrorMessgDb = { message: "error", reason: "Some database error occured!" }
 
 // Start backend server
 const app = express()
@@ -30,10 +31,8 @@ app.use(cors())
 // Enable json parsing of request.body of all requests
 app.use(express.json())
 
-let log
 
-const commonErrorMessage = { message: "error", reason: "Some database error occured!" }
-
+// Making a POST endping @ http://localhost:3001/api/todos so we can add notes to mongo database
 // LEARN: req stands for request and res stands for response
 app.post('/api/todos', async (req, res) => {
 
@@ -59,11 +58,13 @@ app.post('/api/todos', async (req, res) => {
         return
 
     } catch (error) {
-        res.json(commonErrorMessage)
+        res.json(commonErrorMessgDb)
         return
     }
 })
 
+// Making a GET endpoint @ http://localhost:3001/api/todos so we fetch notes from mongo from anywhere
+// TIP: You can browse http://localhost:3001/api/todos in browser to get all notes
 app.get('/api/todos', async (req, res) => {
 
     try {
@@ -75,9 +76,9 @@ app.get('/api/todos', async (req, res) => {
         res.json(notesDocuments)
 
     } catch (error) {
-        res.json(commonErrorMessage)
+        res.json(commonErrorMessgDb)
 
     }
 })
 
-app.listen(PORT, () => log(`::Server is listening @ ${PORT}`))
+app.listen(PORT, () => log('::Server is listening @ ', PORT))
