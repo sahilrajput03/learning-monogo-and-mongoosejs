@@ -12,24 +12,22 @@ const DB_URI = 'mongodb://localhost/' + DB_NAME
 const PERSON_COLLECTION_NAME = 'persons' //* You should use pluras names, otherwise mongodb will itself change the name to plurals.
 const GADGET_COLLECTION_NAME = 'gadgets' //* You should use pluras names, otherwise mongodb will itself change the name to plurals.
 
-connect(DB_URI, {
-	useNewUrlParser: true,
-	useUnifiedTopology: true,
-	// useFindAndModify: false,
-	// useCreateIndex: true,
-})
-.then(() => {
-	console.log("Connection successful... ☺");
-})
-// .catch((error) => {
-// 	console.log("error connection to MongoDB:", error.message);
-// });
+connect(DB_URI, {useNewUrlParser: true, useUnifiedTopology: true})
+	.then(() => {
+		console.log('Connection successful... ☺')
+	})
+	.catch((error) => {
+		console.log('error connection to MongoDB:', error.message)
+	})
 
 // LEARN: General schema definition.
 // let personSchema = new Schema({name: String});
 
 // LEARN: Using below personSchema is enables schemaless saving(i.e., strict: false) to db => https://stackoverflow.com/a/12389168
-let personSchema = new Schema({gadgetlist: [{type: Schema.Types.ObjectId, ref: GADGET_COLLECTION_NAME}]}, {strict: false})
+let personSchema = new Schema(
+	{gadgetlist: [{type: Schema.Types.ObjectId, ref: GADGET_COLLECTION_NAME}]},
+	{strict: false}
+)
 // ? Using above type of ref tells moongoose to treat, gadgets field as join from `GADGET_COLLECTION_NAME` collection.
 const personModel = model(
 	PERSON_COLLECTION_NAME, //LEARN: Model name(if third param is omiited, mongoose will pluralize `modelName` to get a `collectionName`.)
@@ -45,31 +43,18 @@ const gadgetModel = model(
 	GADGET_COLLECTION_NAME //Using third parameter ensures that mongoose will only use this name as collection name, and won't pluralize it. Yikes!
 )
 
-// module.exports = {
-// 	connection,
-// 	personModel,
-// 	gadgetModel,
-// 	GADGET_COLLECTION_NAME,
-// 	PERSON_COLLECTION_NAME,
-// 	log,
-// }
-
-
-// setTimeout(() => {
-// 	connection.close()
-// }, 2000)
-
 require('hot-module-replacement')({
 	// options are optional
 	ignore: /node_modules/, // regexp to decide if module should be ignored; also can be a function accepting string and returning true/false
 })
 
 //? Importing the module is must to apply hot odule replacement to it.
-let code = require('./code.js') 
+let code = require('./code.js')
 
 //? Loading module on file changes...
 // When file code.js is changed it'll run that code.
 if (module.hot) {
+	console.log('This piece..')
 	module.hot.accept('./code.js', () => {
 		console.log('callback executed..')
 		// if foo.js or any files that foo.js depend on are modified this callback is invoked

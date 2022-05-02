@@ -1,0 +1,17 @@
+{
+  "name": "with-jest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "integration1.js",
+  "scripts": {
+    "test": "jest --watchAll"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "jest": "^28.0.3",
+    "mongoose": "^6.3.2"
+  }
+}

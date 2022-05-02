@@ -7,9 +7,11 @@ module.exports = (personModel) => {
 	const useAsyncFunc = 1 // * 1 is true, 0 is false.
 
 	const ManchandaGoyal = new personModel({
-		name: 'Bigyan 1',
+		// All below properties are saved bcoz we have set strict: false in database.
+		name: 'Bigyan 3',
 		phoneNumber: 123456789,
 		address: 'Some address here',
+		addressAlternate: 'Australia rocks',
 	})
 
 	// log("#debug manchandagoyal before saving: 'Object.keys(ManchandaGoyal)'", Object.keys(ManchandaGoyal));
