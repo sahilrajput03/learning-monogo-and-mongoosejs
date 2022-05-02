@@ -1,2 +1,0 @@
-db.posts.find().forEach(function(doc) { print('Blog Post: ' + doc.title)})
-#amazing, prints documents like that!!

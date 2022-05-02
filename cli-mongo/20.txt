@@ -1,5 +1,0 @@
-db.posts.find({title: 'Post Two'}).pretty()
-
-db.posts.update({title: 'Post Two'}, {$set: { views: 10}})
-
-db.posts.find({title: 'Post Two'}).pretty()

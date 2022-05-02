@@ -1,5 +1,0 @@
-db.posts.find().sort({title:1}).pretty()
-#title: 1 means sort by title in ascending order.
-
-db.posts.find().sort({title:-1}).pretty()
-#title: -1 means sort by title in descending order.

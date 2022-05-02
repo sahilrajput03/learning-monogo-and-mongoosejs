@@ -1,5 +1,0 @@
-db.posts.find().limit(2)
-#show first two posts only.
-
-db.posts.find().sort({title: -1}).limit(2)
-#show only first two posts in descending ordered list by title property.

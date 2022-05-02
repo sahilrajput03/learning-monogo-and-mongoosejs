@@ -1,5 +1,0 @@
-db.posts.find().pretty()
-
-db.posts.remove({title: 'Post Four'})
-
-db.posts.find().pretty()
