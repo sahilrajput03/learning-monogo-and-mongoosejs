@@ -17,7 +17,7 @@ const asyncFunc = async () => {
 		.find({})
 		.sort({name: 'asc'})
 		.limit(limit)
-		.skip((page - 1) * 2)
+		.skip((page - 1) * limit)
 	log('::get.js', {reply})
 }
 
