@@ -1,10 +1,6 @@
-// other file
-// const {personModel, log} = require('./0.mongoclient')
-
 module.exports = (personModel) => {
 	let log = console.log
 	log()
-	const useAsyncFunc = 1 // * 1 is true, 0 is false.
 
 	const ManchandaGoyal = new personModel({
 		// All below properties are saved bcoz we have set strict: false in database.
@@ -24,14 +20,5 @@ module.exports = (personModel) => {
 		log('::save.js', {reply})
 	}
 
-	const syncFunc = () => {
-		log('::Using callback for save:')
-
-		ManchandaGoyal.save(function (err, reply) {
-			if (err) return console.error(err)
-			log('::save.js', {reply})
-		})
-	}
-
-	useAsyncFunc ? asyncFunc() : syncFunc()
+	asyncFunc()
 }
