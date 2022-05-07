@@ -17,6 +17,7 @@ const testRunner = async ({name, cb}) => {
 		log('\tTEST PASSED  ✅')
 	} catch (e) {
 		console.log('\tTEST FAILED:❌')
+		console.log(e)
 	}
 }
 // FYI :: I WOULD NEED TO RUN RUNTEST MANUALLY IN THE END OF THIS FILE.

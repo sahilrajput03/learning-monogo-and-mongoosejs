@@ -1,0 +1,2 @@
+- inspect 4.dropcollection.js file
+- inspect 5.dropDatabase.js file

@@ -4,9 +4,10 @@
 	"main": "index.js",
 	"license": "MIT",
 	"scripts": {
-		"start": "nodemon -q index.js"
+		"start": "nodemon -w ./startTesting.js ./startTesting.js"
 	},
 	"dependencies": {
+		"dotenv": "^16.0.0",
 		"hot-module-replacement": "^3.0.4",
 		"mongoose": "^5.11.13",
 		"prompt": "^1.1.0"

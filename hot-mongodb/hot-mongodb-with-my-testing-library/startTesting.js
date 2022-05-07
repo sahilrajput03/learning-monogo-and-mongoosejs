@@ -9,7 +9,7 @@ require('hot-module-replacement')({
 
 let _beforeAll
 global.beforeAll = async (cb) => {
-	_beforeAll = cb
+	_beforeAll = cb || (() => {})
 }
 
 let connected = false
@@ -22,8 +22,8 @@ global.connectToDb = async (cb) => {
 		return
 	}
 
-	log('...here...')
-	log(persistConnection, connected)
+	// log('...here...')
+	// log(persistConnection, connected)
 
 	await mongoose.disconnect()
 	await cb()
