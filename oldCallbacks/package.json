@@ -1,0 +1,13 @@
+{
+	"name": "mongoose-revisit2021",
+	"version": "1.0.0",
+	"main": "index.js",
+	"license": "MIT",
+	"scripts": {
+		"start": "nodemon -q index.js"
+	},
+	"dependencies": {
+		"mongoose": "^5.11.13",
+		"prompt": "^1.1.0"
+	}
+}

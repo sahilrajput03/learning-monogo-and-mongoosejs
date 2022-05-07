@@ -58,4 +58,6 @@ module.exports = {
 	log,
 }
 
-global.connection = connection
+setTimeout(() => {
+	connection.close()
+}, 2000)

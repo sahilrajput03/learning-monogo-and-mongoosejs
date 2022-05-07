@@ -19,3 +19,17 @@ const asyncFunc = async () => {
 		log("Can't delete::", err)
 	}
 }
+
+const syncFunc = () => {
+	log('::Using callback for fetching:')
+	personModel.deleteOne({_id}, (err, reply) => {
+		if (err) {
+			console.log('::me error', err)
+		} else {
+			log(reply)
+			log(message)
+		}
+	})
+}
+
+useAsyncFunc ? asyncFunc() : syncFunc()

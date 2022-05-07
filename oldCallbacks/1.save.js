@@ -1,5 +1,7 @@
 const {personModel, log} = require('./0.mongoclient')
 
+const useAsyncFunc = 1 // * 1 is true, 0 is false.
+
 const ManchandaGoyal = new personModel({
 	name: 'Bigyan 1',
 	phoneNumber: 123456789,
@@ -13,8 +15,16 @@ const asyncFunc = async () => {
 	log('::Using async/await for save:')
 
 	let reply = await ManchandaGoyal.save()
-	log({reply})
-	connection.close()
+	log('::save.js', {reply})
 }
 
-asyncFunc()
+const syncFunc = () => {
+	log('::Using callback for save:')
+
+	ManchandaGoyal.save(function (err, reply) {
+		if (err) return console.error(err)
+		log('::save.js', {reply})
+	})
+}
+
+useAsyncFunc ? asyncFunc() : syncFunc()
