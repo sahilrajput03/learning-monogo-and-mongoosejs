@@ -22,7 +22,6 @@ global.connectToDb = async (cb) => {
 	// log('...here...')
 	// log(persistConnection, connected)
 
-	await mongoose.disconnect()
 	await cb()
 	connected = true
 
@@ -56,5 +55,7 @@ function clearLogs() {
 
 	// Clearn tmux-scroll history
 	const {execSync} = require('child_process')
-	execSync('tmux clear-history', {stdio: 'pipe'})
+	// execSync('tmux clear-history', {stdio: 'pipe'})
+	// This is true craziness!
+	execSync('tmux clear-history -t $(tmux display -pt "${TMUX_PANE:?}" "#{pane_index}")', {stdio: 'pipe'})
 }
