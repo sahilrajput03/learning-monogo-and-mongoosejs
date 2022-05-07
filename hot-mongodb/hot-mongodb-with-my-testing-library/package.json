@@ -4,7 +4,7 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "start": "nodemon -w ./mongodb-hot.js ./mongodb-hot.js",
+    "start": "nodemon -w ./startTesting.js -w ./_setup_test_globals.js ./startTesting.js",
     "z": "nodemon -w ./a.js ./a.js"
   },
   "scriptsComments": {

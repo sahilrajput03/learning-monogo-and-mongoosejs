@@ -1,9 +1,13 @@
 console.log('---> Starting test suite <---')
 
 let tests = []
+let onlyTests = [] // facilitates to run a list of test.only tests to be run.
 
 const test = (name, cb) => {
 	tests.push({name, cb})
+}
+test.only = (name, cb) => {
+	onlyTests.push({name, cb})
 }
 
 const testRunner = async ({name, cb}) => {
@@ -17,11 +21,19 @@ const testRunner = async ({name, cb}) => {
 }
 // FYI :: I WOULD NEED TO RUN RUNTEST MANUALLY IN THE END OF THIS FILE.
 const runTests = async () => {
-	for await (const test of tests) {
-		await testRunner(test)
+	if (onlyTests.length > 0) {
+		log('----->>>USING TEST.ONLY<<<<----')
+		for await (const test of onlyTests) {
+			await testRunner(test)
+		}
+	} else {
+		for await (const test of tests) {
+			await testRunner(test)
+		}
 	}
 
 	tests = [] // IMPORTANT: Empty the tests array so later when we re-run the tests it won't rerun older queued tests.
+	onlyTests = [] // IMPORTANT: Empty the tests array so later when we re-run the tests it won't rerun older queued tests.
 }
 
 // This doesn't work man idk why!

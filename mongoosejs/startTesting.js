@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 require('dotenv').config()
-require('./_setup_test_globals.js')
+// require('./_setup_test_globals.js')
+require('flash') // I linked to this local _setup_test_globas.js file using `npm link`, so you might need to run `npm link flash` in this project once to make it work with npm.
 
 require('hot-module-replacement')({
 	ignore: /node_modules/,
@@ -32,7 +33,7 @@ let beforeAll = async () => {
 beforeAll()
 
 if (module.hot) {
-	console.log('here....')
+	// console.log('here....')
 	module.hot.accept('./code.js', () => {
 		// LEARN: This callack is run only after code.js is loaded!
 		

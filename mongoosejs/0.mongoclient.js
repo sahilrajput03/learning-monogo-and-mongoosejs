@@ -17,12 +17,12 @@ connect(DB_URI, {
 	useFindAndModify: false,
 	useCreateIndex: true,
 })
-// .then(() => {
-// 	console.log("Connection successful... ☺");
-// })
-// .catch((error) => {
-// 	console.log("error connection to MongoDB:", error.message);
-// });
+	.then(() => {
+		console.log('Connection successful... ☺')
+	})
+	.catch((error) => {
+		console.log('error connection to MongoDB:', error.message)
+	})
 
 // LEARN: General schema definition.
 // let personSchema = new Schema({name: String});
