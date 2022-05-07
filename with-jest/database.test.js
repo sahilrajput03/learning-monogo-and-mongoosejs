@@ -2,6 +2,9 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 let log = console.log
 
+let name = process.env.CUSTOMER_NAME
+let email = process.env.CUSTOMER_EMAIL
+
 describe('Customer CRUD',() => {
     let connection;
     let database;
@@ -34,11 +37,11 @@ describe('Customer CRUD',() => {
     test("Add Customer POST /customers",async () => {
 
         const response = await customers.create({
-            name: process.env.CUSTOMER_NAME,
-            email: process.env.CUSTOMER_EMAIL
+            name,
+            email
         });
         await response.save();
-        expect(response.name).toBe(process.env.CUSTOMER_NAME);
+        expect(response.name).toBe(name);
 
     });
 
@@ -51,7 +54,7 @@ describe('Customer CRUD',() => {
 
     test("Update Customer PUT /customers/:id", async () => {
       
-        const response = await customers.updateOne({name: process.env.CUSTOMER_NAME},{email: process.env.CUSTOMER_EMAIL_ALT});
+        const response = await customers.updateOne({name},{email: process.env.CUSTOMER_EMAIL_ALT});
 		// log(response)
         expect(response.modifiedCount).toEqual(1);
 
@@ -59,18 +62,16 @@ describe('Customer CRUD',() => {
 
     test("Customer update is correct", async () => {
 
-        const responseTwo = await customers.findOne({name: process.env.CUSTOMER_NAME});
+        const responseTwo = await customers.findOne({name});
         expect(responseTwo.email).toBe(process.env.CUSTOMER_EMAIL_ALT);
 
     });
 
     test("Delete Customer DELETE /customers/:id", async() => {
         
-        const response = await customers.deleteOne({name: process.env.CUSTOMER_NAME});
+        const response = await customers.deleteOne({name});
 		// log(response)
         expect(response.deletedCount).toBe(1);
-      
-
     });
 
 });
