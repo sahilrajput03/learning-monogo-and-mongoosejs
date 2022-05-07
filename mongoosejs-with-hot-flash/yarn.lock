@@ -120,8 +120,8 @@
   "resolved" "https://registry.npmjs.org/eyes/-/eyes-0.1.8.tgz"
   "version" "0.1.8"
 
-"flash@file:../flash":
-  "resolved" "file:../flash"
+"flash@file:../../flash":
+  "resolved" "file:../../flash"
   "version" "1.0.0"
 
 "fs.realpath@^1.0.0":
