@@ -8,7 +8,8 @@ connectToDb(async () => {
 
 beforeAll(async () => {
 	log('::beforeAll::Dropping the database', DB_NAME)
-	await mongoose.connection.dropDatabase() // This drops the currently connected database intelligently i.e., we don't need give the name of the db as it delete the same db to which we are connected to.
+	const db = mongoose.connection
+	await db.dropDatabase() // This drops the currently connected database intelligently i.e., we don't need give the name of the db as it delete the same db to which we are connected to.
 })
 
 // LEARN: You may never use console.log but simply use debugger to debug values like reply below by placing breakpoint in the functin end brace.
@@ -20,6 +21,7 @@ test('save', async () => {
 		address: 'Some address here',
 	})
 	let reply1 = await bruno.save()
+	if (reply1.name !== 'Bruno Mars') throw new Error('Pikachu not saved!')
 
 	let pikachu = new personModel({
 		name: 'Pikachu',
@@ -27,6 +29,7 @@ test('save', async () => {
 		address: 'New York City',
 	})
 	let reply2 = await pikachu.save()
+	if (reply2.name !== 'Pikachu') throw new Error('Pikachu not saved!')
 })
 
 test('find', async () => {
@@ -49,8 +52,15 @@ test('findById', async () => {
 	let reply = await personModel.findById(_id)
 })
 
-test('deleteOne', async () => {
+test('findByIdAndRemove', async () => {
 	let person = await personModel.findOne({name: 'Bruno Mars'})
+	let _id = person._id
+
+	let reply2 = await personModel.findByIdAndRemove(_id)
+})
+
+test('deleteOne', async () => {
+	let person = await personModel.findOne({name: 'Pikachu'})
 	let _id = person._id
 
 	let reply = await personModel.deleteOne({_id})
@@ -163,6 +173,11 @@ test('update never delete older data', async () => {
 
 	let good = c1 && c2 && c3 && c4 && c5 && c6
 	if (!good) throw new Error('some value got deleted.')
+})
+
+test('dropCollection', async () => {
+	const db = mongoose.connection
+	await db.dropCollection(PERSON_COLLECTION_NAME) // LEARN: This will throw error if the colleciton is already not there!
 })
 
 // OTHERS

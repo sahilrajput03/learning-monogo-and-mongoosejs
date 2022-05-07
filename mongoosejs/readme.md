@@ -1,11 +1,9 @@
-- You should always use pluras names, otherwise mongodb will itself change the name to plurals. Yikes!
+## Mongodb Tips:
 
-- (Usage of collection name as person(gets translated to `people` lol), user gets translated to `users`, people gets translated to `peoples` )
+- You should always use pluras names (e.g., `users`, `persons`), otherwise mongodb will itself change the name to plurals itself. Below is a list of unexpected possible behaviour if you try to use singular names:
 
-- Good collection names: `users`, `persons`
-
-Tip: db.mycollection.drop() to drop a collection.
-
-FInd /?????
-
-drop a collection with mongoose!
+```bash
+user -> users
+person -> people
+people -> peoples
+```
