@@ -7,36 +7,43 @@ require('hot-module-replacement')({
 	ignore: /node_modules/,
 })
 
-// running codejs here..
-require('./code.js')
+let _beforeAll
+global.beforeAll = async (cb) => {
+	_beforeAll = cb
+}
 
-let beforeAll = async () => {
-	connection = await mongoose.connect(
-		'mongodb://localhost:27017/test_' + process.env.DATABASE,
-		{useNewUrlParser: true, useUnifiedTopology: true}
-	)
-	db = mongoose.connection
-	const collection = process.env.COLLECTION
+let connected = false
+global.persistConnection = null
+global.connectToDb = async (cb) => {
+	if (connected) {
+		// RE-RUN BEFOREALL BEFORE RUNNING TESTSUITE
+		// LEARN*1: I run beforeAll even when the connection is active, this is beneficial say when you want your dbs or collecitons to cleared off.
+		await _beforeAll()
+		return
+	}
 
-	global.customers = mongoose.model(
-		'test_' + process.env.COLLECTION,
-		mongoose.Schema({
-			name: String,
-			email: String,
-		})
-	)
+	log('...here...')
+	log(persistConnection, connected)
+
+	await mongoose.disconnect()
+	await cb()
+	connected = true
+
+	// Run beforeAll method (FYI: See LEARN*1)
+	await _beforeAll()
 
 	// We're ready to run tests now coz connection is successful
 	runTests()
 }
 
-beforeAll()
+// running codejs here..
+require('./code.js')
 
 if (module.hot) {
 	// console.log('here....')
 	module.hot.accept('./code.js', () => {
 		// LEARN: This callack is run only after code.js is loaded!
-		
+
 		// Clear the output of previous tests  ~ Sahil
 		console.clear()
 

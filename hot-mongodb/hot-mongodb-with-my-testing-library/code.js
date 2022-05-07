@@ -1,4 +1,26 @@
+const mongoose = require('mongoose')
 require('dotenv').config()
+
+connectToDb(async () => {
+	// LEARN: ALL CONNECTION AND MODEL RELATED STUFF GOES HERE..
+	connection = await mongoose.connect(
+		'mongodb://localhost:27017/test_' + process.env.DATABASE,
+		{useNewUrlParser: true, useUnifiedTopology: true}
+	)
+	db = mongoose.connection
+
+	const collection = process.env.COLLECTION
+
+	customers = mongoose.model(
+		'test_' + process.env.COLLECTION,
+		mongoose.Schema({
+			name: String,
+			email: String,
+		})
+	)
+})
+
+beforeAll(async () => {})
 
 let log = console.log
 let name = process.env.CUSTOMER_NAME
@@ -20,10 +42,7 @@ test('2. All Customers GET /customers', async () => {
 })
 
 test('3. Update Customer PUT /customers/:id', async () => {
-	const response = await customers.updateOne(
-		{name},
-		{email: altEmail}
-	)
+	const response = await customers.updateOne({name}, {email: altEmail})
 	// log(response)
 	if (response.modifiedCount !== 1) throw new Error('update failed.')
 })
