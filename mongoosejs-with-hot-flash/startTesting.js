@@ -15,7 +15,12 @@ global.beforeAll = async (cb) => {
 let connected = false
 global.persistConnection = null
 global.connectToDb = async (cb) => {
-	if (connected) return
+	if (connected) {
+		return
+	}
+
+	// log('...here...')
+	// log(persistConnection, connected)
 
 	await cb()
 	connected = true
@@ -52,8 +57,5 @@ function clearLogs() {
 	const {execSync} = require('child_process')
 	// execSync('tmux clear-history', {stdio: 'pipe'})
 	// This is true craziness!
-	execSync(
-		'tmux clear-history -t $(tmux display -pt "${TMUX_PANE:?}" "#{pane_index}")',
-		{stdio: 'pipe'}
-	)
+	execSync('tmux clear-history -t $(tmux display -pt "${TMUX_PANE:?}" "#{pane_index}")', {stdio: 'pipe'})
 }
