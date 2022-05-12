@@ -52,8 +52,12 @@ function clearLogs() {
 	const {execSync} = require('child_process')
 	// execSync('tmux clear-history', {stdio: 'pipe'})
 	// This is true craziness!
-	execSync(
-		'tmux clear-history -t $(tmux display -pt "${TMUX_PANE:?}" "#{pane_index}")',
-		{stdio: 'pipe'}
-	)
+
+	try {
+		execSync('badCommand', {stdio: 'pipe'}) // mimic for people who don't have tmux installed should also be able to run without errors!
+		execSync(
+			'tmux clear-history -t $(tmux display -pt "${TMUX_PANE:?}" "#{pane_index}")',
+			{stdio: 'pipe'}
+		)
+	} catch (error) {}
 }
