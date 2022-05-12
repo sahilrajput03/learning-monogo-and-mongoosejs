@@ -8,6 +8,7 @@
 	},
 	"dependencies": {
 		"dotenv": "^16.0.0",
+		"expect": "^28.1.0",
 		"hot-module-replacement": "^3.0.4",
 		"mongoose": "^5.11.13",
 		"prompt": "^1.1.0"

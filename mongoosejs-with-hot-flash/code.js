@@ -1,5 +1,8 @@
 const mongoose = require('mongoose')
 require('dotenv').config()
+const {expect} = require('expect')
+// expect DOCS (from jest): https://jestjs.io/docs/expect
+// toMatchObject: (src: https://jestjs.io/docs/expect#tomatchobjectobject) Used to check that a JavaScript object matches a subset of the properties of an object
 
 // LEARN: ALL CONNECTION AND MODEL RELATED STUFF GOES HERE..
 connectToDb(async () => {
@@ -12,44 +15,66 @@ beforeAll(async () => {
 	await db.dropDatabase() // This drops the currently connected database intelligently i.e., we don't need give the name of the db as it delete the same db to which we are connected to.
 })
 
+const _bruno = {
+	name: 'Bruno Mars',
+	phoneNumber: 123456789,
+	address: 'Some address here',
+}
+
+const _pikachu = {
+	name: 'Pikachu',
+	phoneNumber: 987654321,
+	address: 'New York City',
+}
 // LEARN: You may never use console.log but simply use debugger to debug values like reply below by placing breakpoint in the functin end brace.
 test('save', async () => {
-	// LEARN: Placing this in beforeAll or top scope causes issues.
-	let bruno = new personModel({
-		name: 'Bruno Mars',
-		phoneNumber: 123456789,
-		address: 'Some address here',
-	})
-	let reply1 = await bruno.save()
-	if (reply1.name !== 'Bruno Mars') throw new Error('Pikachu not saved!')
+	let bruno = new personModel(_bruno) // LEARN: Placing this in beforeAll or top scope causes issues.
+	expect(bruno).toHaveProperty('_id')
+	// log(bruno._id)// a dynamic _id is assigned here already!
 
-	let pikachu = new personModel({
-		name: 'Pikachu',
-		phoneNumber: 987654321,
-		address: 'New York City',
-	})
+	expect(bruno).toMatchObject(_bruno)
+
+	let reply1 = await bruno.save()
+	expect(reply1).toMatchObject(bruno)
+
+	let pikachu = new personModel(_pikachu)
 	let reply2 = await pikachu.save()
-	if (reply2.name !== 'Pikachu') throw new Error('Pikachu not saved!')
+	expect(reply2).toMatchObject(pikachu)
 })
 
 test('find', async () => {
 	let reply = await personModel.find() // This may find multiple docuemnts
-	// log(reply)
+	expect(() => {
+		reply.toObject() // Since we can't call toObject directly to array so this throws error.
+	}).toThrow()
+
+	reply = reply.map((doc) => doc.toObject())
+
+	expect(reply[0]).toMatchObject(_bruno)
+	expect(reply[1]).toMatchObject(_pikachu)
 })
 
 test('findOne', async () => {
 	const documentFilter = {name: 'Bruno Mars'}
 	let reply = await personModel.findOne(documentFilter) // This would only return first matching document only.
 
+	expect(() => {
+		expect(reply).toMatchObject(_bruno)
+	}).toThrow()
+
 	let person = reply.toObject() //? LEARN: Without .toObject we can't access the properties at all. Src: https://stackoverflow.com/a/32634029/10012446
-	if (person.name !== 'Bruno Mars')
-		throw new Error('Did not found the document.')
+	expect(person).toMatchObject(_bruno)
 })
 
 test('findById', async () => {
 	let person = await personModel.findOne({name: 'Bruno Mars'})
+	expect(() => {
+		expect(reply).toMatchObject(_bruno)
+	}).toThrow()
+
 	let _id = person._id
 	let reply = await personModel.findById(_id)
+	expect(reply.toObject()).toMatchObject(_bruno)
 })
 
 test('findByIdAndRemove', async () => {
@@ -69,10 +94,18 @@ test('deleteOne', async () => {
 test('insertMany', async () => {
 	let arr = require('./data')
 	let reply = await personModel.insertMany(arr) // Docs (insertMany): https://mongoosejs.com/docs/api.html#model_Model.insertMany
+
+	reply = reply.map((doc) => doc.toObject())
+
+	// log(reply)
+	reply.forEach((doc, idx) => {
+		expect(doc).toMatchObject(arr[idx])
+	})
 })
 
 test('deleteMany', async () => {
 	let reply = await personModel.deleteMany({})
+	expect(reply.ok).toBe(1)
 })
 
 test('pagination', async () => {
@@ -148,36 +181,35 @@ test('populate', async () => {
 test('update never delete older data', async () => {
 	let _id = mongoose.Types.ObjectId()
 
-	let ManchandaGoyal = new personModel({
+	let manchanda = {
 		_id,
 		name: 'Bruno Mars',
 		phoneNumber: 123456789,
 		address: 'Some address here',
-	})
+	}
+	let ManchandaGoyal = new personModel(manchanda)
 	let person = await ManchandaGoyal.save()
+
+	expect(person).toMatchObject(ManchandaGoyal)
 
 	// LEARN: We are updating nothing, this is safe i.e., not data will be overwritten.
 	let newProperties = {} // LEARN: In mongodb, updation of document happens like: newDocument = {...updateDocument ,...oldDocuemnt} , that means older proeperties will persist even if you omit in `updatedObject` while updating a document. Yikes!!
 
-	let updated = await personModel.findByIdAndUpdate(_id, newProperties)
-	let updatePerson = updated.toObject()
+	let updated = await personModel
+		.findByIdAndUpdate(_id, newProperties)
+		.populate('gadgetlist')
+		.lean()
+	// LEARN: lean() method above tells mongoose to call .toObject() method internally for this query. So, we don't need as:
+	// xxx ^--> let updatePerson = updated.toObject()
 
-	let c1 = person.name === 'Bruno Mars'
-	let c2 = person.phoneNumber === 123456789
-	let c3 = person.address === 'Some address here'
-
-	let c4 = updatePerson.name === 'Bruno Mars'
-	let c5 = updatePerson.phoneNumber === 123456789
-	let c6 = updatePerson.address === 'Some address here'
-	// log({c1, c2, c3, c4, c5, c6})
-
-	let good = c1 && c2 && c3 && c4 && c5 && c6
-	if (!good) throw new Error('some value got deleted.')
+	delete manchanda.gadgetlist // this was necessary to pass next test!
+	expect(updated).toMatchObject(manchanda)
 })
 
 test('dropCollection', async () => {
 	const db = mongoose.connection
-	await db.dropCollection(PERSON_COLLECTION_NAME) // LEARN: This will throw error if the colleciton is already not there!
+	let status = await db.dropCollection(PERSON_COLLECTION_NAME) // LEARN: This will throw error if the colleciton is already not there!
+	expect(status).toBe(true)
 })
 
 // OTHERS
