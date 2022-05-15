@@ -54,10 +54,8 @@ function clearLogs() {
 	// This is true craziness!
 
 	try {
+		execSync('tmux clear-history -t $(tmux display -pt "${TMUX_PANE:?}" "#{pane_index}")', {stdio: 'pipe'})
+		// LEARN: Please keep this ^^ line always before the below line!
 		execSync('badCommand', {stdio: 'pipe'}) // mimic for people who don't have tmux installed should also be able to run without errors!
-		execSync(
-			'tmux clear-history -t $(tmux display -pt "${TMUX_PANE:?}" "#{pane_index}")',
-			{stdio: 'pipe'}
-		)
 	} catch (error) {}
 }
