@@ -27,7 +27,7 @@ const _pikachu = {
 	address: 'New York City',
 }
 // LEARN: You may never use console.log but simply use debugger to debug values like reply below by placing breakpoint in the functin end brace.
-test('save', async () => {
+test('save bruno', async () => {
 	let bruno = new personModel(_bruno) // LEARN: Placing this in beforeAll or top scope causes issues.
 	expect(bruno).toHaveProperty('_id')
 	// log(bruno._id)// a dynamic _id is assigned here already!
@@ -35,11 +35,13 @@ test('save', async () => {
 	expect(bruno).toMatchObject(_bruno)
 
 	let reply1 = await bruno.save()
-	expect(reply1).toMatchObject(bruno)
+	expect(reply1).toMatchObject(_bruno)
+})
 
+test('save pikachu', async () => {
 	let pikachu = new personModel(_pikachu)
 	let reply2 = await pikachu.save()
-	expect(reply2).toMatchObject(pikachu)
+	expect(reply2).toMatchObject(_pikachu)
 })
 
 test('find', async () => {
@@ -82,6 +84,7 @@ test('findByIdAndRemove', async () => {
 	let _id = person._id
 
 	let reply2 = await personModel.findByIdAndRemove(_id)
+	// todo: add expectation here.
 })
 
 test('deleteOne', async () => {
