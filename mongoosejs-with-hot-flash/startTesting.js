@@ -1,4 +1,3 @@
-const mongoose = require('mongoose')
 require('dotenv').config()
 // require('./_setup_test_globals.js')
 require('flash') // I linked to this local _setup_test_globas.js file using `npm link`, so you might need to run `npm link flash` in this project once to make it work with npm.
@@ -7,9 +6,17 @@ require('hot-module-replacement')({
 	ignore: /node_modules/,
 })
 
-let _beforeAll
-global.beforeAll = async (cb) => {
-	_beforeAll = cb || (() => {})
+// Check if user passed -w or --watch flag
+let watching = process.argv.includes('-w') || process.argv.includes('--watch')
+
+let beforeAllFn = () => {}
+global.beforeAll = (cb) => {
+	beforeAllFn = cb
+}
+
+let closeDbFn = () => {}
+global.closeDb = (cb) => {
+	closeDbFn = cb
 }
 
 let connected = false
@@ -21,10 +28,17 @@ global.connectToDb = async (cb) => {
 	connected = true
 
 	// Run beforeAll method (FYI: See LEARN*1)
-	await _beforeAll()
+	await beforeAllFn()
 
 	// We're ready to run tests now coz connection is successful
 	runTests()
+
+	if (!watching) {
+		await closeDbFn()
+	} else {
+		// Keep the event loop busy with minimal load!
+		setTimeout(() => {}, 24 * 60 * 60 * 1000) // 24hrs
+	}
 }
 
 // running codejs here..
@@ -38,7 +52,7 @@ if (module.hot) {
 		// RE-RUN BEFOREALL BEFORE RUNNING TESTSUITE
 		// LEARN*1: I run beforeAll even when the connection is active, this is beneficial say when you want your dbs or collecitons to cleared off.
 		clearLogs() // Learn: Using clearLogs here helps us print logs of beforeAll on each execution as well. Yikes!
-		await _beforeAll()
+		await beforeAllFn()
 
 		runTests()
 	})
@@ -54,7 +68,10 @@ function clearLogs() {
 	// This is true craziness!
 
 	try {
-		execSync('tmux clear-history -t $(tmux display -pt "${TMUX_PANE:?}" "#{pane_index}")', {stdio: 'pipe'})
+		execSync(
+			'tmux clear-history -t $(tmux display -pt "${TMUX_PANE:?}" "#{pane_index}")',
+			{stdio: 'pipe'}
+		)
 		// LEARN: Please keep this ^^ line always before the below line!
 		execSync('badCommand', {stdio: 'pipe'}) // mimic for people who don't have tmux installed should also be able to run without errors!
 	} catch (error) {}
