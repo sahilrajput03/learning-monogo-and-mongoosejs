@@ -9,6 +9,11 @@ connectToDb(async () => {
 	await require('./initMongodb.js')
 })
 
+closeDb(async () => {
+	// Close connection asap in non-watch mode.
+	await mongoose.disconnect() // Mongoose Docs: Runs .close() on all connections in parallel.
+})
+
 beforeAll(async () => {
 	log('::beforeAll::Dropping the database', DB_NAME)
 	const db = mongoose.connection
