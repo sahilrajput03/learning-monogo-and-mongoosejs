@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-require('dotenv').config()
+require('dotenv').config({path: '.env.test'}) // Alway remember to use separate .env.test file for environment.
 const {expect} = require('expect')
 // expect DOCS (from jest): https://jestjs.io/docs/expect
 // toMatchObject: (src: https://jestjs.io/docs/expect#tomatchobjectobject) Used to check that a JavaScript object matches a subset of the properties of an object

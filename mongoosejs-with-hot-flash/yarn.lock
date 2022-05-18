@@ -318,10 +318,6 @@
   dependencies:
     "to-regex-range" "^5.0.1"
 
-"flash@file:../../flash":
-  "resolved" "file:../../flash"
-  "version" "1.0.0"
-
 "fs.realpath@^1.0.0":
   "integrity" "sha1-FQStJSMVjKpA20onh8sBQRmU6k8="
   "resolved" "https://registry.npmjs.org/fs.realpath/-/fs.realpath-1.0.0.tgz"
