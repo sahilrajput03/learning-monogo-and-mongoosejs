@@ -137,7 +137,7 @@ test('populate', async () => {
 		deviceId: 102,
 	})
 
-	iphoneDoc = await iphoneDoc.save()
+	await iphoneDoc.save()
 	await nokiaDoc.save()
 
 	let _id = mongoose.Types.ObjectId() // creating `_id` manually to be able to avoid confusion later on; src: https://stackoverflow.com/a/17899751/10012446
