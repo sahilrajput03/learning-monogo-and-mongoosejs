@@ -128,38 +128,44 @@ test('pagination', async () => {
 })
 
 test('populate', async () => {
-	let iphone = new gadgetModel({
+	let iphoneDoc = new gadgetModel({
 		deviceName: 'Parineeti',
 		deviceId: 101,
 	})
-	let nokia = new gadgetModel({
+	let nokiaDoc = new gadgetModel({
 		deviceName: 'Alia Bhatt',
 		deviceId: 102,
 	})
 
-	iphone = await iphone.save()
-	nokia = await nokia.save()
+	iphoneDoc = await iphoneDoc.save()
+	await nokiaDoc.save()
 
 	let _id = mongoose.Types.ObjectId() // creating `_id` manually to be able to avoid confusion later on; src: https://stackoverflow.com/a/17899751/10012446
 
-	let person = new personModel({
+	let personDoc = new personModel({
 		_id,
 		name: 'Bruno Mars',
 		phoneNumber: 123456789,
 		address: 'Some address here',
-		gadgetlist: [iphone._id],
+		gadgetlist: [iphoneDoc._id],
 	})
-	let reply1 = await person.save()
 
+	await personDoc.save()
+
+	// Way 1 - Inserting a ObjectId to array i.e., `gadgetlist` property.
 	// Pushing item to array using $push method
-	let reply = await personModel.findByIdAndUpdate(_id, {
-		$push: {
-			gadgetlist: [nokia._id],
-		},
-	})
+	// let reply = await personModel.findByIdAndUpdate(_id, {
+	// 	$push: {
+	// 		gadgetlist: [nokiaDoc._id],
+	// 	},
+	// })
 
-	let gadgetList = [iphone._id, nokia._id]
-	let personGadgetList = reply.gadgetlist
+	// Way 2 - FSO - Inserting a ObjectId to array i.e., `gadgetlist` property.
+	personDoc.gadgetlist = personDoc.gadgetlist.concat(nokiaDoc._id)
+	await personDoc.save()
+
+	let gadgetList = [iphoneDoc._id, nokiaDoc._id]
+	let personGadgetList = personDoc.gadgetlist
 
 	const includesAllIds = gadgetList.every((gadgetId) =>
 		personGadgetList.includes(gadgetId)
@@ -172,7 +178,7 @@ test('populate', async () => {
 
 	// Get a populated person
 	let replyPopulated = await personModel.findById(_id).populate('gadgetlist')
-	const deviceNames = [iphone.deviceName, nokia.deviceName]
+	const deviceNames = [iphoneDoc.deviceName, nokiaDoc.deviceName]
 	const personDeviceNames = replyPopulated.gadgetlist.map((g) => g.deviceName)
 
 	const includesAllNames = deviceNames.every((g) =>
