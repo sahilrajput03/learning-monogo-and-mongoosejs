@@ -142,14 +142,14 @@ test('populate', async () => {
 
 	let _id = mongoose.Types.ObjectId() // creating `_id` manually to be able to avoid confusion later on; src: https://stackoverflow.com/a/17899751/10012446
 
-	let ManchandaGoyal = new personModel({
+	let person = new personModel({
 		_id,
 		name: 'Bruno Mars',
 		phoneNumber: 123456789,
 		address: 'Some address here',
 		gadgetlist: [gadget1._id],
 	})
-	let reply1 = await ManchandaGoyal.save()
+	let reply1 = await person.save()
 
 	// Pushing item to array using $push method
 	let reply = await personModel.findByIdAndUpdate(_id, {
@@ -189,29 +189,29 @@ test('populate', async () => {
 test('update never delete older data', async () => {
 	let _id = mongoose.Types.ObjectId()
 
-	let manchanda = {
+	let _manchanda = {
 		_id,
 		name: 'Bruno Mars',
 		phoneNumber: 123456789,
 		address: 'Some address here',
 	}
-	let ManchandaGoyal = new personModel(manchanda)
-	let person = await ManchandaGoyal.save()
+	let person = new personModel(_manchanda)
+	person = await person.save()
 
-	expect(person).toMatchObject(ManchandaGoyal)
+	expect(person).toMatchObject(_manchanda)
 
 	// LEARN: We are updating nothing, this is safe i.e., not data will be overwritten.
 	let newProperties = {} // LEARN: In mongodb, updation of document happens like: newDocument = {...updateDocument ,...oldDocuemnt} , that means older proeperties will persist even if you omit in `updatedObject` while updating a document. Yikes!!
 
-	let updated = await personModel
+	person = await personModel
 		.findByIdAndUpdate(_id, newProperties)
 		.populate('gadgetlist')
 		.lean()
 	// LEARN: lean() method above tells mongoose to call .toObject() method internally for this query. So, we don't need as:
-	// xxx ^--> let updatePerson = updated.toObject()
+	// xxx ^--> let updatePerson = person.toObject()
 
-	delete manchanda.gadgetlist // this was necessary to pass next test!
-	expect(updated).toMatchObject(manchanda)
+	delete _manchanda.gadgetlist // this was necessary to pass next test!
+	expect(person).toMatchObject(_manchanda)
 })
 
 test('dropCollection', async () => {
