@@ -128,17 +128,17 @@ test('pagination', async () => {
 })
 
 test('populate', async () => {
-	const iphone = new gadgetModel({
+	let iphone = new gadgetModel({
 		deviceName: 'Parineeti',
 		deviceId: 101,
 	})
-	const nokia = new gadgetModel({
+	let nokia = new gadgetModel({
 		deviceName: 'Alia Bhatt',
 		deviceId: 102,
 	})
 
-	let gadget1 = await iphone.save()
-	let gadget2 = await nokia.save()
+	iphone = await iphone.save()
+	nokia = await nokia.save()
 
 	let _id = mongoose.Types.ObjectId() // creating `_id` manually to be able to avoid confusion later on; src: https://stackoverflow.com/a/17899751/10012446
 
@@ -147,18 +147,18 @@ test('populate', async () => {
 		name: 'Bruno Mars',
 		phoneNumber: 123456789,
 		address: 'Some address here',
-		gadgetlist: [gadget1._id],
+		gadgetlist: [iphone._id],
 	})
 	let reply1 = await person.save()
 
 	// Pushing item to array using $push method
 	let reply = await personModel.findByIdAndUpdate(_id, {
 		$push: {
-			gadgetlist: [gadget2._id],
+			gadgetlist: [nokia._id],
 		},
 	})
 
-	let gadgetList = [gadget1._id, gadget2._id]
+	let gadgetList = [iphone._id, nokia._id]
 	let personGadgetList = reply.gadgetlist
 
 	const includesAllIds = gadgetList.every((gadgetId) =>
@@ -172,7 +172,7 @@ test('populate', async () => {
 
 	// Get a populated person
 	let replyPopulated = await personModel.findById(_id).populate('gadgetlist')
-	const deviceNames = [gadget1.deviceName, gadget2.deviceName]
+	const deviceNames = [iphone.deviceName, nokia.deviceName]
 	const personDeviceNames = replyPopulated.gadgetlist.map((g) => g.deviceName)
 
 	const includesAllNames = deviceNames.every((g) =>
