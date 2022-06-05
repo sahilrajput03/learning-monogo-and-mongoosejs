@@ -185,6 +185,7 @@ test('populate', async () => {
 
 	# Get a populated person (populate after save, src: populate afer save: https://stackoverflow.com/a/50334013/10012446)
 	await personDoc.populate('gadgetlist').execPopulate() // works in v5 but doesn't work in v6 as execPopulate is discarded for documents in v6.
+	# Docs: execPopulate: https://mongoosejs.com/docs/migrating_to_6.html#removed-execpopulate
 	# Mongoose: Migrating from v5 to v6: https://mongoosejs.com/docs/migrating_to_6.html#removed-execpopulate
 	*/
 
