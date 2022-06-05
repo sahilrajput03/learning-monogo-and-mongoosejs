@@ -63,14 +63,12 @@ test('find', async () => {
 
 test('findOne', async () => {
 	const documentFilter = {name: 'Bruno Mars'}
-	let reply = await personModel.findOne(documentFilter) // This would only return first matching document only.
+	let person = await personModel.findOne(documentFilter) // This would only return first matching document only.
+	expect(person).toMatchObject(_bruno) // works in v6
 
-	expect(() => {
-		expect(reply).toMatchObject(_bruno)
-	}).toThrow()
-
-	let person = reply.toObject() //? LEARN: Without .toObject we can't access the properties at all. Src: https://stackoverflow.com/a/32634029/10012446
-	expect(person).toMatchObject(_bruno)
+	// Learn: For v5 above test expectation throws error so one needs to call .toObject() method to get real js object like we do below:
+	// person = person.toObject() //? LEARN: Without .toObject we can't access the properties at all. Src: https://stackoverflow.com/a/32634029/10012446
+	// expect(person).toMatchObject(_bruno)
 })
 
 test('findById', async () => {
@@ -113,7 +111,13 @@ test('insertMany', async () => {
 
 test('deleteMany', async () => {
 	let reply = await personModel.deleteMany({})
-	expect(reply.ok).toBe(1)
+	let numberOfInsertedDoc = require('./data').length
+
+	// For v6
+	expect(reply.deletedCount).toBe(numberOfInsertedDoc)
+
+	// For v5
+	// expect(reply.ok).toBe(1)
 })
 
 test('pagination', async () => {
@@ -175,13 +179,17 @@ test('populate', async () => {
 	if (!includesAllIds) {
 		throw new Error('gadget 1 or 2 or both are not there..!')
 	}
+	/*
+	# Get a populated person
+	let replyPopulated = await personModel.findById(_id).populate('gadgetlist
 
-	// Get a populated person
-	// let replyPopulated = await personModel.findById(_id).populate('gadgetlist')
+	# Get a populated person (populate after save, src: populate afer save: https://stackoverflow.com/a/50334013/10012446)
+	await personDoc.populate('gadgetlist').execPopulate() // works in v5 but doesn't work in v6 as execPopulate is discarded for documents in v6.
+	# Mongoose: Migrating from v5 to v6: https://mongoosejs.com/docs/migrating_to_6.html#removed-execpopulate
+	*/
 
-	// Get a populated person (populate after save, src: populate afer save: https://stackoverflow.com/a/50334013/10012446)
-	await personDoc.populate('gadgetlist').execPopulate()
-	
+	await personDoc.populate('gadgetlist')
+
 	const deviceNames = [iphoneDoc.deviceName, nokiaDoc.deviceName]
 	const personDeviceNames = personDoc.gadgetlist.map((g) => g.deviceName)
 

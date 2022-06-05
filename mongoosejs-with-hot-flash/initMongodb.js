@@ -14,8 +14,10 @@ const GADGET_COLLECTION = 'gadgets' //* You should use pluras names, otherwise m
 module.exports = connect(DB_URI, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
-	useFindAndModify: false,
-	useCreateIndex: true,
+
+	//? LEARN useFindAndModify and useCreateIndex are not supported in mongoose v6 but supported in v5
+	// useFindAndModify: false,
+	// useCreateIndex: true,
 })
 
 // LEARN: General schema definition.
