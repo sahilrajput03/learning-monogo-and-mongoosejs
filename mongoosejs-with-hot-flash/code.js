@@ -162,7 +162,7 @@ test('populate', async () => {
 
 	// Way 2 - FSO - Inserting a ObjectId to array i.e., `gadgetlist` property.
 	personDoc.gadgetlist = personDoc.gadgetlist.concat(nokiaDoc._id)
-	await personDoc.save()
+	await personDoc.save({debug: true})
 
 	let gadgetList = [iphoneDoc._id, nokiaDoc._id]
 	let personGadgetList = personDoc.gadgetlist
@@ -177,9 +177,13 @@ test('populate', async () => {
 	}
 
 	// Get a populated person
-	let replyPopulated = await personModel.findById(_id).populate('gadgetlist')
+	// let replyPopulated = await personModel.findById(_id).populate('gadgetlist')
+
+	// Get a populated person (populate after save, src: populate afer save: https://stackoverflow.com/a/50334013/10012446)
+	await personDoc.populate('gadgetlist').execPopulate()
+	
 	const deviceNames = [iphoneDoc.deviceName, nokiaDoc.deviceName]
-	const personDeviceNames = replyPopulated.gadgetlist.map((g) => g.deviceName)
+	const personDeviceNames = personDoc.gadgetlist.map((g) => g.deviceName)
 
 	const includesAllNames = deviceNames.every((g) =>
 		personDeviceNames.includes(g)
