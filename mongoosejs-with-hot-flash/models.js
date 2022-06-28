@@ -2,6 +2,7 @@ const {Schema, model} = require('mongoose')
 
 const PERSON_COLLECTION = 'persons' //* You should use pluras names, otherwise mongodb will itself change the name to plurals.
 const GADGET_COLLECTION = 'gadgets' //* You should use pluras names, otherwise mongodb will itself change the name to plurals.
+const CARS_COLLECTION = 'cars' //* You should use pluras names, otherwise mongodb will itself change the name to plurals.
 
 // LEARN: General schema definition.
 // let personSchema = new Schema({name: String});
@@ -26,9 +27,34 @@ const gadgetModel = model(
 	GADGET_COLLECTION //Using third parameter ensures that mongoose will only use this name as collection name, and won't pluralize it. Yikes!
 )
 
+const carSchema = new Schema({
+	carName: {
+		type: String,
+		validate: {
+			// Custom validator src: https://mongoosejs.com/docs/validation.html#custom-validators
+			validator: (value) => {
+				const isValid = value === 'audi' || value === 'bmw'
+				if (typeof isValid === 'undefined')
+					throw 'isValid got undefined value in carName validator function.'
+
+				return isValid
+			},
+			message: (props) =>
+				`${props.value} is not allowed. Only audi and bmw cars are allowed.`,
+		},
+	},
+})
+
+const carModel = model(
+	CARS_COLLECTION,
+	carSchema,
+	CARS_COLLECTION //Using third parameter ensures that mongoose will only use this name as collection name, and won't pluralize it. Yikes!
+)
+
 module.exports = {
 	personModel,
 	gadgetModel,
 	PERSON_COLLECTION,
 	GADGET_COLLECTION,
+	carModel,
 }

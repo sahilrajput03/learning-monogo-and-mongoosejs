@@ -9,14 +9,20 @@ set('returnOriginal', false) //This makes returning of new updated object instea
 const DB_NAME = 'testdb'
 const DB_URI = 'mongodb://localhost/' + DB_NAME
 
-let connectPromise = connect(DB_URI, {
-	// @ts-ignore
-	useNewUrlParser: true,
-	useUnifiedTopology: true,
+async function connectFn() {
+	await connect(DB_URI, {
+		// @ts-ignore
+		useNewUrlParser: true,
+		useUnifiedTopology: true,
 
-	//? LEARN useFindAndModify and useCreateIndex are not supported in mongoose v6 but supported in v5
-	// useFindAndModify: false,
-	// useCreateIndex: true,
-})
+		//? LEARN useFindAndModify and useCreateIndex are not supported in mongoose v6 but supported in v5
+		// useFindAndModify: false,
+		// useCreateIndex: true,
+	})
+
+	console.log(':INFO: CONNECTION TO DB SUCCESSFUL.')
+}
+
+let connectPromise = connectFn()
 
 module.exports = {connectPromise, DB_NAME, DB_URI}

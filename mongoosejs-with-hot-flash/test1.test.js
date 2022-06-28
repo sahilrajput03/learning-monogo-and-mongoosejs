@@ -4,7 +4,12 @@ const {expect} = require('expect')
 // expect DOCS (from jest): https://jestjs.io/docs/expect
 // toMatchObject: (src: https://jestjs.io/docs/expect#tomatchobjectobject) Used to check that a JavaScript object matches a subset of the properties of an object
 const {connectPromise, DB_NAME} = require('./initMongodb.js')
-const {personModel, gadgetModel, PERSON_COLLECTION} = require('./models')
+const {
+	personModel,
+	gadgetModel,
+	PERSON_COLLECTION,
+	carModel,
+} = require('./models')
 const {log} = console
 
 let connectToDb = global.connectToDb,
@@ -247,7 +252,31 @@ test('dropCollection', async () => {
 	// log(db)
 	let status = await db.dropCollection(PERSON_COLLECTION) // LEARN: This will throw error if the colleciton is already not there!
 	expect(status).toBe(true)
-	// throw 'cao'
+})
+
+test('custom validator function with custom message', async () => {
+	// Valid `carName` is `audi` or `bmw`.
+	let car1Doc = new carModel({
+		carName: 'audi',
+	})
+	let car1 = await car1Doc.save()
+	// log({car1})
+	// Above is car is saved successfully!
+
+	// Trying to get validation error message (custom validator defined in `carSchema` in models file).
+	let expectedErrMessg = ' is not allowed. Only audi and bmw cars are allowed.'
+	let error
+	let car2Doc
+	try {
+		car2Doc = new carModel({
+			carName: 'random-audi',
+		})
+		let car2 = await car2Doc.save()
+	} catch (e) {
+		error = e
+	}
+	expect(error.errors.carName instanceof Error).toBe(true)
+	expect(error.errors.carName.message).toBe(car2Doc.carName + expectedErrMessg)
 })
 
 // OTHERS
