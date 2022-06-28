@@ -313,6 +313,13 @@
   dependencies:
     "to-regex-range" "^5.0.1"
 
+"flash-runner@file:../../flash-runner-npm":
+  "resolved" "file:../../flash-runner-npm"
+  "version" "0.0.27"
+  dependencies:
+    "hot-module-replacement" "^3.0.4"
+    "nodemon" "^2.0.16"
+
 "fs.realpath@^1.0.0":
   "integrity" "sha1-FQStJSMVjKpA20onh8sBQRmU6k8="
   "resolved" "https://registry.npmjs.org/fs.realpath/-/fs.realpath-1.0.0.tgz"

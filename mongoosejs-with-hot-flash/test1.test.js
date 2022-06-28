@@ -3,10 +3,18 @@ require('dotenv').config({path: '.env.test'}) // Alway remember to use separate 
 const {expect} = require('expect')
 // expect DOCS (from jest): https://jestjs.io/docs/expect
 // toMatchObject: (src: https://jestjs.io/docs/expect#tomatchobjectobject) Used to check that a JavaScript object matches a subset of the properties of an object
+const {connectPromise, DB_NAME} = require('./initMongodb.js')
+const {personModel, gadgetModel, PERSON_COLLECTION} = require('./models')
+const {log} = console
+
+let connectToDb = global.connectToDb,
+	closeDb = global.closeDb,
+	beforeAll = global.beforeAll,
+	test = global.test
 
 // LEARN: ALL CONNECTION AND MODEL RELATED STUFF GOES HERE..
 connectToDb(async () => {
-	await require('./initMongodb.js')
+	await connectPromise
 })
 
 closeDb(async () => {
@@ -50,6 +58,7 @@ test('save pikachu', async () => {
 })
 
 test('find', async () => {
+	/** @type object */
 	let reply = await personModel.find() // This may find multiple docuemnts
 	expect(() => {
 		reply.toObject() // Since we can't call toObject directly to array so this throws error.
@@ -144,7 +153,7 @@ test('populate', async () => {
 	await iphoneDoc.save()
 	await nokiaDoc.save()
 
-	let _id = mongoose.Types.ObjectId() // creating `_id` manually to be able to avoid confusion later on; src: https://stackoverflow.com/a/17899751/10012446
+	let _id = new mongoose.Types.ObjectId() // creating `_id` manually to be able to avoid confusion later on; src: https://stackoverflow.com/a/17899751/10012446
 
 	let personDoc = new personModel({
 		_id,
@@ -206,7 +215,7 @@ test('populate', async () => {
 })
 
 test('update never delete older data', async () => {
-	let _id = mongoose.Types.ObjectId()
+	let _id = new mongoose.Types.ObjectId()
 
 	let _manchanda = {
 		_id,
@@ -235,8 +244,10 @@ test('update never delete older data', async () => {
 
 test('dropCollection', async () => {
 	const db = mongoose.connection
-	let status = await db.dropCollection(PERSON_COLLECTION_NAME) // LEARN: This will throw error if the colleciton is already not there!
+	// log(db)
+	let status = await db.dropCollection(PERSON_COLLECTION) // LEARN: This will throw error if the colleciton is already not there!
 	expect(status).toBe(true)
+	// throw 'cao'
 })
 
 // OTHERS

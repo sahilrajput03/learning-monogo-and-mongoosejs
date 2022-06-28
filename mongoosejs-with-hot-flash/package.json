@@ -4,8 +4,8 @@
 	"main": "index.js",
 	"license": "MIT",
 	"scripts": {
-		"test": "fr code.js",
-		"test:watch": "fr -w code.js"
+		"test": "fr test1.test.js",
+		"test:watch": "fr -w test1.test.js"
 	},
 	"oldScripts": {
 		"start": "nodemon -w ./startTesting.js ./startTesting.js"
