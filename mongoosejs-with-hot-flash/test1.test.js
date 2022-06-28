@@ -264,6 +264,7 @@ test('custom validator function with custom message', async () => {
 	// Above is car is saved successfully!
 
 	// Trying to get validation error message (custom validator defined in `carSchema` in models file).
+	let expectErrName = 'ValidatorError'
 	let expectedErrMessg = ' is not allowed. Only audi and bmw cars are allowed.'
 	let error
 	let car2Doc
@@ -276,7 +277,11 @@ test('custom validator function with custom message', async () => {
 		error = e
 	}
 	expect(error.errors.carName instanceof Error).toBe(true)
+	expect(error.errors.carName.name).toBe(expectErrName)
 	expect(error.errors.carName.message).toBe(car2Doc.carName + expectedErrMessg)
+
+	// log(error.errors.carName.name)
+	// log(error.errors.carName.message)
 })
 
 // OTHERS
