@@ -43,6 +43,11 @@ const carSchema = new Schema({
 				`${props.value} is not allowed. Only audi and bmw cars are allowed.`,
 		},
 	},
+	// Email id to be unique (validates on saving any doc).
+	email: {
+		type: String,
+		unique: true, // `email` must be unique
+	},
 })
 
 const carModel = model(

@@ -284,6 +284,36 @@ test('custom validator function with custom message', async () => {
 	// log(error.errors.carName.message)
 })
 
+//! Unique key doesn't seem to throw error in watch mode after first execution, why??
+// test('unique email test for car saving', async () => {
+// 	let car1Doc = new carModel({
+// 		carName: 'audi',
+// 		email: 'sahil@rajput.com',
+// 	})
+// 	let car1 = await car1Doc.save()
+// 	log({car1})
+
+// 	let expectedErrorName = 'MongoServerError'
+
+// 	let error
+// 	try {
+// 		// Trying to save new car with an existing email id, should throw unique error:
+// 		let car2Doc = new carModel({
+// 			carName: 'audi',
+// 			email: 'sahil@rajput.com',
+// 		})
+// 		let car2 = await car2Doc.save()
+// 		log({car2})
+// 	} catch (e) {
+// 		error = e
+// 	}
+// 	log('got e.name', error?.name)
+// 	log('got e.message', error?.message)
+// 	log('got e as:', error)
+// 	// expect(error?.name).toBe(expectedErrorName)
+// 	// expect(error.message).toBe(expectedErrorName)
+// })
+
 // OTHERS
 // ? What is Projection operator ?
 // Ans. It helps in overfetching data.
