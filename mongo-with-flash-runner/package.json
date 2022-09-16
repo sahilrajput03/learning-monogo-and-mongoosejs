@@ -1,0 +1,20 @@
+{
+	"name": "mongoose-revisit2021",
+	"version": "1.0.0",
+	"main": "index.js",
+	"license": "MIT",
+	"scripts": {
+		"test": "fr test1.test.js",
+		"test-watch": "fr -w test1.test.js"
+	},
+	"oldScripts": {
+		"start": "nodemon -w ./startTesting.js ./startTesting.js"
+	},
+	"dependencies": {
+		"dotenv": "^16.0.0",
+		"expect": "^28.1.0",
+		"hot-module-replacement": "^3.0.4",
+		"mongodb": "^4.9.1",
+		"prompt": "^1.1.0"
+	}
+}
