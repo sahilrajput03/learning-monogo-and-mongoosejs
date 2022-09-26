@@ -212,7 +212,7 @@ test('populate', async () => {
 	// GADGETLIST
 	const deviceNames = [iphoneDoc.deviceName, nokiaDoc.deviceName]
 	const includesAllNames = deviceNames.every((deviceName) =>
-		personDoc.gadgetList.find((p) => p.deviceName === deviceName)
+		Boolean(personDoc.gadgetList.find((p) => p.deviceName === deviceName))
 	)
 
 	// Second Assertion
