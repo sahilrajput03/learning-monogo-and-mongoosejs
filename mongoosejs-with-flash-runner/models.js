@@ -9,8 +9,11 @@ const CARS_COLLECTION = 'cars' //* You should use pluras names, otherwise mongod
 
 // LEARN: Using below personSchema is enables schemaless saving(i.e., strict: false) to db => https://stackoverflow.com/a/12389168
 let personSchema = new Schema(
-	{gadgetlist: [{type: Schema.Types.ObjectId, ref: GADGET_COLLECTION}]},
-	{strict: false}
+	{
+		gadgetList: [{type: Schema.Types.ObjectId, ref: GADGET_COLLECTION}],
+		favouriteGadget: {type: Schema.Types.ObjectId, ref: GADGET_COLLECTION},
+	},
+	{strict: false} // since I disabled strict so any property can be saved irrespective of the schema definition ~Sahil
 )
 // ? Using above type of ref tells moongoose to treat, gadgets field as join from `GADGET_COLLECTION_NAME` collection.
 const personModel = model(

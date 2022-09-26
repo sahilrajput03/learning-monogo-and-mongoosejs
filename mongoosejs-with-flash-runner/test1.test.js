@@ -12,10 +12,10 @@ const {
 } = require('./models')
 const {log} = console
 
-let connectToDb = global.connectToDb,
-	closeDb = global.closeDb,
-	beforeAll = global.beforeAll,
-	test = global.test
+// @ts-ignore
+const {connectToDb, closeDb, beforeAll, test} = global
+
+console.log('sadasdfsadasdfsadasdfsadasdfsadasdfsadasdfsadasdfsadasdfsadas')
 
 // LEARN: ALL CONNECTION AND MODEL RELATED STUFF GOES HERE..
 connectToDb(async () => {
@@ -165,28 +165,30 @@ test('populate', async () => {
 		name: 'Bruno Mars',
 		phoneNumber: 123456789,
 		address: 'Some address here',
-		gadgetlist: [iphoneDoc._id],
+		gadgetList: [iphoneDoc._id],
+		favouriteGadget: iphoneDoc._id,
 	})
 
 	await personDoc.save()
 
-	// Way 1 - Inserting a ObjectId to array i.e., `gadgetlist` property.
+	// Way 1 - Inserting a ObjectId to array i.e., `gadgetList` property.
 	// Pushing item to array using $push method
 	// let reply = await personModel.findByIdAndUpdate(_id, {
 	// 	$push: {
-	// 		gadgetlist: [nokiaDoc._id],
+	// 		gadgetList: [nokiaDoc._id],
 	// 	},
 	// })
 
-	// Way 2 - FSO - Inserting a ObjectId to array i.e., `gadgetlist` property.
-	personDoc.gadgetlist = personDoc.gadgetlist.concat(nokiaDoc._id)
-	await personDoc.save({debug: true})
+	// Way 2 - FSO - Inserting a ObjectId to array i.e., `gadgetList` property.
+	// LEARN: Both `ARRAY.concat` and `spread operator` works well
+	personDoc.gadgetList = personDoc.gadgetList.concat(nokiaDoc._id)
+	// personDoc.gadgetList = [...personDoc.gadgetList, nokiaDoc._id]
+	await personDoc.save({debug: true}) // this doesn't work ~Sahil
 
 	let gadgetList = [iphoneDoc._id, nokiaDoc._id]
-	let personGadgetList = personDoc.gadgetlist
 
 	const includesAllIds = gadgetList.every((gadgetId) =>
-		personGadgetList.includes(gadgetId)
+		personDoc.gadgetList.includes(gadgetId)
 	)
 
 	// First Assertion
@@ -195,28 +197,33 @@ test('populate', async () => {
 	}
 	/*
 	# Get a populated person
-	let replyPopulated = await personModel.findById(_id).populate('gadgetlist
+	let replyPopulated = await personModel.findById(_id).populate('gadgetList
 
 	# Get a populated person (populate after save, src: populate afer save: https://stackoverflow.com/a/50334013/10012446)
-	await personDoc.populate('gadgetlist').execPopulate() // works in v5 but doesn't work in v6 as execPopulate is discarded for documents in v6.
+	await personDoc.populate('gadgetList').execPopulate() // works in v5 but doesn't work in v6 as execPopulate is discarded for documents in v6.
 	# Docs: execPopulate: https://mongoosejs.com/docs/migrating_to_6.html#removed-execpopulate
 	# Mongoose: Migrating from v5 to v6: https://mongoosejs.com/docs/migrating_to_6.html#removed-execpopulate
 	*/
 
-	await personDoc.populate('gadgetlist')
+	await personDoc.populate('gadgetList') // will populate the array
+	await personDoc.populate('favouriteGadget') // will populate favourite item
+	// log('personDoc?', personDoc)
 
+	// GADGETLIST
 	const deviceNames = [iphoneDoc.deviceName, nokiaDoc.deviceName]
-	const personDeviceNames = personDoc.gadgetlist.map((g) => g.deviceName)
-
-	const includesAllNames = deviceNames.every((g) =>
-		personDeviceNames.includes(g)
+	const includesAllNames = deviceNames.every((deviceName) =>
+		personDoc.gadgetList.some((p) => p.deviceName === deviceName)
 	)
-	// log({deviceNames, personDeviceNames})// DEBUG
 
 	// Second Assertion
 	if (!includesAllNames) {
 		throw new Error('Does not include any or all of the devices!')
 	}
+
+	// FAVOURITE GADGET
+	expect(personDoc.favouriteGadget.toObject()).toMatchObject(
+		iphoneDoc.toObject()
+	)
 })
 
 test('update never delete older data', async () => {
@@ -238,12 +245,12 @@ test('update never delete older data', async () => {
 
 	person = await personModel
 		.findByIdAndUpdate(_id, newProperties)
-		.populate('gadgetlist')
+		.populate('gadgetList')
 		.lean()
 	// LEARN: lean() method above tells mongoose to call .toObject() method internally for this query. So, we don't need as:
 	// xxx ^--> let updatePerson = person.toObject()
 
-	delete _manchanda.gadgetlist // this was necessary to pass next test!
+	delete _manchanda.gadgetList // this was necessary to pass next test!
 	expect(person).toMatchObject(_manchanda)
 })
 

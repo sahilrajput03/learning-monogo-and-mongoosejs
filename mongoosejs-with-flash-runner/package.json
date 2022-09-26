@@ -5,7 +5,7 @@
 	"license": "MIT",
 	"scripts": {
 		"test": "fr test1.test.js",
-		"test:watch": "fr -w test1.test.js"
+		"test-watch": "fr -w test1.test.js"
 	},
 	"oldScripts": {
 		"start": "nodemon -w ./startTesting.js ./startTesting.js"
