@@ -62,6 +62,35 @@ test('read', async () => {
 	expect(estimatedDocumentsCount).toEqual(1)
 })
 
+test('delete', async () => {
+	const deletedCount = await adminCollection.deleteMany({name: 'penny'})
+})
+
+test('insert and update', async () => {
+	const createUser = async (user) => {
+		await adminCollection.update(
+			{username: user.username},
+			{$set: {...user}},
+			{upsert: true}
+		)
+	}
+	await createUser({
+		username: 'sahilrajput03',
+		age: 25,
+		class: 'superb',
+	})
+	await createUser({
+		username: 'sahilrajput03',
+		age: 25,
+		class: 'superb',
+	})
+	await createUser({
+		username: 'sahilrajput03',
+		age: 25,
+		class: 'superb',
+	})
+})
+
 // const _bruno = {
 // 	name: 'Bruno Mars',
 // 	phoneNumber: 123456789,
