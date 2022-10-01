@@ -66,7 +66,7 @@ test('delete', async () => {
 	const deletedCount = await adminCollection.deleteMany({name: 'penny'})
 })
 
-test('insert and update', async () => {
+test('create/update lovely command', async () => {
 	const createUser = async (user) => {
 		await adminCollection.update(
 			{username: user.username},
