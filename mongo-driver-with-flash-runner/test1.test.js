@@ -68,6 +68,7 @@ test('delete', async () => {
 
 test('create/update lovely command', async () => {
 	const createUser = async (user) => {
+		console.log("Creaeting user in database:", user.username)
 		await adminCollection.update(
 			{username: user.username},
 			{$set: {...user}},
