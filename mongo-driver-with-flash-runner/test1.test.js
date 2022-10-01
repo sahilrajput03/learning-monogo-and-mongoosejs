@@ -1,6 +1,6 @@
 require('dotenv').config({path: '.env.test'}) // Alway remember to use separate .env.test file for environment.
 const {expect} = require('expect')
-const {client, connect} = require('./initMongo')
+const {client, connect, COLLECTION_NAME} = require('./initMongo')
 const {log} = console
 
 const connectToDb = global.connectToDb,
@@ -25,7 +25,11 @@ beforeAll(async () => {
 	db = global.db
 	adminCollection = global.adminCollection
 
-	await adminCollection.drop() // Drop collection (to have pure testing)
+	const collectionExists = await (
+		await db.listCollections().toArray()
+	).find((c) => c.name.toLowerCase() === COLLECTION_NAME)
+
+	if (collectionExists) await adminCollection.drop() // Drop collection (to have pure testing)
 	// await db.dropDatabase() // Drop db
 })
 
@@ -47,20 +51,15 @@ test('write', async () => {
 })
 
 test('read', async () => {
-	// cursor methods api: https://www.mongodb.com/docs/manual/reference/method/js-cursor/
-	const cursor = await adminCollection.find({
+	// `collection.countDocuments()` to count documents in a collection: Returns (type: Number) the count of all documents which match the query we pass as parameter to this function
+	const pennyDocCount = await adminCollection.countDocuments({
 		name: 'penny',
 	})
+	expect(pennyDocCount).toBe(1)
 
-	// Apply js function to each document
-	// await cursor.forEach(console.log)
-
-	// log('length?', cursor.size()) // throws erro idk why?
-	const allDocs = await cursor.toArray()
-	expect(allDocs[0]).toMatchObject(pennyObj)
-
-	const docsCount = await cursor.count()
-	expect(docsCount).toBe(1)
+	// Total Document Count `collection.estimatedDocumentCount()`
+	const estimatedDocumentsCount = await adminCollection.estimatedDocumentCount() // Returns (type: Number) the count of all documents in a collection or view.
+	expect(estimatedDocumentsCount).toEqual(1)
 })
 
 // const _bruno = {

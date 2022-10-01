@@ -12,9 +12,12 @@ const connect = async () => {
 		await client.db(DB_NAME).command({ping: 1}) // Establish and verify connection
 		const db = client.db(DB_NAME)
 		const adminCollection = db.collection(COLLECTION_NAME)
+		/* Globals */
 		global.db = db
 		global.adminCollection = adminCollection
+		/* Globals */
 	} catch (e) {
+		console.log('Ooops.. failed to connect to db ~Sahil')
 		console.dir(e)
 	}
 }
@@ -22,4 +25,5 @@ const connect = async () => {
 module.exports = {
 	client,
 	connect,
+	COLLECTION_NAME
 }
