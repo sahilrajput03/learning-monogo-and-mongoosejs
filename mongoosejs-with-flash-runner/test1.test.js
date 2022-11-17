@@ -30,6 +30,8 @@ closeDb(async () => {
 beforeAll(async () => {
 	log('::beforeAll::Dropping the database', DB_NAME)
 	const db = mongoose.connection
+	const collectionArray = await (await mongoose.connection.db.listCollections().toArray()).map(col => col.name)
+	console.log('collection names?', collectionArray)
 	await db.dropDatabase() // This drops the currently connected database intelligently i.e., we don't need give the name of the db as it delete the same db to which we are connected to.
 })
 

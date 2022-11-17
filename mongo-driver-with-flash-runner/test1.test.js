@@ -52,6 +52,10 @@ test('write', async () => {
 
 test('read', async () => {
 	// `collection.countDocuments()` to count documents in a collection: Returns (type: Number) the count of all documents which match the query we pass as parameter to this function
+	let usersCursor = await adminCollection.find()
+	const users = await usersCursor.toArray()
+	console.log('c?', )
+
 	const pennyDocCount = await adminCollection.countDocuments({
 		name: 'penny',
 	})
@@ -68,7 +72,7 @@ test('delete', async () => {
 
 test('create/update lovely command', async () => {
 	const createUser = async (user) => {
-		console.log("Creaeting user in database:", user.username)
+		console.log('Creaeting user in database:', user.username)
 		await adminCollection.update(
 			{username: user.username},
 			{$set: {...user}},

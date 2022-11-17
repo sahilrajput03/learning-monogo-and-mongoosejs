@@ -10,7 +10,7 @@ const DB_NAME = 'testdb'
 const DB_URI = 'mongodb://localhost/' + DB_NAME
 
 async function connectFn() {
-	await connect(DB_URI, {
+	return await connect(DB_URI, {
 		// @ts-ignore
 		useNewUrlParser: true,
 		useUnifiedTopology: true,
