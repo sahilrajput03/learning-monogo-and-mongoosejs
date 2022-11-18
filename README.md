@@ -14,3 +14,7 @@ LinkedIn Quiz Solutions: [Click here](https://github.com/Ebazhanov/linkedin-skil
 Source: [Click here](https://stackoverflow.com/a/32811548/10012446)
 
 ![image](https://user-images.githubusercontent.com/31458531/201935213-7bb54d74-96f5-46de-9520-8d58b55d14ca.png)
+
+# Thats how you can hide some of the fields
+
+![image](https://user-images.githubusercontent.com/31458531/202694888-70939dfd-3f47-4245-98e2-eb0e1185b008.png)
