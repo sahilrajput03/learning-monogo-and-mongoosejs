@@ -18,3 +18,20 @@ Source: [Click here](https://stackoverflow.com/a/32811548/10012446)
 # Thats how you can hide some of the fields
 
 ![image](https://user-images.githubusercontent.com/31458531/202694888-70939dfd-3f47-4245-98e2-eb0e1185b008.png)
+
+## Executing js files with mongodb
+
+```js
+// switch to database
+use imdb;
+
+// firstly we have to clean up potential remainders
+db.dropDatabase();
+
+// create admin user
+db.createUser({
+user: 'imdb',
+pwd: 'simple',
+roles: [{ role: 'dbOwner', db:'imdb'}]
+});
+```
