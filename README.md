@@ -9,6 +9,18 @@ LinkedIn Quiz Solutions: [Click here](https://github.com/Ebazhanov/linkedin-skil
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 
 
+## Clearing collections (can be used for better test without sideeffects)
+
+```js
+import { Connection } from 'mongoose';
+
+export const dropCollections = async (connection: Connection) => {
+  await Promise.all(
+    (await connection.db.collections()).map((collection) => collection.deleteMany({})),
+  );
+};
+```
+
 ## more
 
 Source: [Click here](https://stackoverflow.com/a/32811548/10012446)
