@@ -1,13 +1,10 @@
 # Readme
 
-LinkedIn Quiz Solutions: [Click here](https://github.com/Ebazhanov/linkedin-skill-assessments-quizzes/blob/main/mongodb/mongodb-quiz.md)
-
-**`flash` is my own testing library, the code is @ [`flash`](https://github.com/sahilrajput03/flash).**
-
+**Quicks:**
 - **learn-cli-mongo:** [Github file](https://github.com/sahilrajput03/sahilrajput03/blob/master/learn-mongo-cli.md), [Web Page](https://sahilrajput03.ml/learn-mongo-cli.html).
-
+- LinkedIn Quiz Solutions: [Click here](https://github.com/Ebazhanov/linkedin-skill-assessments-quizzes/blob/main/mongodb/mongodb-quiz.md)
+- **`flash` is my own testing library, the code is @ [`flash`](https://github.com/sahilrajput03/flash).**
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
-
 
 ## Clearing collections (can be used for better test without sideeffects)
 
@@ -72,3 +69,19 @@ links for eric:
 - Proposal on feeback forum (NOT RESOLVED): [Click here](https://feedback.mongodb.com/forums/924280-database/suggestions/45394135-add-operator-that-would-calculate-distance-between)
 - Issue on Jira (NOT RESOLVED): [Click here](https://jira.mongodb.org/browse/SERVER-2990)
 
+
+## Finding distance between two gps locations (point to point and not the actual travelling distance by roads)
+
+**Source: [Click here](https://www.youtube.com/watch?v=qbge8Psdyrw)**
+
+*Also: In case you wanna calculate distance using Haversine formula: [Stackoverflow Question](https://stackoverflow.com/questions/27928/calculate-distance-between-two-latitude-longitude-points-haversine-formula/27943#27943)*
+
+Docs: $geoNear: [version4.0](https://www.mongodb.com/docs/v4.0/reference/operator/aggregation/geoNear/#pipe._S_geoNear), [ver6-latest](https://www.mongodb.com/docs/manual/reference/operator/aggregation/geoNear/)
+
+Docs: [Geospatial Queries](https://www.mongodb.com/docs/v4.0/geospatial-queries/)
+
+I managed to calculate distance b/w two gps locations and returning the docs in nearest first order with just mongo's geospatial utils. ALSO: I tested with my nearby locations as well, it seemed to work for me.
+
+Find this code in `mongo-shell-with-watcher` folder, yikes! **TESTED with my custom gps locations as well. Yikes!!**
+
+![image](https://user-images.githubusercontent.com/31458531/205132307-2ae1c56e-3ebe-446c-8b40-16132edf8b3e.png)
