@@ -47,3 +47,9 @@ pwd: 'simple',
 roles: [{ role: 'dbOwner', db:'imdb'}]
 });
 ```
+
+## `$within`?
+
+This is for checking a point lies in given shape with given values of its edges and coordinates. (Not at all useful to check if a coordinate exists in 10kms range of another coordinate point on earth).
+
+Sourc: [Click here](https://mongodb-documentation.readthedocs.io/en/latest/reference/operator/within.html#gsc.tab=0)
