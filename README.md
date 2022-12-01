@@ -69,3 +69,11 @@ links for eric:
 - Proposal on feeback forum (NOT RESOLVED): [Click here](https://feedback.mongodb.com/forums/924280-database/suggestions/45394135-add-operator-that-would-calculate-distance-between)
 - Issue on Jira (NOT RESOLVED): [Click here](https://jira.mongodb.org/browse/SERVER-2990)
 
+
+## Finding distance between two gps locations (point to point and not the actual travelling distance by roads)
+
+**Source: [Click here](https://www.youtube.com/watch?v=qbge8Psdyrw)**
+
+Find this code in `mongo-shell-with-watcher` folder, yikes! **TESTED with my custom gps locations as well. Yikes!!**
+
+![image](https://user-images.githubusercontent.com/31458531/205132307-2ae1c56e-3ebe-446c-8b40-16132edf8b3e.png)
