@@ -1,0 +1,36 @@
+// @ts-nocheck
+use mydb
+db.createCollection('posts')
+// show collections
+
+// Insert a single document
+db.posts.insert({
+	title: 'Post One',
+	body: 'Body of post one',
+	category: 'News',
+	date: Date()
+})
+
+// Insert many posts
+db.posts.insertMany([
+{
+	title: 'Post Two',
+	body: 'Body of post two',
+	category: 'Technology',
+	date: Date()
+},
+{
+	title: 'Post Three',
+	body: 'Body of post three',
+	category: 'News',
+	date: Date()
+}])
+
+// Find all documents
+db.posts.find().pretty()
+
+// Drop a collection
+db.posts.drop() // true
+
+// Drop a database
+// db.dropDatabase() // { "ok" : 1 }
