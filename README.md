@@ -85,3 +85,8 @@ I managed to calculate distance b/w two gps locations and returning the docs in 
 Find this code in `mongo-shell-with-watcher` folder, yikes! **TESTED with my custom gps locations as well. Yikes!!**
 
 ![image](https://user-images.githubusercontent.com/31458531/205132307-2ae1c56e-3ebe-446c-8b40-16132edf8b3e.png)
+
+
+## Amazing and sweet explanation of document linking by mongodb
+
+[Click here](https://www.mongodb.com/docs/atlas/schema-suggestions/avoid-unbounded-arrays/)
