@@ -1,13 +1,10 @@
 # Readme
 
-LinkedIn Quiz Solutions: [Click here](https://github.com/Ebazhanov/linkedin-skill-assessments-quizzes/blob/main/mongodb/mongodb-quiz.md)
-
+**Quicks:**
+- LinkedIn Quiz Solutions: [Click here](https://github.com/Ebazhanov/linkedin-skill-assessments-quizzes/blob/main/mongodb/mongodb-quiz.md)
 **`flash` is my own testing library, the code is @ [`flash`](https://github.com/sahilrajput03/flash).**
-
 - **learn-cli-mongo:** [Github file](https://github.com/sahilrajput03/sahilrajput03/blob/master/learn-mongo-cli.md), [Web Page](https://sahilrajput03.ml/learn-mongo-cli.html).
-
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
-
 
 ## Clearing collections (can be used for better test without sideeffects)
 
