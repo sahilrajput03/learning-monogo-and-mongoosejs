@@ -293,6 +293,21 @@ test('custom validator function with custom message', async () => {
 	// log(error.errors.carName.message)
 })
 
+test('Saving array of objects (for demo to eric)', async () => {
+	let g1 = new carModel({
+		carName: 'audi',
+		deviceId: 501,
+		report: [{_id: new mongoose.Types.ObjectId(),  reason: 'Inappropriate User'}]
+	})
+
+	await g1.save()
+
+	// console.log(g1);
+	g1.report = g1.report.concat({_id: new mongoose.Types.ObjectId(), reason: 'Seemed Scammer'})
+	await g1.save()
+	// console.log(g1);
+})
+
 //! Unique key doesn't seem to throw error in watch mode after first execution, why??
 // test('unique email test for car saving', async () => {
 // 	let car1Doc = new carModel({

@@ -51,6 +51,10 @@ const carSchema = new Schema({
 		type: String,
 		unique: true, // `email` must be unique
 	},
+	report: [{
+		_id : Schema.Types.ObjectId,
+		reason : String
+	}]
 })
 
 const carModel = model(
