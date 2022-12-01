@@ -80,6 +80,8 @@ Docs: $geoNear: [version4.0](https://www.mongodb.com/docs/v4.0/reference/operato
 
 Docs: [Geospatial Queries](https://www.mongodb.com/docs/v4.0/geospatial-queries/)
 
+I managed to calculate distance b/w two gps locations and returning the docs in nearest first order with just mongo's geospatial utils. ALSO: I tested with my nearby locations as well, it seemed to work for me.
+
 Find this code in `mongo-shell-with-watcher` folder, yikes! **TESTED with my custom gps locations as well. Yikes!!**
 
 ![image](https://user-images.githubusercontent.com/31458531/205132307-2ae1c56e-3ebe-446c-8b40-16132edf8b3e.png)
