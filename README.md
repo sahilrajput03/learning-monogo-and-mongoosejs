@@ -90,3 +90,12 @@ Find this code in `mongo-shell-with-watcher` folder, yikes! **TESTED with my cus
 ## Amazing and sweet explanation of document linking by mongodb
 
 [Click here](https://www.mongodb.com/docs/atlas/schema-suggestions/avoid-unbounded-arrays/)
+
+## Maximum number of records in single document in mongodb?
+
+Source: [Click here](https://stackoverflow.com/questions/39622354/how-many-bson-objectids-can-a-mongodb-array-field-save)
+
+Docs: [MongoDB Limits and Thresholds](https://www.mongodb.com/docs/manual/reference/limits/)
+
+![image](https://user-images.githubusercontent.com/31458531/205167045-06deaa7d-9377-48a6-869d-7bcc4ec2eeb7.png)
+
