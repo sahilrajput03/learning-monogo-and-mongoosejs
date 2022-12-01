@@ -74,6 +74,12 @@ links for eric:
 
 **Source: [Click here](https://www.youtube.com/watch?v=qbge8Psdyrw)**
 
+*Also: In case you wanna calculate distance using Haversine formula: [Stackoverflow Question](https://stackoverflow.com/questions/27928/calculate-distance-between-two-latitude-longitude-points-haversine-formula/27943#27943)*
+
+Docs: $geoNear: [version4.0](https://www.mongodb.com/docs/v4.0/reference/operator/aggregation/geoNear/#pipe._S_geoNear), [ver6-latest](https://www.mongodb.com/docs/manual/reference/operator/aggregation/geoNear/)
+
+Docs: [Geospatial Queries](https://www.mongodb.com/docs/v4.0/geospatial-queries/)
+
 Find this code in `mongo-shell-with-watcher` folder, yikes! **TESTED with my custom gps locations as well. Yikes!!**
 
 ![image](https://user-images.githubusercontent.com/31458531/205132307-2ae1c56e-3ebe-446c-8b40-16132edf8b3e.png)
