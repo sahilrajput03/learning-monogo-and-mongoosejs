@@ -1,0 +1,46 @@
+// @ts-nocheck
+use mydb
+db.createCollection('persons')
+cls
+
+// Learn: GeoJSON object: `{type: "Point", coordinates: [number, number]}`
+
+db.persons.insertMany([
+	{
+		name: "Alan Turing",
+		location: {
+			type: "Point",
+			coordinates: [30.668482493441893, 76.84996594056327]
+		}
+	},
+	{
+		name: "Nikola Tesla",
+		location: {
+			type: "Point",
+			coordinates: [30.679993722431135, 76.86150115968628]
+		}
+	}
+])
+
+// $geoNear requires to have a 2d or 2sdphere index (from mongo shell compiler)
+db.persons.createIndex({location: '2dsphere'})
+
+cls
+// Find all documents
+// db.persons.find().pretty()
+
+db.persons.aggregate([
+	{
+		$geoNear: {
+			near: {
+				type: "Point",
+				coordinates: [30.663794441117606, 76.84462298048282] // Distance wil be calculated from this point
+			},
+			maxDistance: 100000, // units is metres
+			distanceField: 'distance' // output field which will show the distance measured
+		}
+	}
+]).pretty()
+
+// Drop a collection
+db.persons.drop() // true

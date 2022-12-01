@@ -2,6 +2,7 @@
 use mydb
 db.createCollection('posts')
 // show collections
+show collections
 
 // Insert a single document
 db.posts.insert({
