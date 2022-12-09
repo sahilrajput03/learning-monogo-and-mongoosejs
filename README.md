@@ -6,6 +6,13 @@
 - **`flash` is my own testing library, the code is @ [`flash`](https://github.com/sahilrajput03/flash).**
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 
+## post hooks with `mongoose`
+
+**Docs: [Click here](https://mongoosejs.com/docs/middleware.html#post)**
+
+![image](https://user-images.githubusercontent.com/31458531/206688709-25396fc2-39f1-4a50-bc55-f67e1325a549.png)
+
+
 ## Clearing collections (can be used for better test without sideeffects)
 
 ```js
