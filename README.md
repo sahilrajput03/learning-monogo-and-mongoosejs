@@ -6,6 +6,13 @@
 - **`flash` is my own testing library, the code is @ [`flash`](https://github.com/sahilrajput03/flash).**
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 
+## post hooks with `mongoose`
+
+**Docs: [Click here](https://mongoosejs.com/docs/middleware.html#post)**
+
+![image](https://user-images.githubusercontent.com/31458531/206688709-25396fc2-39f1-4a50-bc55-f67e1325a549.png)
+
+
 ## Clearing collections (can be used for better test without sideeffects)
 
 ```js
@@ -85,3 +92,17 @@ I managed to calculate distance b/w two gps locations and returning the docs in 
 Find this code in `mongo-shell-with-watcher` folder, yikes! **TESTED with my custom gps locations as well. Yikes!!**
 
 ![image](https://user-images.githubusercontent.com/31458531/205132307-2ae1c56e-3ebe-446c-8b40-16132edf8b3e.png)
+
+
+## Amazing and sweet explanation of document linking by mongodb
+
+[Click here](https://www.mongodb.com/docs/atlas/schema-suggestions/avoid-unbounded-arrays/)
+
+## Maximum number of records in single document in mongodb?
+
+Source: [Click here](https://stackoverflow.com/questions/39622354/how-many-bson-objectids-can-a-mongodb-array-field-save)
+
+Docs: [MongoDB Limits and Thresholds](https://www.mongodb.com/docs/manual/reference/limits/)
+
+![image](https://user-images.githubusercontent.com/31458531/205167045-06deaa7d-9377-48a6-869d-7bcc4ec2eeb7.png)
+
