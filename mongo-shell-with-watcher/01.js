@@ -7,6 +7,7 @@ db = db.getSiblingDB('mydb')
 // print(db.getUsers) // get user objects
 // print(db.getCollectionNames()) // postman,posts
 
+// print() methods prints the info from the operation ~Sahil
 // print(
 // 	db.posts.insert({
 // 		title: 'Post One',
@@ -22,7 +23,9 @@ db = db.getSiblingDB('mydb')
 // 	})
 // )
 
-// print(db.posts.find())
+let myCursor = db.posts.find();
+// myCursor.forEach(printjson); // Works like a charm. Src: https://www.mongodb.com/docs/manual/reference/method/db.collection.find/
+
 
 // db.createCollection('postman')
 
@@ -34,3 +37,4 @@ db = db.getSiblingDB('mydb')
 // )
 
 // print('hello world')
+// print([1,2,3].map(k => k+1)) // works like a charm
