@@ -6,6 +6,11 @@
 - **`flash` is my own testing library, the code is @ [`flash`](https://github.com/sahilrajput03/flash).**
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 
+## You can create mongodb object ids from plain text as well
+
+![image](https://user-images.githubusercontent.com/31458531/210085356-4b943271-10ae-4594-8749-e61af86edc49.png)
+
+
 ## post hooks with `mongoose`
 
 **Docs: [Click here](https://mongoosejs.com/docs/middleware.html#post)**
