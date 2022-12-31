@@ -6,6 +6,10 @@
 - **`flash` is my own testing library, the code is @ [`flash`](https://github.com/sahilrajput03/flash).**
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 
+## stackoverflow queston: `Is there a max limit to the $nin operator in MongoDB?`
+
+![image](https://user-images.githubusercontent.com/31458531/210134154-7c41a90e-3804-4d8d-aff8-356ba08c2f23.png)
+
 ## whats is `$$ROOT`
 
 Stack overflow Anser: [Click here](https://stackoverflow.com/a/61833219/10012446)
