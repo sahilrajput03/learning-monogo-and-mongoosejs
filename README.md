@@ -6,6 +6,17 @@
 - **`flash` is my own testing library, the code is @ [`flash`](https://github.com/sahilrajput03/flash).**
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 
+
+## Iterate over documents individualy using stream
+
+- Amazing - Mongodb Docs: [Click here](https://www.mongodb.com/docs/manual/tutorial/iterate-a-cursor/)
+- MongooseJs: [Click here](https://mongoosejs.com/docs/api/querycursor.html)
+
+Q. Why cursor and not batches (i.e, `limit()` way)? **Ans.** Using the skip feature when iterating through results in batches can get slower over time for large data sets, when skip is given a high numeric value, so streaming with a cursor helps to get around that. ~Credits: Eric
+ 
+![image](https://user-images.githubusercontent.com/31458531/211360156-03499979-a645-4242-9950-417bab32672d.png)
+
+
 ## How to use `updateMany` in mongodb/mongoosejs
 
 ![image](https://user-images.githubusercontent.com/31458531/211191847-c1859b2a-2c7a-40fd-9fbc-899ca3c15ed9.png)
