@@ -13,36 +13,10 @@
 
 ```bash
 db.collection.aggregate([
-  {
-    "$group": {
-      "_id": "$first_name",
-      "duplicates": {
-        "$sum": 1
-      }
-    }
-  },
-  {
-    "$match": {
-      "_id": {
-        "$ne": null
-      },
-      "duplicates": {
-        "$gt": 1
-      }
-    }
-  },
-  {
-    "$sort": {
-      "duplicates": -1
-    }
-  },
-  {
-    "$project": {
-      "first_name": "$_id",
-      "_id": 0,
-      duplicates: 1
-    }
-  }
+  { "$group": { "_id": "$first_name", "duplicates": { "$sum": 1 } } },
+  { "$match": { "_id": { "$ne": null }, "duplicates": { "$gt": 1 } } },
+  { "$sort": { "duplicates": -1 } },
+  { "$project": { "first_name": "$_id", "_id": 0, duplicates: 1 } }
 ])
 ```
 
