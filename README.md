@@ -9,6 +9,8 @@
 
 ## find duplicate items in mongodb
 
+Docs - `$group (aggregation)` : [Click here](https://www.mongodb.com/docs/manual/reference/operator/aggregation/group/)
+
 ![image](https://user-images.githubusercontent.com/31458531/211372185-d91fc2ec-f717-4066-abef-92192a5ccb2c.png)
 
 ```bash
@@ -19,6 +21,8 @@ db.collection.aggregate([
   { "$project": { "first_name": "$_id", "_id": 0, duplicates: 1 } }
 ])
 ```
+
+![image](https://user-images.githubusercontent.com/31458531/211373136-ab404c81-77b1-4a09-a78a-f9dab7a88469.png)
 
 
 ## Iterate over documents individualy using stream
