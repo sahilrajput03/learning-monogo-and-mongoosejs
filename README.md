@@ -7,6 +7,46 @@
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 
 
+## find duplicate items in mongodb
+
+![image](https://user-images.githubusercontent.com/31458531/211372185-d91fc2ec-f717-4066-abef-92192a5ccb2c.png)
+
+```bash
+db.collection.aggregate([
+  {
+    "$group": {
+      "_id": "$first_name",
+      "duplicates": {
+        "$sum": 1
+      }
+    }
+  },
+  {
+    "$match": {
+      "_id": {
+        "$ne": null
+      },
+      "duplicates": {
+        "$gt": 1
+      }
+    }
+  },
+  {
+    "$sort": {
+      "duplicates": -1
+    }
+  },
+  {
+    "$project": {
+      "first_name": "$_id",
+      "_id": 0,
+      duplicates: 1
+    }
+  }
+])
+```
+
+
 ## Iterate over documents individualy using stream
 
 - Amazing - Mongodb Docs: [Click here](https://www.mongodb.com/docs/manual/tutorial/iterate-a-cursor/)
