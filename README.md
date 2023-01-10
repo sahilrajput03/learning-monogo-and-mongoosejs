@@ -6,6 +6,13 @@
 - **`flash` is my own testing library, the code is @ [`flash`](https://github.com/sahilrajput03/flash).**
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 
+## Order of array while searching matters
+
+That means if you use wrong order then the query will not match the document:
+
+![image](https://user-images.githubusercontent.com/31458531/211662275-dd65edd2-7ea9-4819-bb2e-b9f641655bca.png)
+
+
 ## You don't nee the $in operator to search inside of an array in `mongo` and `mongoose`
 
 ![image](https://user-images.githubusercontent.com/31458531/211585232-688742ab-7f58-4f06-97ed-d9ff29f8d260.png)
