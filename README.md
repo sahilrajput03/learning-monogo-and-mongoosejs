@@ -6,6 +6,11 @@
 - **`flash` is my own testing library, the code is @ [`flash`](https://github.com/sahilrajput03/flash).**
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 
+## Searching a document of a given _id can be done like that:
+
+![image](https://user-images.githubusercontent.com/31458531/211829410-e66dadc1-2a1d-403f-9617-293043ce0857.png)
+
+
 ## Order of array while searching matters
 
 That means if you use wrong order then the query will not match the document:
