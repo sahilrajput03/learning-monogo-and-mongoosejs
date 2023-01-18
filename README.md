@@ -6,10 +6,9 @@
 - **`flash` is my own testing library, the code is @ [`flash`](https://github.com/sahilrajput03/flash).**
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 
-## Searching a document of a given _id can be done like that:
+## Directly searching a document of a given _id can be done like that:
 
 ![image](https://user-images.githubusercontent.com/31458531/211829410-e66dadc1-2a1d-403f-9617-293043ce0857.png)
-
 
 ## Order of array while searching matters
 
@@ -31,7 +30,20 @@ Docs - `$group (aggregation)` : [Click here](https://www.mongodb.com/docs/manual
 
 ![image](https://user-images.githubusercontent.com/31458531/211372185-d91fc2ec-f717-4066-abef-92192a5ccb2c.png)
 
+**Playground Link: [mongoplayground.net](https://mongoplayground.net/)**
+
 ```bash
+# Documents:
+[
+  { "first_name": "Sahil" },
+  { "first_name": "Mohit" },
+  { "first_name": "Mohit" },
+  { "first_name": "Mandy" },
+  { "first_name": "Mandy" },
+  { "first_name": "Mandy" },
+]
+
+# Query
 db.collection.aggregate([
   { "$group": { "_id": "$first_name", "duplicates": { "$sum": 1 } } },
   { "$match": { "_id": { "$ne": null }, "duplicates": { "$gt": 1 } } },
