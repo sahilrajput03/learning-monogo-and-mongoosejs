@@ -10,6 +10,14 @@
 
 ![image](https://user-images.githubusercontent.com/31458531/211829410-e66dadc1-2a1d-403f-9617-293043ce0857.png)
 
+## Thats how we do transactions with mongoose
+
+*Transactions are new in MongoDB 4.0 and Mongoose 5.2.0. Transactions let you execute multiple operations in isolation and potentially undo all the operations if one of them fails. This guide will get you started using transactions with Mongoose.*
+
+**Transactions in Mongoose DOCS:** [Click here](https://mongoosejs.com/docs/transactions.html)
+
+![image](https://user-images.githubusercontent.com/31458531/213842447-2afc8f6f-73f0-4dee-9ced-707e20b736bc.png)
+
 ## Order of array while searching matters
 
 That means if you use wrong order then the query will not match the document:
