@@ -6,6 +6,11 @@
 - **`flash` is my own testing library, the code is @ [`flash`](https://github.com/sahilrajput03/flash).**
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 
+## You can Enable indexing for fields in backend server directly as well (otherwise we simply enable in the mongodb server<in compass>)
+
+![image](https://user-images.githubusercontent.com/31458531/215793227-45f230f6-b870-4a62-b41c-89e42f37dd32.png)
+
+
 ## Directly searching a document of a given _id can be done like that:
 
 ![image](https://user-images.githubusercontent.com/31458531/211829410-e66dadc1-2a1d-403f-9617-293043ce0857.png)
