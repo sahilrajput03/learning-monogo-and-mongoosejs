@@ -6,7 +6,13 @@
 - **`flash` is my own testing library, the code is @ [`flash`](https://github.com/sahilrajput03/flash).**
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 
-## You can Enable indexing for fields in backend server directly as well (otherwise we simply enable in the mongodb server<in compass>)
+## Only add to a field of mongodb document if doesn't exist already
+
+Source: [Click here](https://stackoverflow.com/questions/38970835/mongodb-add-element-to-array-if-not-exists/38970956#38970956)
+
+![image](https://user-images.githubusercontent.com/31458531/216082340-0a8428b9-b559-4bc4-9eed-fb2d0e53f0b9.png)
+
+## (*not*tested*) You can Enable indexing for fields in backend server directly as well (otherwise we simply enable in the mongodb server<in compass>)
 
 ![image](https://user-images.githubusercontent.com/31458531/215793227-45f230f6-b870-4a62-b41c-89e42f37dd32.png)
 
