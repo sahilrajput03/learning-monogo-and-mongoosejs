@@ -8,7 +8,7 @@
 
 ## Only add to a field of mongodb document if doesn't exist already
 
-Source: [Click here](https://stackoverflow.com/questions/38970835/mongodb-add-element-to-array-if-not-exists/38970956#38970956)
+Source: [Click here](https://stackoverflow.com/questions/38970835/mongodb-add-element-to-array-if-not-exists/38970956#38970956) (~ Credits: Eric)
 
 ![image](https://user-images.githubusercontent.com/31458531/216082340-0a8428b9-b559-4bc4-9eed-fb2d0e53f0b9.png)
 
