@@ -6,6 +6,10 @@
 - **`flash` is my own testing library, the code is @ [`flash`](https://github.com/sahilrajput03/flash).**
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 
+## `update()` is deprecates and warnings recommends to use `updateOne()` and `updateMany()` now!
+
+Read about it here: [https://mongoosejs.com/docs/deprecations.html](https://mongoosejs.com/docs/deprecations.html)
+
 ## Only add to a field of mongodb document if doesn't exist already
 
 Source: [Click here](https://stackoverflow.com/questions/38970835/mongodb-add-element-to-array-if-not-exists/38970956#38970956) (~ Credits: Eric)
