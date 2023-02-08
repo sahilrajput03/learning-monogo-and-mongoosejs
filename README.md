@@ -8,7 +8,7 @@
 
 ## Performance Best Practices: Indexing
 
-Recommended Read by Eric (especially @ ESR rule).
+Recommened Read by Eric (especially @ ESR rule).
 
 [Click here](https://www.mongodb.com/blog/post/performance-best-practices-indexing)
 
