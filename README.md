@@ -6,6 +6,12 @@
 - **`flash` is my own testing library, the code is @ [`flash`](https://github.com/sahilrajput03/flash).**
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 
+## Performance Best Practices: Indexing
+
+Recommended Read by Eric (especially @ ESR rule).
+
+[Click here](https://www.mongodb.com/blog/post/performance-best-practices-indexing)
+
 ## `update()` is deprecates and warnings recommends to use `updateOne()` and `updateMany()` now!
 
 Read about it here: [https://mongoosejs.com/docs/deprecations.html](https://mongoosejs.com/docs/deprecations.html)
