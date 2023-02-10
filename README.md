@@ -6,7 +6,15 @@
 - **`flash` is my own testing library, the code is @ [`flash`](https://github.com/sahilrajput03/flash).**
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 
-## Performance Best Practices: Indexing
+## Pagination on array stored in a document field
+
+Source: [Click here](https://stackoverflow.com/a/31792645/10012446), another similar [here](https://stackoverflow.com/a/32904084/10012446).
+
+![image](https://user-images.githubusercontent.com/31458531/218165665-1c2d2da8-2530-43ca-ac87-9b4b15b8884c.png)
+
+![image](https://user-images.githubusercontent.com/31458531/218165780-2caf9d66-15a1-4a1c-a393-4472efe75879.png)
+
+## TODO: URGENT: Performance Best Practices: Indexing
 
 Recommened Read by Eric (especially @ ESR rule).
 
