@@ -9,11 +9,11 @@
 ## pagination over an array field of a document
 
 ```ts
-    // TODO: Remove this comment: [offset=5, limit=5<numberOfItems>] i.e., {$slice: [5, 5]} will bring array i.e., [5,9]
-    const [feedPost] = await this.feedPostModel.find(
-      { _id: new mongoose.Types.ObjectId(id) },
-      { likes: { $slice: [offset ?? 0, offset + limit] } },
-    );
+// TODO: Remove this comment: [offset=5, limit=5<numberOfItems>] i.e., {$slice: [5, 5]} will bring array i.e., [5,9]
+const [feedPost] = await this.feedPostModel.find(
+  { _id: new mongoose.Types.ObjectId(id) },
+  { likes: { $slice: [offset ?? 0, offset + limit] } },
+);
 ```
 
 ## Pagination on array stored in a document field
