@@ -6,6 +6,13 @@
 - **`flash` is my own testing library, the code is @ [`flash`](https://github.com/sahilrajput03/flash).**
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 
+## `$or`: collection scan vs. index scan
+
+Source: Official Docs Mongodb: [Click here](https://www.mongodb.com/docs/manual/reference/operator/query/or/)
+
+![image](https://user-images.githubusercontent.com/31458531/218228634-6a059107-b188-4b41-90e1-0a42ddb203e5.png)
+
+
 ## you can give a simple queryFiler to the populated field's data as well like that
 
 Source: [Click here](https://stackoverflow.com/a/27075782/10012446)
