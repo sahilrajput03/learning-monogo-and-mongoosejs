@@ -6,6 +6,13 @@
 - **`flash` is my own testing library, the code is @ [`flash`](https://github.com/sahilrajput03/flash).**
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 
+## you can give a simple queryFiler to the populated field's data as well like that
+
+Source: [Click here](https://stackoverflow.com/a/27075782/10012446)
+
+![image](https://user-images.githubusercontent.com/31458531/218228459-5813c991-c638-4aba-84af-c8967c847fb3.png)
+
+
 ## pagination over an array field of a document
 
 ```ts
