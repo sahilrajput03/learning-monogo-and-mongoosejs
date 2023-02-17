@@ -15,7 +15,7 @@ await connection.dropDatabase();
 ```
 
 ```js
-// Delete records from all collections
+// Delete all documents from the database
 await Promise.all((await connection.db.collections()).map((collection) => collection.deleteMany({})));
 ```
 
