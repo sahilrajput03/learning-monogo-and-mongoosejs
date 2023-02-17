@@ -7,7 +7,12 @@
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 - Seems like a good read on efficient mongodb queries with mongoosejs: [Click here](https://climbtheladder.com/10-mongoose-populate-best-practices/)
 
-## deleting all collections?
+## Deleting all `collections` or dropping `database` at once?
+
+```js
+// Drop entire database (which will drop all collections in one operation)
+await connection.dropDatabase();
+```
 
 ```js
 // Delete records from all collections
