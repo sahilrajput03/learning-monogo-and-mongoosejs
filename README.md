@@ -7,6 +7,13 @@
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 - Seems like a good read on efficient mongodb queries with mongoosejs: [Click here](https://climbtheladder.com/10-mongoose-populate-best-practices/)
 
+## `currentOp` ?
+
+Docs Mongodb: [Click here](https://www.mongodb.com/docs/manual/reference/method/db.currentOp/)
+
+![image](https://user-images.githubusercontent.com/31458531/219519327-1d92727b-6f34-4723-a712-2f08d8b10a04.png)
+
+
 ## `$or`: collection scan vs. index scan
 
 Source: Official Docs Mongodb: [Click here](https://www.mongodb.com/docs/manual/reference/operator/query/or/)
