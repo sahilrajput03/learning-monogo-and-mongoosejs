@@ -7,6 +7,13 @@
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 - Seems like a good read on efficient mongodb queries with mongoosejs: [Click here](https://climbtheladder.com/10-mongoose-populate-best-practices/)
 
+## Run raw mongodb commands with mongoosejs
+
+Source: [Click here](https://stackoverflow.com/a/41736477/10012446)
+
+![image](https://user-images.githubusercontent.com/31458531/219715844-c78227d8-6e2d-4cbb-92f7-533ca0fdafbf.png)
+
+
 ## Deleting all `collections` or dropping `database` at once?
 
 ```js
