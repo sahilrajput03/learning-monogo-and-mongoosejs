@@ -7,6 +7,10 @@
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 - Seems like a good read on efficient mongodb queries with mongoosejs: [Click here](https://climbtheladder.com/10-mongoose-populate-best-practices/)
 
+## `dbHasActiveOperations` amazing utility funciton used in previous compnay (ssshrr)
+
+Cool!
+
 ## Run raw mongodb commands with mongoosejs
 
 Source: [Click here](https://stackoverflow.com/a/41736477/10012446)
