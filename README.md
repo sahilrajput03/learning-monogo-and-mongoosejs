@@ -9,7 +9,7 @@
 
 ## Using `$avg` for a calculating average from documents of a different collection
 
-Mongoplayground: [Click here](https://mongoplayground.net/)
+Source: [Mongoplayground](https://mongoplayground.net/), [$Avg](https://www.mongodb.com/docs/manual/reference/operator/aggregation/avg/), [$group](https://www.mongodb.com/docs/manual/reference/operator/aggregation/group/), [Awesome example of unwind](https://stackoverflow.com/a/29880058/10012446)
 
 *Tip:* Click on **Template** dropdown and select **multiple collections** to get a similar tempalte.
 
