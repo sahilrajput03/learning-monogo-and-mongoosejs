@@ -7,6 +7,35 @@
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 - Seems like a good read on efficient mongodb queries with mongoosejs: [Click here](https://climbtheladder.com/10-mongoose-populate-best-practices/)
 
+## Using $avg in mongodb
+
+Mongoplayground: [Click here](https://mongoplayground.net/)
+
+*Tip:* Click on **Template** dropdown and select **multiple collections** to get a similar tempalte.
+
+```txt
+# template: multiple collections
+db={
+  "movies": [
+    {"_id": 100},{"_id": 200},{"_id": 300}
+  ],
+  "movieuserstatus": [
+    {"_id": 400,movieId: 200,rating: 1},
+    {"_id": 500,movieId: 200,rating: 6},
+    {"_id": 600,movieId: 300,rating: 5}
+  ]
+}
+
+# query
+db.movies.aggregate([
+  // We pass movie._id explicitly for which we want to compute $avg (otherwise it would be joining/lookup/populate for all movie documents which is too costly.
+  {"$match": {_id: 200}},
+  {$lookup: {from: "movieuserstatus",localField: "_id",foreignField: "movieId",as: "movieuserstatus"}},
+  {"$unwind": "$movieuserstatus"},
+  {$group: {_id: "$movieuserstatus.movieId",average: {$avg: "$movieuserstatus.rating"}}}
+])
+```
+
 ## `dbHasActiveOperations` amazing utility funciton used in previous compnay (ssshrr)
 
 Cool!
