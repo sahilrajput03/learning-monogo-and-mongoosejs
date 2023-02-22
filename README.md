@@ -19,7 +19,9 @@ Mongoplayground: [Click here](https://mongoplayground.net/)
 # template: multiple collections
 db={
   "movies": [
-    {"_id": 100},{"_id": 200},{"_id": 300}
+    {"_id": 100},
+    {"_id": 200},
+    {"_id": 300}
   ],
   "movieuserstatus": [
     {"_id": 400,movieId: 200,rating: 1},
