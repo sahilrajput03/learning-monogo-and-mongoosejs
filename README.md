@@ -17,6 +17,9 @@
 
 ![image](https://user-images.githubusercontent.com/31458531/220798949-de616037-afd3-47e1-868d-d15737fba531.png)
 
+3. We can use only these methods. You can view the entire docs by clicking on the **Docs** button on the mongo playground.
+
+![image](https://user-images.githubusercontent.com/31458531/220799555-e075c916-fce5-4de1-9d6c-8d8bc3ee5c18.png)
 
 ## Using `$avg` for calculating average in a single collection
 
