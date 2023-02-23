@@ -7,6 +7,17 @@
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 - Seems like a good read on efficient mongodb queries with mongoosejs: [Click here](https://climbtheladder.com/10-mongoose-populate-best-practices/)
 
+## Amazing feature of mongoplayground
+
+1. You can create a shareable link via that button as well:
+
+![image](https://user-images.githubusercontent.com/31458531/220799081-b41c699e-c917-4678-83af-58d2550d7c03.png)
+
+2. To show output for individual stages
+
+![image](https://user-images.githubusercontent.com/31458531/220798949-de616037-afd3-47e1-868d-d15737fba531.png)
+
+
 ## Using `$avg` for calculating average in a single collection
 
 ![image](https://user-images.githubusercontent.com/31458531/220793602-580a6d41-8167-4ca4-9627-5e675b75c895.png)
