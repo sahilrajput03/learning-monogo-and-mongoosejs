@@ -9,7 +9,9 @@
 
 ## useful `updateOne` method
 
-*Drawback: We don't get created/updated document, so we need fo to make a `findOne` query explcitly*
+*Drawback:*
+- We don't get created/updated document, so we need fo to make a `findOne` query explcitly
+- Do not rely on returned value i.e, `value.upsertedId` as this is only preset if document is created (not returned when its updated)
 
 ```ts
 // its useful as it creates the record with necessary values if it already doesn't exist
