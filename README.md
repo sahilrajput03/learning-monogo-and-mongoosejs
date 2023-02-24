@@ -10,8 +10,10 @@
 ## Amazing and super useful `updateOne` method
 
 ```ts
-await this.students.updateOne(
-  { movieDBId: movieId },
+// its useful as it creates the record with necessary values if it already doesn't exist
+const movieUserStatus = await this.movieUserStatusModel.updateOne(
+  { movieId, userId },
+  { $set: { rating } },
   { upsert: true, new: true },
 );
 ```
