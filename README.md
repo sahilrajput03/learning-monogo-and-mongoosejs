@@ -7,6 +7,15 @@
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 - Seems like a good read on efficient mongodb queries with mongoosejs: [Click here](https://climbtheladder.com/10-mongoose-populate-best-practices/)
 
+## Amazing and super useful `updateOne` method
+
+```ts
+await this.students.updateOne(
+  { movieDBId: movieId },
+  { upsert: true, new: true },
+);
+```
+
 ## Amazing feature of mongoplayground
 
 1. You can create a shareable link via that button as well:
