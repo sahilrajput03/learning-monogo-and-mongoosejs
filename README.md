@@ -7,14 +7,16 @@
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 - Seems like a good read on efficient mongodb queries with mongoosejs: [Click here](https://climbtheladder.com/10-mongoose-populate-best-practices/)
 
-## Amazing and super useful `updateOne` method
+## useful `updateOne` method
+
+*Drawback: We don't get created/updated document, so we need fo to make a `findOne` query explcitly*
 
 ```ts
 // its useful as it creates the record with necessary values if it already doesn't exist
-const movieUserStatus = await this.movieUserStatusModel.updateOne(
+await this.movieUserStatusModel.updateOne(
   { movieId, userId },
   { $set: { rating } },
-  { upsert: true, new: true },
+  { upsert: true },
 );
 ```
 
