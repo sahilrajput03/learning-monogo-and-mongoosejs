@@ -7,6 +7,40 @@
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 - Seems like a good read on efficient mongodb queries with mongoosejs: [Click here](https://climbtheladder.com/10-mongoose-populate-best-practices/)
 
+## Usage of `$exists`
+
+Without `$exists`:
+
+```bash
+# Collection
+[{"key": 1,car: 10},{"key": 2}]
+
+# Query
+car: {$ne: 20}
+
+# Output:
+[
+  {"_id": ObjectId("5a934e000102030405000000"),"car": 10,"key": 1},
+  {"_id": ObjectId("5a934e000102030405000001"),"key": 2}
+]
+```
+
+
+With `$exists`:
+
+```bash
+# Collection
+[{"key": 1,car: 10},{"key": 2}]
+
+# Query
+car: {$exists: true, $ne: 20}
+
+# Output (notice that field which has no `car` key is not returned):
+[
+  {"_id": ObjectId("5a934e000102030405000000"),"car": 10,"key": 1},
+]
+```
+
 ## We can use `$count` to count documents easily in aggregate
 
 Source: [Mongoplayground](https://mongoplayground.net/)
