@@ -7,6 +7,33 @@
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 - Seems like a good read on efficient mongodb queries with mongoosejs: [Click here](https://climbtheladder.com/10-mongoose-populate-best-practices/)
 
+## We can use `$count` to count documents easily in aggregate
+
+**Using `$count` in aggregate: [Docs](https://www.mongodb.com/docs/manual/reference/operator/aggregation/count/)**
+
+Similarly:
+
+- db.collection.count(): [Docs](https://www.mongodb.com/docs/manual/reference/method/db.collection.count/)
+- db.collection.estimatedDocumentCount(): [Docs](https://www.mongodb.com/docs/manual/reference/method/db.collection.estimatedDocumentCount/)
+
+```bash
+# Documents
+[
+  {"_id": 400, movieId: 200},
+  {"_id": 500,movieId: 200},
+  {"_id": 600,movieId: 300}
+]
+
+# Query
+db.collection.aggregate([
+  {"$match": {movieId: 200}},
+  {"$count": "totaItems"}
+])
+
+# Output
+[{"totaItems": 2}]
+```
+
 ## we can execute multiple queries with using `$facet`
 
 Using `$facet`: [Click here](https://stackoverflow.com/questions/52913008/mongodb-execute-multiple-queries-in-one-round-trip)
@@ -76,8 +103,8 @@ Source:
 
 ![image](https://user-images.githubusercontent.com/31458531/220788855-ebeda8f3-11c8-4475-aca5-6c3600cd5695.png)
 
-```txt
-# template: multiple collections
+```bash
+# Template: Multiple Collections
 db={
   "movies": [
     {"_id": 100},
