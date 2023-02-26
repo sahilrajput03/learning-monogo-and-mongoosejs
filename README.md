@@ -9,6 +9,8 @@
 
 ## we can execute multiple queries with using `$facet`
 
+Using `$facet`: [Click here](https://stackoverflow.com/questions/52913008/mongodb-execute-multiple-queries-in-one-round-trip)
+
 But this is a issue that I faced myself and seems there's no such fix for this werid behaviour: [Click here](https://stackoverflow.com/questions/54128630/mongodb-aggregation-slow-count-using-facet)
 
 ## useful `updateOne` method
