@@ -9,6 +9,9 @@
 
 ## Usage of `$exists`
 
+- Source: [Mongoplayground](https://mongoplayground.net/)
+- Docs: [$exists](https://www.mongodb.com/docs/manual/reference/operator/query/exists/)
+
 Without `$exists`:
 
 ```bash
