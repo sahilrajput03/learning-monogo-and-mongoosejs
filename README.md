@@ -46,6 +46,8 @@ car: {$exists: true, $ne: 20}
 
 ## We can use `$count` to count documents easily in aggregate
 
+with mongoose you can do like: `const ratingUsersCount = await this.movieUserStatusModel.count({ movieId, rating: { $exists: true, $ne: 0 } });`
+
 Source: [Mongoplayground](https://mongoplayground.net/)
 
 **Using `$count` in aggregate: [Docs](https://www.mongodb.com/docs/manual/reference/operator/aggregation/count/)**
