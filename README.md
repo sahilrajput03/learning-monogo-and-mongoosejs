@@ -19,7 +19,7 @@ Without `$exists`:
 [{"key": 1,car: 10},{"key": 2}]
 
 # Query
-car: {$ne: 20}
+db.collection.aggregate([{$match: {car: {$ne: 20}}}])
 
 # Output:
 [
@@ -36,7 +36,7 @@ With `$exists`:
 [{"key": 1,car: 10},{"key": 2}]
 
 # Query
-car: {$exists: true, $ne: 20}
+db.collection.aggregate([{$match: {car: {$exists: true, $ne: 20}}}])
 
 # Output (notice that field which has no `car` key is not returned):
 [
