@@ -9,7 +9,9 @@
 
 ## ♥ ❣♥ ❣♥ ❣ `findOneAndUpdate` is best and how to use from the maintainer itself
 
-Source: [Click here](https://stackoverflow.com/a/59491047/10012446)
+- MongoDb Docs: [findOneAndUpdate](https://www.mongodb.com/docs/manual/reference/method/db.collection.findOneAndUpdate/)
+- MongooseJs: [How to Use findOneAndUpdate() in Mongoose](https://mongoosejs.com/docs/tutorials/findoneandupdate.html)
+- Source: [SO](https://stackoverflow.com/a/59491047/10012446)
 
 ```ts
 const doc = await Contact.findOneAndUpdate(
