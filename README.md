@@ -328,6 +328,8 @@ db.collection.aggregate([
   { "$sort": { "duplicates": -1 } },
   { "$project": { "first_name": "$_id", "_id": 0, duplicates: 1 } }
 ])
+  
+# PRO Tip: You can filter some data using a $match stage in the front of the aggregate query as well, for e.g, `{$match: {car: 30}}`
 ```
 
 ![image](https://user-images.githubusercontent.com/31458531/211373136-ab404c81-77b1-4a09-a78a-f9dab7a88469.png)
