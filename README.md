@@ -7,6 +7,28 @@
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 - Seems like a good read on efficient mongodb queries with mongoosejs: [Click here](https://climbtheladder.com/10-mongoose-populate-best-practices/)
 
+## `findOneAndUpdate` is best and how to use from the maintainer itself
+
+Source: [Click here](https://stackoverflow.com/a/59491047/10012446)
+
+```ts
+const doc = await Contact.findOneAndUpdate(
+  { phone: request.phone},
+  { status: request.status },
+  { upsert: true, new: true }
+);
+
+
+# Comment from here: https://stackoverflow.com/a/7486950/10012446
+# I don't think you need the {$set: ... } part here as its automatic form my reading
+# ~Sahil: People use $set as well:
+const doc = await Contact.findOneAndUpdate(
+  { phone: request.phone},
+  { $set: { status: request.status } },
+  { upsert: true, new: true }
+);
+```
+
 ## Usage of `$exists`
 
 - Source: [Mongoplayground](https://mongoplayground.net/)
