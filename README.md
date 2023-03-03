@@ -9,8 +9,8 @@
 
 ## Using geospatial schema definition example
 
-- Yet another amazing article: Geospatial Queries: [Click here](http://thecodebarbarian.com/80-20-guide-to-mongodb-geospatial-queries)
 - Source: Mongoose: Using GeoJSON: [Click here](https://mongoosejs.com/docs/geojson.html)
+- Yet another amazing article: Geospatial Queries: [Click here](http://thecodebarbarian.com/80-20-guide-to-mongodb-geospatial-queries)
 - GeoJson: [Click here](https://mongoosejs.com/docs/geojson.html)
 
 ```js
