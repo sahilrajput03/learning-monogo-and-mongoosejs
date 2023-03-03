@@ -28,6 +28,9 @@ const citySchema = new mongoose.Schema({
     }
   }
 });
+
+// to add data use this format:
+// loc: { type: "Point", coordinates: [ longitude, latitude ] },
 ```
 
 ## ♥ ❣♥ ❣♥ ❣ `findOneAndUpdate` is best and how to use from the maintainer itself
