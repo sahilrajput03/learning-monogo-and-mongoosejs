@@ -7,6 +7,27 @@
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 - Seems like a good read on efficient mongodb queries with mongoosejs: [Click here](https://climbtheladder.com/10-mongoose-populate-best-practices/)
 
+## Using geospatial schema definition example
+
+Source: Mongoose: Using GeoJSON: [Click here](https://mongoosejs.com/docs/geojson.html)
+
+```js
+const citySchema = new mongoose.Schema({
+  name: String,
+  location: {
+    type: {
+      type: String,
+      enum: ['Point'],
+      required: true
+    },
+    coordinates: {
+      type: [Number],
+      required: true
+    }
+  }
+});
+```
+
 ## ♥ ❣♥ ❣♥ ❣ `findOneAndUpdate` is best and how to use from the maintainer itself
 
 - MongoDb Docs: [findOneAndUpdate](https://www.mongodb.com/docs/manual/reference/method/db.collection.findOneAndUpdate/)
