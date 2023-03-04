@@ -7,6 +7,22 @@
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 - Seems like a good read on efficient mongodb queries with mongoosejs: [Click here](https://climbtheladder.com/10-mongoose-populate-best-practices/)
 
+## Getting all collecion names
+
+```ts
+// getting names of all models
+const mongooseModelsNames = connection.modelNames();
+
+// getting all models as an array
+const mongooseModels = connection.modelNames().map((modelName) => connection.model(modelName));
+```
+
+## On demand creating an index for a collection
+
+```ts
+(await connection.db.collections()).find((collection) => collection.collectionName === 'events').createIndex({ location: '2dsphere' });
+```
+
 ## Using geospatial schema definition example
 
 - Source: Mongoose: Using GeoJSON: [Click here](https://mongoosejs.com/docs/geojson.html)
