@@ -7,6 +7,15 @@
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 - Seems like a good read on efficient mongodb queries with mongoosejs: [Click here](https://climbtheladder.com/10-mongoose-populate-best-practices/)
 
+## Typescript with mongoose
+
+Source (official mongoose docs):
+- 1. Schemas in TypeScript: [Click here](https://mongoosejs.com/docs/typescript/schemas.html)
+- 2. Statics and Methods in TypeScript: [Click here](https://mongoosejs.com/docs/typescript/statics-and-methods.html) (below screenshot)
+
+![image](https://user-images.githubusercontent.com/31458531/224515793-2e843b81-4b5a-4779-984c-b3f8bab6d854.png)
+
+
 ## Getting all collecion names
 
 ```ts
