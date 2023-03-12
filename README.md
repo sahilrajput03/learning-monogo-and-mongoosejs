@@ -11,6 +11,10 @@
 
 **Official Docs:** - GeoJSON Objects: [Click here](https://www.mongodb.com/docs/manual/reference/geojson/)
 
+Syntax:
+
+`<field>: { type: <GeoJSON type> , coordinates: <coordinates> }`
+
 ```txt
 // Point
 { type: "Point", coordinates: [ 40, 5 ] }
