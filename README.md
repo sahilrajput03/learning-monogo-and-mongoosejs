@@ -7,6 +7,91 @@
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 - Seems like a good read on efficient mongodb queries with mongoosejs: [Click here](https://climbtheladder.com/10-mongoose-populate-best-practices/)
 
+## GeoJSON Objects in mongodb
+
+**Official Docs:** [Click here](https://www.mongodb.com/docs/manual/reference/geojson/)
+
+```txt
+// Point
+{ type: "Point", coordinates: [ 40, 5 ] }
+
+// LineString
+{ type: "LineString", coordinates: [ [ 40, 5 ], [ 41, 6 ] ] }
+
+// Polygon
+{
+  type: "Polygon",
+  coordinates: [ [ [ 0 , 0 ] , [ 3 , 6 ] , [ 6 , 1 ] , [ 0 , 0  ] ] ]
+}
+
+// Polygons with Multiple Rings
+{
+  type : "Polygon",
+  coordinates : [
+     [ [ 0 , 0 ] , [ 3 , 6 ] , [ 6 , 1 ] , [ 0 , 0 ] ],
+     [ [ 2 , 2 ] , [ 3 , 3 ] , [ 4 , 2 ] , [ 2 , 2 ] ]
+  ]
+}
+
+
+// MultiPoint
+{
+  type: "MultiPoint",
+  coordinates: [
+     [ -73.9580, 40.8003 ],
+     [ -73.9498, 40.7968 ],
+     [ -73.9737, 40.7648 ],
+     [ -73.9814, 40.7681 ]
+  ]
+}
+
+// MultiLineString
+{
+  type: "MultiLineString",
+  coordinates: [
+     [ [ -73.96943, 40.78519 ], [ -73.96082, 40.78095 ] ],
+     [ [ -73.96415, 40.79229 ], [ -73.95544, 40.78854 ] ],
+     [ [ -73.97162, 40.78205 ], [ -73.96374, 40.77715 ] ],
+     [ [ -73.97880, 40.77247 ], [ -73.97036, 40.76811 ] ]
+  ]
+}
+
+
+// MultiPolygon
+{
+  type: "MultiPolygon",
+  coordinates: [
+     [ [ [ -73.958, 40.8003 ], [ -73.9498, 40.7968 ], [ -73.9737, 40.7648 ], [ -73.9814, 40.7681 ], [ -73.958, 40.8003 ] ] ],
+     [ [ [ -73.958, 40.8003 ], [ -73.9498, 40.7968 ], [ -73.9737, 40.7648 ], [ -73.958, 40.8003 ] ] ]
+  ]
+}
+
+// GeometryCollection
+{
+  type: "GeometryCollection",
+  geometries: [
+     {
+       type: "MultiPoint",
+       coordinates: [
+          [ -73.9580, 40.8003 ],
+          [ -73.9498, 40.7968 ],
+          [ -73.9737, 40.7648 ],
+          [ -73.9814, 40.7681 ]
+       ]
+     },
+     {
+       type: "MultiLineString",
+       coordinates: [
+          [ [ -73.96943, 40.78519 ], [ -73.96082, 40.78095 ] ],
+          [ [ -73.96415, 40.79229 ], [ -73.95544, 40.78854 ] ],
+          [ [ -73.97162, 40.78205 ], [ -73.96374, 40.77715 ] ],
+          [ [ -73.97880, 40.77247 ], [ -73.97036, 40.76811 ] ]
+       ]
+     }
+  ]
+}
+```
+
 ## Thats how different indexes look in the mongo compass for a collection
 
 ![image](https://user-images.githubusercontent.com/31458531/224561264-d40e7b9f-d60d-4087-bf58-ccfd29acc362.png)
