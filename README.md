@@ -7,6 +7,23 @@
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 - Seems like a good read on efficient mongodb queries with mongoosejs: [Click here](https://climbtheladder.com/10-mongoose-populate-best-practices/)
 
+## Find documents within rectangular region specifed by `[topRightCoordinate, bottomLeftCoordinates]`
+
+Specifies a rectangle for a geospatial $geoWithin query to return documents that are within the bounds of the rectangle, according to their point-based location data.
+
+**$box:** [Click here](https://www.mongodb.com/docs/manual/reference/operator/query/box/)
+
+```js
+{/* using mongocompass's query, worked awesome! */}
+db.events.find(
+  {
+     location: {
+       $geoWithin: { $box: [ [41.08840841260634, -74.89843368530275], [41.01332484409777,-75.03129959106447]] }
+     }
+  }
+)
+```
+
 ## `GeoJSON Objects` and `Geospatial Queries` in mongodb
 
 <ins>Docs:</ins>
