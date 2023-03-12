@@ -7,6 +7,12 @@
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 - Seems like a good read on efficient mongodb queries with mongoosejs: [Click here](https://climbtheladder.com/10-mongoose-populate-best-practices/)
 
+## Latitude vs. longitude
+
+Source: Stack Overflow Question: [Click here](https://stackoverflow.com/a/7780993/10012446)
+
+`The latitude must be a number between -90 and 90 and the longitude between -180 and 180.`
+
 ## Find documents within rectangular region specifed by `[topRightCoordinate, bottomLeftCoordinates]`
 
 Specifies a rectangle for a geospatial $geoWithin query to return documents that are within the bounds of the rectangle, according to their point-based location data.
