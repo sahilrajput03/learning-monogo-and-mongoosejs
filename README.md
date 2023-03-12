@@ -18,7 +18,7 @@ Specifies a rectangle for a geospatial $geoWithin query to return documents that
 db.events.find(
   {
      location: {
-       $geoWithin: { $box: [ [41.08840841260634, -74.89843368530275], [41.01332484409777,-75.03129959106447]] }
+       $geoWithin: { $box: [ [topRightCoordinateLat, topRightCoordinateLng], [bottomLeftLat, bottomLeftLng]] }
      }
   }
 )
