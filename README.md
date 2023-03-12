@@ -24,6 +24,27 @@ db.events.find(
 )
 ```
 
+## Find documents within a given radius around a given coordinate
+
+```js
+const results = await this.eventModel.aggregate([
+  {
+    $geoNear: {
+      near: {
+        type: 'Point',
+        coordinates: [lattitude, longitude],
+      },
+      maxDistance: maxDistanceMetres,
+      distanceField: 'distance',
+      // get distances of each event in miles
+      distanceMultiplier: METRES_TO_MILES_MULTIPLIER,
+    },
+  },
+  // any other optional query (NOTE: `$geoNear` must be the first query in the pipeline array of queries
+  { $match: query },
+]);
+```
+
 ## `GeoJSON Objects` and `Geospatial Queries` in mongodb
 
 <ins>Docs:</ins>
