@@ -11,6 +11,8 @@
 
 **Official Docs:** - GeoJSON Objects: [Click here](https://www.mongodb.com/docs/manual/reference/geojson/)
 
+MongoDB geospatial queries on GeoJSON objects calculate on a sphere; MongoDB uses the WGS84 reference system for geospatial queries on GeoJSON objects.
+
 Syntax:
 
 `<field>: { type: <GeoJSON type> , coordinates: <coordinates> }`
