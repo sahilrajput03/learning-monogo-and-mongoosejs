@@ -9,7 +9,7 @@
 
 ## GeoJSON Objects in mongodb
 
-**Official Docs:** [Click here](https://www.mongodb.com/docs/manual/reference/geojson/)
+**Official Docs:** - GeoJSON Objects: [Click here](https://www.mongodb.com/docs/manual/reference/geojson/)
 
 ```txt
 // Point
