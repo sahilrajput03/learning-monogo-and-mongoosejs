@@ -7,9 +7,11 @@
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 - Seems like a good read on efficient mongodb queries with mongoosejs: [Click here](https://climbtheladder.com/10-mongoose-populate-best-practices/)
 
-## GeoJSON Objects in mongodb
+## `GeoJSON Objects` and `Geospatial Queries` in mongodb
 
-**Official Docs:** GeoJSON Objects: [Click here](https://www.mongodb.com/docs/manual/reference/geojson/)
+<ins>Docs:</ins>
+- GeoJSON Objects: [Click here](https://www.mongodb.com/docs/manual/reference/geojson/)
+- Geospatial Queries: [Click here](https://www.mongodb.com/docs/manual/geospatial-queries/)
 
 MongoDB geospatial queries on GeoJSON objects calculate on a sphere; MongoDB uses the WGS84 reference system for geospatial queries on GeoJSON objects.
 
