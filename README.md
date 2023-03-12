@@ -7,6 +7,10 @@
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 - Seems like a good read on efficient mongodb queries with mongoosejs: [Click here](https://climbtheladder.com/10-mongoose-populate-best-practices/)
 
+## Thats how different indexes look in the mongo compass for a collection
+
+![image](https://user-images.githubusercontent.com/31458531/224561264-d40e7b9f-d60d-4087-bf58-ccfd29acc362.png)
+
 ## Typescript with mongoose
 
 Source (official mongoose docs):
