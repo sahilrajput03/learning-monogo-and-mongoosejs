@@ -214,6 +214,10 @@ const citySchema = new mongoose.Schema({
 - Source: [SO](https://stackoverflow.com/a/59491047/10012446)
 
 ```ts
+// creating new document if already doesn't exist (note: we're passing {} as second coz we just want a new document with required fields (search fields in 1st argument)
+await this.feedReplyLikeModel.findOneAndUpdate({ feedReplyId, userId }, {}, { upsert: true, new: true });
+
+
 const doc = await Contact.findOneAndUpdate(
   { phone: request.phone},
   { status: request.status },
