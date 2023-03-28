@@ -7,6 +7,14 @@
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 - Seems like a good read on efficient mongodb queries with mongoosejs: [Click here](https://climbtheladder.com/10-mongoose-populate-best-practices/)
 
+## Using `$in` and `$nin` operator for a single field at the same time
+
+![image](https://user-images.githubusercontent.com/31458531/228137175-7d462d7e-8bc7-4219-a50a-0f992e72e374.png)
+
+Also, `$and` is redundant and thus we can remove `$and` and it would work same again:
+
+![image](https://user-images.githubusercontent.com/31458531/228137271-11283de4-32ba-4e60-9708-a95008081716.png)
+
 ## Latitude vs. longitude
 
 Source: Stack Overflow Question: [Click here](https://stackoverflow.com/a/7780993/10012446)
