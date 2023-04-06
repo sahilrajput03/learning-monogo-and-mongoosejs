@@ -7,6 +7,10 @@
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 - Seems like a good read on efficient mongodb queries with mongoosejs: [Click here](https://climbtheladder.com/10-mongoose-populate-best-practices/)
 
+## What is mongodb cluster?
+
+![image](https://user-images.githubusercontent.com/31458531/230266118-7f971c78-b7c5-4aee-97fa-858a75c9978d.png)
+
 ## Using `$in` and `$nin` operator for a single field at the same time
 
 ![image](https://user-images.githubusercontent.com/31458531/228137175-7d462d7e-8bc7-4219-a50a-0f992e72e374.png)
