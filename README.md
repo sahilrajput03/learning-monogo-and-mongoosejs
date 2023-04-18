@@ -7,6 +7,12 @@
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 - Seems like a good read on efficient mongodb queries with mongoosejs: [Click here](https://climbtheladder.com/10-mongoose-populate-best-practices/)
 
+## How can we print more than 20 items in mongo shell?
+
+Source: [Click here](https://stackoverflow.com/a/5094867/10012446)
+
+![image](https://user-images.githubusercontent.com/31458531/232702960-48fd02e9-d2a6-43a4-a94b-4e83aa1eb341.png)
+
 ## What is mongodb cluster?
 
 ![image](https://user-images.githubusercontent.com/31458531/230266118-7f971c78-b7c5-4aee-97fa-858a75c9978d.png)
