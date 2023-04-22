@@ -516,7 +516,7 @@ That means if you use wrong order then the query will not match the document:
 ![image](https://user-images.githubusercontent.com/31458531/211585155-6c4a8a3c-f3e5-46c8-acb0-94a921f421ee.png)
 
 
-## find duplicate items in mongodb
+## find duplicate items in mongodb (finding unique items)
 
 Docs - `$group (aggregation)` : [Click here](https://www.mongodb.com/docs/manual/reference/operator/aggregation/group/)
 
