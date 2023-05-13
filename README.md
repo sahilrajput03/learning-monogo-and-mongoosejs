@@ -554,12 +554,11 @@ db.collection.aggregate([
 Documents:
 [
   // good case: both users are deleted
-  { "first_name": "Sahil", "deleted": true }, { "first_name": "Sahil", "deleted": true },
+  { "email": "Sahil", "deleted": true }, { "email": "Sahil", "deleted": true },
   // good case: one user deleted, one active
-  { "first_name": "Mohit", "deleted": true }, { "first_name": "Mohit", "deleted": false },
+  { "email": "Mohit", "deleted": true }, { "email": "Mohit", "deleted": false },
   // *bad case*: one deleted user, two active user i.e, deleted=false
-  { "first_name": "Mandy", "deleted": true }, { "first_name": "Mandy", "deleted": false },
-  { "first_name": "Mandy", "deleted": false },
+  { "email": "Mandy", "deleted": true }, { "email": "Mandy", "deleted": false },  { "email": "Mandy", "deleted": false },
 ]
 
 # Query:
@@ -569,7 +568,7 @@ db.collection.aggregate([
   // now we group by email
   { "$group": {
       "_id": {
-        "first_name": "$first_name",
+        "email": "$email",
         "deleted": "$deleted"// delete is *optional* here though
         
       },
