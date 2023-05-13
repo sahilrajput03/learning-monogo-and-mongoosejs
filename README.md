@@ -548,6 +548,8 @@ db.collection.aggregate([
 
 ## find duplicate#2 items in mongodb (finding unique items)
 
+Docs - `$group (aggregation)` : [Click here](https://www.mongodb.com/docs/manual/reference/operator/aggregation/group/)
+
 ![image](https://github.com/sahilrajput03/learning-monogo-and-mongoosejs/assets/31458531/f2a6c281-057d-45cb-8e50-f4f066df75b7)
 
 ```bash
