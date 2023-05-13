@@ -513,7 +513,7 @@ That means if you use wrong order then the query will not match the document:
 
 ![image](https://user-images.githubusercontent.com/31458531/211585155-6c4a8a3c-f3e5-46c8-acb0-94a921f421ee.png)
 
-## find #duplicate (#1) items in mongodb (finding unique items)
+## find duplicate#1 items in mongodb (finding unique items)
 
 Docs - `$group (aggregation)` : [Click here](https://www.mongodb.com/docs/manual/reference/operator/aggregation/group/)
 
@@ -546,7 +546,7 @@ db.collection.aggregate([
 ![image](https://user-images.githubusercontent.com/31458531/211373136-ab404c81-77b1-4a09-a78a-f9dab7a88469.png)
 
 
-## find #duplicate (#2) items in mongodb (finding unique items)
+## find duplicate#2 items in mongodb (finding unique items)
 
 ![image](https://github.com/sahilrajput03/learning-monogo-and-mongoosejs/assets/31458531/f2a6c281-057d-45cb-8e50-f4f066df75b7)
 
