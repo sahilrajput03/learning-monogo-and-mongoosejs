@@ -548,7 +548,7 @@ db.collection.aggregate([
 
 ## find #duplicate (#2) items in mongodb (finding unique items)
 
-![image](https://github.com/sahilrajput03/learning-monogo-and-mongoosejs/assets/31458531/2c6ea85b-6b98-4dc0-a02f-0420a4323b22)
+![image](https://github.com/sahilrajput03/learning-monogo-and-mongoosejs/assets/31458531/f2a6c281-057d-45cb-8e50-f4f066df75b7)
 
 ```bash
 Documents:
