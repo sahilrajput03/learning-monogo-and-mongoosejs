@@ -485,10 +485,9 @@ Source: [Click here](https://stackoverflow.com/questions/38970835/mongodb-add-el
 
 ![image](https://user-images.githubusercontent.com/31458531/216082340-0a8428b9-b559-4bc4-9eed-fb2d0e53f0b9.png)
 
-## (*not*tested*) You can Enable indexing for fields in backend server directly as well (otherwise we simply enable in the mongodb server<in compass>)
+## `#not_tested` You can Enable indexing for fields in backend server directly as well (otherwise we simply enable in the mongodb server `In Compass`)
 
 ![image](https://user-images.githubusercontent.com/31458531/215793227-45f230f6-b870-4a62-b41c-89e42f37dd32.png)
-
 
 ## Directly searching a document of a given _id can be done like that:
 
@@ -508,15 +507,13 @@ That means if you use wrong order then the query will not match the document:
 
 ![image](https://user-images.githubusercontent.com/31458531/211662275-dd65edd2-7ea9-4819-bb2e-b9f641655bca.png)
 
-
 ## You don't nee the $in operator to search inside of an array in `mongo` and `mongoose`
 
 ![image](https://user-images.githubusercontent.com/31458531/211585232-688742ab-7f58-4f06-97ed-d9ff29f8d260.png)
 
 ![image](https://user-images.githubusercontent.com/31458531/211585155-6c4a8a3c-f3e5-46c8-acb0-94a921f421ee.png)
 
-
-## find duplicate items in mongodb (finding unique items)
+## find #duplicate (#1) items in mongodb (finding unique items)
 
 Docs - `$group (aggregation)` : [Click here](https://www.mongodb.com/docs/manual/reference/operator/aggregation/group/)
 
@@ -549,6 +546,40 @@ db.collection.aggregate([
 ![image](https://user-images.githubusercontent.com/31458531/211373136-ab404c81-77b1-4a09-a78a-f9dab7a88469.png)
 
 
+## find #duplicate (#2) items in mongodb (finding unique items)
+
+![image](https://github.com/sahilrajput03/learning-monogo-and-mongoosejs/assets/31458531/2c6ea85b-6b98-4dc0-a02f-0420a4323b22)
+
+```bash
+Documents:
+[
+  // good case: both users are deleted
+  { "first_name": "Sahil", "deleted": true }, { "first_name": "Sahil", "deleted": true },
+  // good case: one user deleted, one active
+  { "first_name": "Mohit", "deleted": true }, { "first_name": "Mohit", "deleted": false },
+  // *bad case*: one deleted user, two active user i.e, deleted=false
+  { "first_name": "Mandy", "deleted": true }, { "first_name": "Mandy", "deleted": false },
+  { "first_name": "Mandy", "deleted": false },
+]
+
+# Query:
+db.collection.aggregate([
+  // filter only deleted users
+  { $match: { deleted: false, } },
+  // now we group by email
+  { "$group": {
+      "_id": {
+        "first_name": "$first_name",
+        "deleted": "$deleted"// delete is *optional* here though
+        
+      },
+      "duplicates": { "$sum": 1 }
+    }
+  },
+  { "$match": { "_id": { "$ne": null }, "duplicates": { "$gt": 1 } } },
+])
+```
+  
 ## Iterate over documents individualy using stream
 
 - Amazing - Mongodb Docs: [Click here](https://www.mongodb.com/docs/manual/tutorial/iterate-a-cursor/)
