@@ -515,7 +515,8 @@ That means if you use wrong order then the query will not match the document:
 
 ## find duplicate#1 items in mongodb (finding unique items)
 
-Docs - `$group (aggregation)` : [Click here](https://www.mongodb.com/docs/manual/reference/operator/aggregation/group/)
+- Docs - `$group (aggregation)` : [Click here](https://www.mongodb.com/docs/manual/reference/operator/aggregation/group/)
+- Playground Link: [mongoplayground.net](https://mongoplayground.net/)
 
 ![image](https://user-images.githubusercontent.com/31458531/211372185-d91fc2ec-f717-4066-abef-92192a5ccb2c.png)
 
@@ -548,7 +549,8 @@ db.collection.aggregate([
 
 ## find duplicate#2 items in mongodb (finding unique items)
 
-Docs - `$group (aggregation)` : [Click here](https://www.mongodb.com/docs/manual/reference/operator/aggregation/group/)
+- Docs - `$group (aggregation)` : [Click here](https://www.mongodb.com/docs/manual/reference/operator/aggregation/group/)
+- Playground Link: [mongoplayground.net](https://mongoplayground.net/)
 
 ![image](https://github.com/sahilrajput03/learning-monogo-and-mongoosejs/assets/31458531/f2a6c281-057d-45cb-8e50-f4f066df75b7)
 
