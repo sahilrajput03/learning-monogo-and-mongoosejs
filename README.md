@@ -249,6 +249,13 @@ const doc = await Contact.findOneAndUpdate(
   { $set: { status: request.status } },
   { upsert: true, new: true }
 );
+
+
+### LEARN: Difference between `upsert: true` and `new: true`. Source: https://stackoverflow.com/a/44794886
+
+They are completely different flags
+- If upsert is true then if the row trying to be updated does not exist then a new row is inserted instead , if false then it does not do anything .
+- If new is true then the modified document is returned after the update rather than the original , if false then the original document is returned
 ```
 
 ## Usage of `$exists`
