@@ -7,6 +7,15 @@
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 - Seems like a good read on efficient mongodb queries with mongoosejs: [Click here](https://climbtheladder.com/10-mongoose-populate-best-practices/)
 
+## Sort in mongodb
+
+Short notes:
+1. Default is ascending order ie., `sort: 1`
+2. Providing `sort: -1` to get in descending order.
+
+![image](https://github.com/sahilrajput03/learning-monogo-and-mongoosejs/assets/31458531/1807c9c4-648e-4806-9697-a4e81d91a9c6)
+
+
 ## Amazing mongodb query
 
 Link to saved playground by Author: [Click here](https://mongoplayground.net/p/uo8cMK-9N0t)
