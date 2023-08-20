@@ -605,16 +605,21 @@ db.collection.aggregate([
 ])
 ```
   
-## Iterate over documents individualy using stream
+## Cursor in mongodb, Iterate over documents individualy using stream
 
 - Amazing - Mongodb Docs: [Click here](https://www.mongodb.com/docs/manual/tutorial/iterate-a-cursor/)
 - MongooseJs: [Click here](https://mongoosejs.com/docs/api/querycursor.html)
 - Stackoverflow Question: [Click here](https://stackoverflow.com/questions/56741578/mongoose-cursors-with-many-documents-and-load)
 
-Q. Why cursor and not batches (i.e, `limit()` way)? **Ans.** Using the skip feature when iterating through results in batches can get slower over time for large data sets, when skip is given a high numeric value, so streaming with a cursor helps to get around that. ~Credits: Eric
- 
+Q. **(Please see ChatGPT's awesome explanations below as well)** Why cursor and not batches (i.e, `limit()` way)? **Ans.** Using the skip feature when iterating through results in batches can get slower over time for large data sets, when skip is given a high numeric value, so streaming with a cursor helps to get around that. ~Credits: Eric
+
 ![image](https://user-images.githubusercontent.com/31458531/211360156-03499979-a645-4242-9950-417bab32672d.png)
 
+From ChatGPT:
+
+![image](https://github.com/sahilrajput03/learning-monogo-and-mongoosejs/assets/31458531/1bfc33f7-1405-49b8-b2e0-e46dd31d9866)
+
+![image](https://github.com/sahilrajput03/learning-monogo-and-mongoosejs/assets/31458531/a6bdd1d5-451d-437f-b6b4-ff6170e6cf2c)
 
 ## How to use `updateMany` in mongodb/mongoosejs
 
