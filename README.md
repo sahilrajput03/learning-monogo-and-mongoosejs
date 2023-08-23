@@ -7,6 +7,12 @@
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 - Seems like a good read on efficient mongodb queries with mongoosejs: [Click here](https://climbtheladder.com/10-mongoose-populate-best-practices/)
 
+## Actively closing mongodb connection to close NestJS app immediately when we run custom `scripts`
+
+Source: [Click here](https://stackoverflow.com/a/20167155)
+
+![image](https://github.com/sahilrajput03/learning-monogo-and-mongoosejs/assets/31458531/6ca1ced6-7259-420b-a832-75813f507f63)
+
 ## Sort in mongodb
 
 Short notes:
