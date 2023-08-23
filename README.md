@@ -11,6 +11,8 @@
 
 Source: [Click here](https://stackoverflow.com/a/20167155)
 
+Problem: When we run a below script with a simple `console.log`, the app.close works pretty good but when we have some bulky db operations with db the `app.close` seems to hang out for some time like 1-2 minutes thus we can fix that issue by actively closing the db connection as shown in below screenshot.
+
 ![image](https://github.com/sahilrajput03/learning-monogo-and-mongoosejs/assets/31458531/6ca1ced6-7259-420b-a832-75813f507f63)
 
 ## Sort in mongodb
