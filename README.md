@@ -7,6 +7,17 @@
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 - Seems like a good read on efficient mongodb queries with mongoosejs: [Click here](https://climbtheladder.com/10-mongoose-populate-best-practices/)
 
+## Using `.exists()` method to check if one or more documents match with a given filter
+
+Note: `Model.exists(filter)` returns `{ _id: id_of_first_matched_document } | null`.
+
+```ts
+async podcastUrlIsAvailable(podcastUrl: string): Promise<boolean> {
+  const podcastExists = await this.podcastsModel.exists({ rssUrl: podcastUrl });
+  return !podcastExists;
+}
+```
+
 ## How many parallel mongodb insert query can I run in parallel with mongoosejs in nodejs?
 
 ![image](https://github.com/sahilrajput03/learning-monogo-and-mongoosejs/assets/31458531/d8ce0d15-e7e2-46ab-a006-8377e3619224)
