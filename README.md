@@ -7,6 +7,21 @@
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 - Seems like a good read on efficient mongodb queries with mongoosejs: [Click here](https://climbtheladder.com/10-mongoose-populate-best-practices/)
 
+## `maxTimeMS` (sems like it doesn't work though)
+
+![image](https://github.com/sahilrajput03/learning-monogo-and-mongoosejs/assets/31458531/215802a2-315f-4dc6-88e9-8474eedd440c)
+
+```js
+    const doc of moviesModel
+      .find({ deleted: MovieDeletionStatus.NotDeleted })
+      .cursor({ maxTimeMS: 5000 })
+  ) {
+    // doc
+  }
+
+```
+
+
 ## Using `.exists()` method to check if one or more documents match with a given filter
 
 Note: `Model.exists(filter)` returns `{ _id: id_of_first_matched_document } | null`.
