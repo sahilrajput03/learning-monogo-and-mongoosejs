@@ -9,6 +9,8 @@
 
 ## `maxTimeMS` (sems like it doesn't work though)
 
+[chatGPT](https://chat.openai.com/share/910c0308-a8dd-49bd-9089-e95f946119cb)
+
 ![image](https://github.com/sahilrajput03/learning-monogo-and-mongoosejs/assets/31458531/215802a2-315f-4dc6-88e9-8474eedd440c)
 
 ```js
