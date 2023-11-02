@@ -13,7 +13,7 @@ Query: For e.g., we have a 10 classes in a school, then each class has students 
 
 Solution:
 
-1. Use a Sequence Field: Add a field to your documents that represents the order or sequence of the documents. For example, you can add a field called "sequence" and assign a numeric value to each document. When you retrieve documents, you can use this field to sort them in the desired sequence.
+1. Use a Sequence Field: Add a field to your documents that represents the order or sequence of the documents. For example, you can add a field called "sequence" and assign a numeric value to each document. When you retrieve documents, you can use this field to sort them in the desired sequence. When retrieving documents, you can use .sort({ "sequence": 1 }) to get them in ascending order.
    ```js
    {
      "_id": ObjectId("documentId"),
@@ -22,7 +22,6 @@ Solution:
      // Other document fields
    }
    ```
-   When retrieving documents, you can use .sort({ "sequence": 1 }) to get them in ascending order.
 2. Maintain an External List for e.g., `rollNumbers: [studentId1, studentId2, and so on...]`: Maintain a separate list or array of document IDs that represents the desired sequence. When you need to retrieve documents in a specific order, you can fetch the list of IDs and then retrieve the documents based on this list. This approach allows you to change the order without modifying the documents themselves. However, it requires additional management of the order list.
 
 ## `maxTimeMS` (sems like it doesn't work though)
