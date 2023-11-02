@@ -7,6 +7,24 @@
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 - Seems like a good read on efficient mongodb queries with mongoosejs: [Click here](https://climbtheladder.com/10-mongoose-populate-best-practices/)
 
+## How can a store documents such that I can fetch them in a particular sequence
+
+Query: For e.g., we have a 10 classes in a school, then each class has students with defined roll numbers to them in ascending order. So, we need to fetch items in a particular order only, in other words we need to maintain their order/sequence.
+
+Solution:
+
+1. Use a Sequence Field: Add a field to your documents that represents the order or sequence of the documents. For example, you can add a field called "sequence" and assign a numeric value to each document. When you retrieve documents, you can use this field to sort them in the desired sequence.
+   ```js
+   {
+     "_id": ObjectId("documentId"),
+     "name": "Document Name",
+     "sequence": 1
+     // Other document fields
+   }
+   ```
+   When retrieving documents, you can use .sort({ "sequence": 1 }) to get them in ascending order.
+2. Maintain an External List for e.g., `rollNumbers: [studentId1, studentId2, and so on...]`: Maintain a separate list or array of document IDs that represents the desired sequence. When you need to retrieve documents in a specific order, you can fetch the list of IDs and then retrieve the documents based on this list. This approach allows you to change the order without modifying the documents themselves. However, it requires additional management of the order list.
+
 ## `maxTimeMS` (sems like it doesn't work though)
 
 [chatGPT](https://chat.openai.com/share/910c0308-a8dd-49bd-9089-e95f946119cb)
