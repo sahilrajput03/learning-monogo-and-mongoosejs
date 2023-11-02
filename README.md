@@ -9,7 +9,7 @@
 
 ## How can a store documents such that I can fetch them in a particular sequence
 
-Query: For e.g., we have a 10 classes in a school, then each class has students with defined roll numbers to them in ascending order. So, we need to fetch items in a particular order only, in other words we need to maintain their order/sequence.
+Query: For e.g., we have a 10 classes in a school, then each class has students with defined roll numbers to them in ascending order. So, we need to fetch list of students in a particular order only, in other words we need to maintain their order/sequence.
 
 Solution:
 
