@@ -7,6 +7,47 @@
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 - Seems like a good read on efficient mongodb queries with mongoosejs: [Click here](https://climbtheladder.com/10-mongoose-populate-best-practices/)
 
+## Validatation using mongoose data
+
+**Comparison for custom validation libraries for data on backend:**
+
+<img src="https://github.com/sahilrajput03/learning-monogo-and-mongoosejs/assets/31458531/4b0ecf44-db9b-47f5-998c-b7f87c8227f0" width="800" />
+
+```bash
+const mongoose = require('mongoose');
+
+const userSchema = new mongoose.Schema({
+  username: {
+    type: String,
+    required: true
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true
+  }
+});
+
+const User = mongoose.model('User', userSchema);
+
+// This is useful for simple validation on APIs
+async function validateUser() {
+  const newUser = new User({
+    username: 'john_doe',
+    email: 'john.doe@email.com'
+  });
+
+  try {
+    await newUser.validate();
+    console.log('Data is valid!');
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+
+validateUser();
+```
+
 ## How can a store documents such that I can fetch them in a particular sequence
 
 Query: For e.g., we have a 10 classes in a school, then each class has students with defined roll numbers to them in ascending order. So, we need to fetch list of students in a particular order only, in other words we need to maintain their order/sequence.
