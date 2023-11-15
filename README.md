@@ -44,7 +44,7 @@ async function validateUser() {
 validateUser();
 ```
 
-**Comparison for custom validation libraries for data on backend:**
+## Comparison for custom validation libraries for data on backend:
 
 <img src="https://github.com/sahilrajput03/learning-monogo-and-mongoosejs/assets/31458531/4b0ecf44-db9b-47f5-998c-b7f87c8227f0" width="800" />
 
