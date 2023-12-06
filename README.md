@@ -542,8 +542,11 @@ Source: [Click here](https://stackoverflow.com/a/41736477/10012446)
 ## Deleting all `collections` or dropping `database` at once?
 
 ```js
+// TESTED: 6 Dec, 2023 (16.13.1), mongoose: ^7.6.3, mongodb (docker): mongo:4.0.9
+import mongoose from 'mongoose'
+
 // Drop entire database (which will drop all collections in one operation)
-await connection.dropDatabase();
+await mongoose.connection.dropDatabase();
 ```
 
 ```js
