@@ -7,6 +7,20 @@
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 - Seems like a good read on efficient mongodb queries with mongoosejs: [Click here](https://climbtheladder.com/10-mongoose-populate-best-practices/)
 
+## Does validation message plays any role when `required: false` (tldr: no)
+
+```js
+// schema:
+  password: {
+    type: String,
+    required: [false, 'Please Enter Your Password'],
+    minLength: [8, 'Password should be greater than 8 characters'],
+    select: false,
+  },
+```
+
+![image](https://github.com/sahilrajput03/learning-monogo-and-mongoosejs/assets/31458531/ae1082f2-3f80-4908-82d1-a351cbe37805)
+
 ## Validatation using mongoose data
 
 ```bash
