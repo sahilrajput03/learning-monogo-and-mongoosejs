@@ -19,7 +19,12 @@
   },
 ```
 
-![image](https://github.com/sahilrajput03/learning-monogo-and-mongoosejs/assets/31458531/ae1082f2-3f80-4908-82d1-a351cbe37805)
+```js
+// password field is only retrieved when explicitly asked for like below
+const user = await User.findOne({ email }).select('+password')
+```
+
+![image](https://github.com/sahilrajput03/learning-monogo-and-mongoosejs/assets/31458531/9c6bda7b-31ab-424a-9ee8-7dcf8597da82)
 
 ## Validatation using mongoose data
 
