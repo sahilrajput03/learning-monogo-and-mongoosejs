@@ -20,7 +20,7 @@
 **From ChatGPT:**
   - **Having a separate collection for Google users and linking it to the users collection is better. It ensures better scalability, normalization, and easier management of relationships while avoiding duplication of data.**
 
-**From Claude:**
+**❤️From Claude:**
 
   - **For most applications, having a separate collection for Google users is better because:**
     - **1. It maintains cleaner data separation and schema flexibility**
