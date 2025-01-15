@@ -7,6 +7,28 @@
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 - Seems like a good read on efficient mongodb queries with mongoosejs: [Click here](https://climbtheladder.com/10-mongoose-populate-best-practices/)
 
+
+## ❤️ Database schema for Google User details? (Claude and ChatGPT)
+
+*What is better?*
+
+*- having google user data to a nested field in mongodb or*
+*- having separate collection for google-users and link them to users collection.*
+
+*Be concise.*
+
+**From ChatGPT:**
+  - **Having a separate collection for Google users and linking it to the users collection is better. It ensures better scalability, normalization, and easier management of relationships while avoiding duplication of data.**
+
+**From Claude:**
+
+  - **For most applications, having a separate collection for Google users is better because:**
+    - **1. It maintains cleaner data separation and schema flexibility**
+    - **2. Enables easier querying of Google-specific data**
+    - **3. Follows MongoDB's principle of embedding vs referencing - reference when data can change independently or needs to be queried independently**
+
+**Use embedded nested fields only if the Google data is simple, rarely changes, and is always queried together with the user data.**
+
 ## mongodb - connection states
 
 ![image](https://user-images.githubusercontent.com/31458531/192446672-e1d27156-5e62-49ec-a8b5-6732fe673067.png)
