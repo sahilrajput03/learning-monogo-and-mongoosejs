@@ -29,7 +29,7 @@
 
 **Use embedded nested fields only if the Google data is simple, rarely changes, and is always queried together with the user data.**
 
-## What does populate do in mongoose? Is it natively from mongodb driver? What does it do behind the scenes? (ChatGPT)
+## What does `.populate()` do in mongoose? Is it natively from mongodb driver? What does it do behind the scenes? (ChatGPT)
 
 In Mongoose, `.populate()` is a powerful method used to automatically replace a referenced document ID with the actual document data from another collection. This feature simplifies working with related data in Mongo
 
