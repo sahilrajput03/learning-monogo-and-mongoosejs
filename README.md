@@ -163,6 +163,19 @@ const Post = mongoose.model("Post", postSchema);
 - Useful for simplifying queries without duplicating references.
 
 
+## Piyush's Project vs. Slasher's Project
+
+- In piyush's project, we got `userSchema.pre('save', () => {...})` method and it updates `password` field to be hashed i.e., `User.create({ password: 'plain-text'})` automatically saved password to hash. This is cool, and the current note-zipper project has the implementation for the `userFactory`. The big difference b/w `userFactory` of piyush's project and slasher project is that slasher's project uses transient properties which is not needed at all when we have auto hashing of passwords set on the schema.
+- In slasher's project, we have defiend custom schema methods i.e, `UserSchema.methods.setUnhashedPassword = () => {...}`  which  works like below:
+
+```js
+const user = new User(userRegisterDto);
+// set the hashed password manually on the user document
+user.setUnhashedPassword(userRegisterDto.password);
+// needed to updated in db
+await userDetails.save();
+```
+
 ## mongodb - connection states
 
 ![image](https://user-images.githubusercontent.com/31458531/192446672-e1d27156-5e62-49ec-a8b5-6732fe673067.png)
