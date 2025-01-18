@@ -113,7 +113,7 @@ User.findById(userId).populate("posts");
 
 `.populate()` simplifies working with related data in MongoDB by abstracting the process of manually fetching and combining related documents.
 
-## what is virtual populate in mongoose? Give example. be concise. (ChatGPT)
+## What is virtual populate in mongoose? Give example. be concise. (ChatGPT)
 
 In Mongoose, virtual populate is a feature that lets you set up virtual fields in your schema to populate related documents without storing references directly in the database. It works by dynamically pulling related data based on specified criteria.
 
