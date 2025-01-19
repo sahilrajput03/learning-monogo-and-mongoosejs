@@ -9,6 +9,8 @@
 
 # ❤️ ❤️ Avoid duplicate references when creating relationships
 
+~ Written by Sahil Rajput.
+
 When you want to reference between two collections you can store the id of the 1st document in second document only (no need to store id of second document in first Documents). Now when you need second document you can avoid using populate of the first document and rather make a separate query on second collection e.g. `secondCollection.find({ userId: "..."})`. Also for the reverse query i e., to get linked first document from the second document — you have userId field in the second document itself.
 
 This way we avoid making redundant reference in documents of the first collection and also achieve the goal to visually see what the second document is linked to by directly looking at documents of the second collection.
