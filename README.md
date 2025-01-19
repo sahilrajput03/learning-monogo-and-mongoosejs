@@ -7,6 +7,13 @@
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 - Seems like a good read on efficient mongodb queries with mongoosejs: [Click here](https://climbtheladder.com/10-mongoose-populate-best-practices/)
 
+# ❤️ ❤️ Avoid duplicate references when creating relationships
+
+When you want to reference between two collections you can store the id of the 1st document in second document only (no need to store id of second document in first Documents). Now when you need second document you can avoid using populate of the first document and rather make a separate query on second collection e.g. `secondCollection.find({ userId: "..."})`. Also for the reverse query i e., to get linked first document from the second document — you have userId field in the second document itself.
+
+This way we avoid making redundant reference in documents of the first collection and also achieve the goal to visually see what the second document is linked to by directly looking at documents of the second collection.
+
+Also, .populate() internally makes two queries just like we would manually query to the second collection to get the item using the id stored on that field.
 
 ## ❤️ Database schema for Google User details? (Claude and ChatGPT)
 
