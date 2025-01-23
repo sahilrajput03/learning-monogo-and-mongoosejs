@@ -11,6 +11,9 @@
 
 ***Thus if you have 33 test files and you open db for each test file then total time consumed for opening database connection is just 1 SECOND (33\*30ms = 1000ms).***
 
+- **"Premature optimization is the root of all evil" ~ Donald Knuth**
+    - Though, if you're still care about optimization then please refer my solution of `flash-runner`, which is a cli tool and you can open db connection and it is shared across all tests then and you can close the db once in the end. This is used in some repo in `learn-expressjs`, `learning-monogo-and-mongoosejs` and `learning_sql`. Thanks.*
+
 ```ts
 // Source - Check qr-solution backend.
 console.time('db-start')
