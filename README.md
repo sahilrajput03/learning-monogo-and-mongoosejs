@@ -9,7 +9,9 @@
 
 # It takes 30ms to open connection to mongodb running locally
 
-Source - Check qr-solution backend.
+***Thus if you have 33 test files and you open db for each test file then total time consumed for opening database connection is just 1 SECOND.***
+
+*Source - Check qr-solution backend.*
 
 ```ts
 console.time('db-start')
