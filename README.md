@@ -9,7 +9,7 @@
 
 # It takes 30ms to open connection to mongodb running locally
 
-***Thus if you have 33 test files and you open db for each test file then total time consumed for opening database connection is just 1 SECOND.***
+***Thus if you have 33 test files and you open db for each test file then total time consumed for opening database connection is just 1 SECOND (33\*30ms = 1000ms).***
 
 *Source - Check qr-solution backend.*
 
