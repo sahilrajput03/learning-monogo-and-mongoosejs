@@ -11,9 +11,8 @@
 
 ***Thus if you have 33 test files and you open db for each test file then total time consumed for opening database connection is just 1 SECOND (33\*30ms = 1000ms).***
 
-*Source - Check qr-solution backend.*
-
 ```ts
+// Source - Check qr-solution backend.
 console.time('db-start')
     try {
         mongoose.set('strictQuery', true)
