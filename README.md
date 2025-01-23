@@ -7,6 +7,21 @@
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 - Seems like a good read on efficient mongodb queries with mongoosejs: [Click here](https://climbtheladder.com/10-mongoose-populate-best-practices/)
 
+# It takes 30ms to open connection to mongodb running locally
+
+Source - Check qr-solution backend.
+
+```ts
+console.time('db-start')
+    try {
+        mongoose.set('strictQuery', true)
+        const conn = await mongoose.connect(MONGO_URI)
+        if (process.env.NODE_ENV !== 'test') {
+            logger.success(`MONGO DB CONNECTED: ${conn.connection.host}`)
+        }
+        console.timeEnd('db-start') // db-start: 28.915ms
+```
+
 # ❤️ ❤️ Avoid duplicate references when creating relationships
 
 ~ Written by Sahil Rajput.
