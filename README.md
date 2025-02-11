@@ -9,13 +9,15 @@
 
 ## Cloudflare worker connection with mongodb atlas is not possible as of date (but WIP) - 10 Feb 2025
 
-- Cloudflare workers doesn't work well with connecting with mongodb for now. Source Tried:
-- https://github.com/jchoi2x/cf-mongodb-polyfills
-  - https://github.com/jchoi2x/cf-mongodb-polyfills/issues/4
-    - https://github.com/cloudflare/workerd/discussions/2721#discussioncomment-11999598
+- Cloudflare workers doesn't work well with connecting with mongodb for now.
+- **Sources Tried:**
+- https://www.reddit.com/r/CloudFlare/comments/1fb5ji1/connect_mongodb_with_cloudflare_worker/
+  - https://github.com/jchoi2x/cf-mongodb-polyfills
+    - https://github.com/jchoi2x/cf-mongodb-polyfills/issues/4
+      - https://github.com/cloudflare/workerd/discussions/2721#discussioncomment-11999598
 - **Alternated dbs for cloudflare:**
-    - d1 db by cloudflare for https://developers.cloudflare.com/d1/
-    - https://bejamas.com/compare/cloudflare-d1-vs-mongodb-atlas
+  - d1 db by cloudflare for https://developers.cloudflare.com/d1/
+  - https://bejamas.com/compare/cloudflare-d1-vs-mongodb-atlas
 
 ## 🛑 Mongodb realm is deprecating soon.
 
