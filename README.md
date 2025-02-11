@@ -7,6 +7,11 @@
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 - Seems like a good read on efficient mongodb queries with mongoosejs: [Click here](https://climbtheladder.com/10-mongoose-populate-best-practices/)
 
+## Mongodb realm is deprecating soon.
+
+- Src - https://www.reddit.com/r/mongodb/comments/1fcsemu/mongodb_realm_deprecation/
+- Docs - https://www.mongodb.com/products/updates/product-support-deprecation
+
 # It takes 30ms to open connection to mongodb running locally
 
 ***Thus if you have 33 test files and you open db for each test file then total time consumed for opening database connection is just 1 SECOND (33\*30ms = 1000ms).***
