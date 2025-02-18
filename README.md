@@ -13,7 +13,10 @@
 - [npm](https://www.npmjs.com/package/@typegoose/typegoose)
 - [npmtrends](https://npmtrends.com/@typegoose/typegoose-vs-mongoose) (downloads stats)
 
-**(18 Feb, 2025) Note from Sahi ✅: I feel its unnecessary to bring much code of foreign library (which which has its own [downsides](https://typegoose.github.io/typegoose/docs/guides/known-issues/) and [issues](https://github.com/typegoose/typegoose/issues) for sure) when we get all the type errors via typescript itself already 🚀.**
+**(18 Feb, 2025) Note from Sahi ✅:**
+- ❌ I feel its unnecessary to bring much code of foreign library (which which has its own [downsides](https://typegoose.github.io/typegoose/docs/guides/known-issues/) and [issues](https://github.com/typegoose/typegoose/issues) for sure) when we get all the type errors via typescript itself already 🚀.
+- ❌ Schema creation is one time job and changing schema is done very rarely and thus not make much deal about it.
+- ❌ I am heavily invested in ideology to not add complexity of any library unnecessary thus not use typegoose here. The tradeoffs are not much good for using this library.
 
 ## Cloudflare worker connection with mongodb atlas is not possible as of date (but WIP) - 10 Feb 2025
 
