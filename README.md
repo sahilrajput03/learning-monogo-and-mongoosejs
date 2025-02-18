@@ -7,6 +7,12 @@
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 - Seems like a good read on efficient mongodb queries with mongoosejs: [Click here](https://climbtheladder.com/10-mongoose-populate-best-practices/)
 
+## Typegoose to help write mongoose schemas with classes
+
+- [github 2.2k*](https://github.com/typegoose/typegoose)
+- [npm](https://www.npmjs.com/package/@typegoose/typegoose)
+- [npmtrends](https://npmtrends.com/@typegoose/typegoose-vs-mongoose) (downloads stats)
+
 ## Cloudflare worker connection with mongodb atlas is not possible as of date (but WIP) - 10 Feb 2025
 
 - Cloudflare workers doesn't work well with connecting with mongodb for now.
