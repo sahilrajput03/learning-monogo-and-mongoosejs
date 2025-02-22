@@ -2,6 +2,9 @@
 DB_NAME=db1
 # DB_NAME=db2
 
+# & For dry run you can use below option:
+# --dryRun
+
 # * ✅  Restore all dbs from `dump`
 # mongorestore
 
@@ -60,9 +63,6 @@ DB_NAME=db1
 # mongorestore --db $DB_NAME --collection posts2 dump2/$DB_NAME/posts.bson
 # OUTPUT: `The --db and --collection flags are deprecated for this use-case; please use --nsInclude instead, i.e. with --nsInclude=${DATABASE}.${COLLECTION}``
 
-
-# & For dry run you can use below option:
-# --dryRun
 
 FILENAME=dump.archive
 # * ✅ Restore all dbs from a archive file # ! Be caureful: This command overwrites previous `dump.archive`
