@@ -1,3 +1,6 @@
+mongorestore --help > help-mongorestore.txt               
+============================OUTPUT============================
+
 Usage:
   mongorestore <options> <connection-string> <directory or file to restore>
 

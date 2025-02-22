@@ -1,5 +1,6 @@
 NODE_DISABLE_COLORS=1 mongosh --help > mongosh-help.txt
 ============================OUTPUT============================
+
   $ mongosh [options] [db address] [file names (ending in .js or .mongodb)]
 
   Options:
