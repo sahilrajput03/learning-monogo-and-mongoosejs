@@ -57,11 +57,11 @@ FILENAME=dump.archive
 #
 # 2 directories, 4 files
 
-# * ✅ Backup all dbs in local mongodb server
-mongodump --archive=${FILENAME}
+# * ✅ Backup all dbs from local mongodb server to archive file
+# mongodump --archive=${FILENAME}
 
 
-# TODO: try to backup mongodb atlas things:
+# TODO: Try to backup mongodb atlas dbs and collections:
 # mongodump --host ${MONGO_HOST} --port ${MONGO_PORT} --db ${DB_NAME} --out ${DB_BACKUP_PATH}
 # mongodump --host ${MONGO_HOST} --port ${MONGO_PORT} --db ${DB_NAME} ${AUTH_PARAM} --out ${DB_BACKUP_PATH}
 

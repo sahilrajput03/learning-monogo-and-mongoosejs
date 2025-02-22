@@ -11,34 +11,34 @@ DB_NAME=db1
 # * ✅  Restore particular DB from specified `dump` directory
 # mongorestore --db ${DB_NAME} dump/${DB_NAME}
 # OUTPUT:
-# OUTPUT: The --db and --collection flags are deprecated for this use-case; please use --nsInclude instead, i.e. with --nsInclude=${DATABASE}.${COLLECTION}
-# OUTPUT: building a list of collections to restore from dump/db1 dir
-# OUTPUT: reading metadata for db1.posts from dump/db1/posts.metadata.json
-# OUTPUT: reading metadata for db1.users from dump/db1/users.metadata.json
-# OUTPUT: restoring db1.users from dump/db1/users.bson
-# OUTPUT: finished restoring db1.users (1 document, 0 failures)
-# OUTPUT: restoring db1.posts from dump/db1/posts.bson
-# OUTPUT: finished restoring db1.posts (1 document, 0 failures)
-# OUTPUT: no indexes to restore for collection db1.posts
-# OUTPUT: no indexes to restore for collection db1.users
-# OUTPUT: 2 document(s) restored successfully. 0 document(s) failed to restore.
+# OUTPUT:: TIME_HERE     The --db and --collection flags are deprecated for this use-case; please use --nsInclude instead, i.e. with --nsInclude=${DATABASE}.${COLLECTION}
+# OUTPUT:: TIME_HERE     building a list of collections to restore from dump/db1 dir
+# OUTPUT:: TIME_HERE     reading metadata for db1.posts from dump/db1/posts.metadata.json
+# OUTPUT:: TIME_HERE     reading metadata for db1.users from dump/db1/users.metadata.json
+# OUTPUT:: TIME_HERE     restoring db1.users from dump/db1/users.bson
+# OUTPUT:: TIME_HERE     finished restoring db1.users (1 document, 0 failures)
+# OUTPUT:: TIME_HERE     restoring db1.posts from dump/db1/posts.bson
+# OUTPUT:: TIME_HERE     finished restoring db1.posts (1 document, 0 failures)
+# OUTPUT:: TIME_HERE     no indexes to restore for collection db1.posts
+# OUTPUT:: TIME_HERE     no indexes to restore for collection db1.users
+# OUTPUT:: TIME_HERE     2 document(s) restored successfully. 0 document(s) failed to restore.
 
 # * Note: If we try the above command again we get following logs:
-# OUTPUT: The --db and --collection flags are deprecated for this use-case; please use --nsInclude instead, i.e. with --nsInclude=${DATABASE}.${COLLECTION}
-# OUTPUT: building a list of collections to restore from dump/db1 dir
-# OUTPUT: reading metadata for db1.posts from dump/db1/posts.metadata.json
-# OUTPUT: reading metadata for db1.users from dump/db1/users.metadata.json
-# OUTPUT: restoring to existing collection db1.posts without dropping
-# OUTPUT: restoring to existing collection db1.users without dropping
-# OUTPUT: restoring db1.posts from dump/db1/posts.bson
-# OUTPUT: restoring db1.users from dump/db1/users.bson
-# OUTPUT: continuing through error: E11000 duplicate key error collection: db1.users index: _id_ dup key: { _id: ObjectId('67b9e4c4bf8a035ed99036dc') }
-# OUTPUT: continuing through error: E11000 duplicate key error collection: db1.posts index: _id_ dup key: { _id: ObjectId('67b9e4c4bf8a035ed99036db') }
-# OUTPUT: finished restoring db1.users (0 documents, 1 failure)
-# OUTPUT: finished restoring db1.posts (0 documents, 1 failure)
-# OUTPUT: no indexes to restore for collection db1.posts
-# OUTPUT: no indexes to restore for collection db1.users
-# OUTPUT: 0 document(s) restored successfully. 2 document(s) failed to restore.
+# OUTPUT:: TIME_HERE     The --db and --collection flags are deprecated for this use-case; please use --nsInclude instead, i.e. with --nsInclude=${DATABASE}.${COLLECTION}
+# OUTPUT:: TIME_HERE     building a list of collections to restore from dump/db1 dir
+# OUTPUT:: TIME_HERE     reading metadata for db1.posts from dump/db1/posts.metadata.json
+# OUTPUT:: TIME_HERE     reading metadata for db1.users from dump/db1/users.metadata.json
+# OUTPUT:: TIME_HERE     restoring to existing collection db1.posts without dropping
+# OUTPUT:: TIME_HERE     restoring to existing collection db1.users without dropping
+# OUTPUT:: TIME_HERE     restoring db1.posts from dump/db1/posts.bson
+# OUTPUT:: TIME_HERE     restoring db1.users from dump/db1/users.bson
+# OUTPUT:: TIME_HERE     continuing through error: E11000 duplicate key error collection: db1.users index: _id_ dup key: { _id: ObjectId('67b9e4c4bf8a035ed99036dc') }
+# OUTPUT:: TIME_HERE     continuing through error: E11000 duplicate key error collection: db1.posts index: _id_ dup key: { _id: ObjectId('67b9e4c4bf8a035ed99036db') }
+# OUTPUT:: TIME_HERE     finished restoring db1.users (0 documents, 1 failure)
+# OUTPUT:: TIME_HERE     finished restoring db1.posts (0 documents, 1 failure)
+# OUTPUT:: TIME_HERE     no indexes to restore for collection db1.posts
+# OUTPUT:: TIME_HERE     no indexes to restore for collection db1.users
+# OUTPUT:: TIME_HERE     0 document(s) restored successfully. 2 document(s) failed to restore.
 
 
 # * ✅ Import particular collection to your collection of same name [TESTED] from default `dump` directory
@@ -68,22 +68,42 @@ FILENAME=dump.archive
 # * ✅ Restore all dbs from a archive file # ! Be caureful: This command overwrites previous `dump.archive`
 # mongorestore --archive=${FILENAME}
 
+# * ✅ Import specified collection (`db1.posts`) from archive file to `db2.cars`
+SOURCE_COLLECTION=$DB_NAME.posts
+# mongorestore --archive=${FILENAME} --nsInclude=$SOURCE_COLLECTION --nsFrom=$SOURCE_COLLECTION --nsTo=db2.cars
+
+# * ✅ Import a collection from archive file (when db name and collection are same in archive file and mongodb server)
+# mongorestore --archive=${FILENAME} --nsInclude $DB_NAME.posts
+
 
 # !NOTE: DO NOT USE BELOW COMMAND because it imports all dbs instead of specified db via `--nsFrom` and `--nsTo`
 # mongorestore --archive=${FILENAME} --nsFrom="$DB_NAME.*" --nsTo="$DB_NAME.*"
+# !NOTE: DO NOT USE BELOW COMMAND because it imports all dbs instead of specified db via `--nsFrom` and `--nsTo`
+# mongorestore --archive=${FILENAME} --nsFrom=$DB_NAME --nsTo=$DB_NAME
+# !NOTE: DO NOT USE BELOW COMMAND because it imports all dbs instead of specified collection (`$DB_NAME.posts`)
+# mongorestore --archive=${FILENAME} --nsFrom=$DB_NAME.posts --nsTo=$DB_NAME.posts
 
-# !NOTE: DO NOT USE BELOW COMMAND because it imports all dbs (+collections) instead of specified db via `--nsFrom` and `--nsTo`
-# mongorestore --archive=${FILENAME} --nsFrom="db2" --nsTo="db2"
-# !NOTE: DO NOT USE BELOW COMMAND because it imports all dbs (+collections) instead of specified collection via `--nsFrom` and `--nsTo`
-# mongorestore --nsTo=$DB_NAME.posts2 --nsFrom=$DB_NAME.posts
-# !NOTE: DO NOT USE BELOW COMMAND because it imports all collection instead of specified collection (`users`)
-# mongorestore --archive=${FILENAME} --nsFrom="$DB_NAME.users" --nsTo="$DB_NAME.users"
-# !NOTE: DO NOT USE BELOW COMMAND because didn't import anything at all.
-# mongorestore --archive=${FILENAME} --nsInclude $DB_NAME.users
+# & 😍 View all dbs and their collections of dump archive file
+# mongorestore --archive=dump.archive --dryRun --verbose
+# * From below output we can see this archive file has two dbs --- db1 (posts, users) and db2 (cars).
+# OUTPUT: TIME_HERE     using write concern: &{majority false 0}
+# OUTPUT: TIME_HERE     archive prelude db1.posts
+# OUTPUT: TIME_HERE     archive prelude db1.users
+# OUTPUT: TIME_HERE     archive prelude db2.cars
+# OUTPUT: TIME_HERE     archive prelude admin.system.version
+# OUTPUT: TIME_HERE     preparing collections to restore from
+# OUTPUT: TIME_HERE     found collection db1.posts bson to restore to db1.posts
+# OUTPUT: TIME_HERE     found collection metadata from db1.posts to restore to db1.posts
+# OUTPUT: TIME_HERE     found collection db1.users bson to restore to db1.users
+# OUTPUT: TIME_HERE     found collection metadata from db1.users to restore to db1.users
+# OUTPUT: TIME_HERE     found collection db2.cars bson to restore to db2.cars
+# OUTPUT: TIME_HERE     found collection metadata from db2.cars to restore to db2.cars
+# OUTPUT: TIME_HERE     found collection admin.system.version bson to restore to admin.system.version
+# OUTPUT: TIME_HERE     found collection metadata from admin.system.version to restore to admin.system.version
+# OUTPUT: TIME_HERE     dry run completed
+# OUTPUT: TIME_HERE     0 document(s) restored successfully. 0 document(s) failed to restore.
 
-# TODO: Learn how to convert archive to dump directory
 
 
-
-# TODO:
+# TODO: Try to restore from mongodb atlas dbs and collections:
 # mongorestore --host localhost --port 27017 --db my_database /backup/my_database_backup/my_database

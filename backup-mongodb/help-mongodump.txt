@@ -1,5 +1,6 @@
- mongodump --help > help-mongodump.txt
+mongodump --help > help-mongodump.txt
 ============================OUTPUT============================
+
 Usage:
   mongodump <options> <connection-string>
 
