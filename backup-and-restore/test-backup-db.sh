@@ -38,17 +38,17 @@ rm -rf dump
 # 4 directories, 8 files
 
 # ✅ Backup specified db in local mongodb server to `dump` directory
-# mongodump --db ${DB_NAME}
+# mongodump --db $DB_NAME
 # ✅ Backup specified db in local mongodb server
-# mongodump --db ${DB_NAME} --archive=${FILENAME}
+# mongodump --db $DB_NAME --archive=$FILENAME
 
 # Backup all dbs in local mongodb server to directory specified by `--out` option
 # mongodump --out my-db-dump
 
 # Backup specified db in local mongodb server to directory specified by `--out` option
-# mongodump --db ${DB_NAME} --out my-db-dump
+# mongodump --db $DB_NAME --out my-db-dump
 
-# mongodump --db ${DB_NAME} --gzip
+# mongodump --db $DB_NAME --gzip
 # Prining files of `dump` directory using `tree`
 # tree dump
 # dump
@@ -61,7 +61,7 @@ rm -rf dump
 # 2 directories, 4 files
 
 # * ✅ Backup all dbs from local mongodb server to archive file
-# mongodump --archive=${FILENAME}
+# mongodump --archive=$FILENAME
 
 
 # TODO: Try to backup mongodb atlas dbs and collections:
