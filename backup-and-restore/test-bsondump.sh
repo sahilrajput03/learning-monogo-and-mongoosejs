@@ -1,3 +1,5 @@
+# & Help of `mongodump` CLI - file:///./help-mongodump.txt
+
 mongosh <<EOF
 // DROP ALL DBS
 use db1

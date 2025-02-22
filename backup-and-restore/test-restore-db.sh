@@ -2,6 +2,7 @@
 DB_NAME=db1
 # DB_NAME=db2
 
+# & Help of `mongodump` CLI - file:///./help-mongorestore.txt
 # & For dry run you can use below option:
 # --dryRun
 
@@ -105,5 +106,6 @@ SOURCE_COLLECTION=$DB_NAME.posts
 
 
 
-# TODO: Try to restore from mongodb atlas dbs and collections:
-# mongorestore --host localhost --port 27017 --db my_database /backup/my_database_backup/my_database
+# TODO: Try to restore to a remote mongodb atlas (db and collections):
+# mongorestore --host myremotehost --port 27017 --archive=mybackup.archive
+# mongorestore --host myremotehost --port 27017 --db my_database /backup/my_database_backup/my_database

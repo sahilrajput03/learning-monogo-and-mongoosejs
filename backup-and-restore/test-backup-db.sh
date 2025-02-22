@@ -8,6 +8,7 @@ AUTH_PARAM="--username my_user --password" # (only needed if authentication is e
 DB_BACKUP_PATH=my_database_backup
 FILENAME=dump.archive
 
+# & Help of `mongodump` CLI - file:///./help-mongodump.txt
 # & Note: There is no dry run feature in mongodump cli.
 
 # ! Note when you backup to `dump` directory it not delete old files though it overwrites existing files so use `rm -rf dump` to start fresh each time.
