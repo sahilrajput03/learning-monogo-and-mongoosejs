@@ -41,10 +41,6 @@ DB_NAME=db1
 # OUTPUT: 0 document(s) restored successfully. 2 document(s) failed to restore.
 
 
-FILENAME=dump.archive
-# Restore all dbs from a archive file # ! Be caureful: This command overwrites previous `dump.archive`
-# mongorestore --archive=${FILENAME}
-
 # * ✅ Import particular collection to your collection of same name [TESTED] from default `dump` directory
 # (Note 1: If a collection with same name already exists along with some docs then the old docs having same `_id` will not be modified and other documens having different `_id` will not deleted 🙂.
 # (Note 2: If a collection with same name already exists along with some docs then the old docs will not be deleted).
@@ -54,7 +50,7 @@ FILENAME=dump.archive
 # mongorestore --nsInclude $DB_NAME.posts dump2
 
 # * ✅ Importing to a different collection from a specified collection bson file (from a `dump` directory) [TESTED]
-mongorestore --nsInclude $DB_NAME.posts2 dump/$DB_NAME/posts.bson
+# mongorestore --nsInclude $DB_NAME.posts2 dump/$DB_NAME/posts.bson
 
 # * ✅🔔 Import particular db from specified db directory (from a dump directory)
 # mongorestore --db $DB_NAME dump/$DB_NAME
@@ -65,8 +61,12 @@ mongorestore --nsInclude $DB_NAME.posts2 dump/$DB_NAME/posts.bson
 # OUTPUT: `The --db and --collection flags are deprecated for this use-case; please use --nsInclude instead, i.e. with --nsInclude=${DATABASE}.${COLLECTION}``
 
 
-# For dry run you can use below option:
+# & For dry run you can use below option:
 # --dryRun
+
+FILENAME=dump.archive
+# * ✅ Restore all dbs from a archive file # ! Be caureful: This command overwrites previous `dump.archive`
+# mongorestore --archive=${FILENAME}
 
 
 # !NOTE: DO NOT USE BELOW COMMAND because it imports all dbs instead of specified db via `--nsFrom` and `--nsTo`

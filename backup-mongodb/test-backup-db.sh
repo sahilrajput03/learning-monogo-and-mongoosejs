@@ -10,13 +10,13 @@ FILENAME=dump.archive
 
 # ! Note when you backup to `dump` directory it not delete old files though it overwrites existing files so use `rm -rf dump` to start fresh each time.
 # ! BE careful to use below command as you can accidentally delete some backup too while testing so be extra careful!
-rm -rf dump
+# rm -rf dump
 
 # See this help in `mongodump-help.txt` file
 # mongodump --help
 
 # ✅ Backup all dbs in local mongodb server to a new `dump` directory
-mongodump
+# mongodump
 # Prining files of `dump` directory using `tree`
 # tree dump
 # dump
@@ -57,8 +57,8 @@ mongodump
 #
 # 2 directories, 4 files
 
-# Backup all dbs in local mongodb server
-# mongodump --archive=${FILENAME}
+# * ✅ Backup all dbs in local mongodb server
+mongodump --archive=${FILENAME}
 
 
 # TODO: try to backup mongodb atlas things:
