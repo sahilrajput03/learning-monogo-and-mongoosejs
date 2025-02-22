@@ -107,10 +107,13 @@ mongorestore --db $DB_NAME dump/$DB_NAME
 # TODO -  Try below commands ---------------------------------------------------------------------------
 
 # TODO: Restore db from archieve file to a remote mongodb server at atlas
-# mongorestore --host myremotehost --port 27017 --archive=dump.archive
+# mongorestore --host myremotehost --port 27017 --archive=$FILENAME
 # TODO: Restore db from dump folder to a remote mongodb server at atlas
-# mongorestore --host myremotehost --port 27017 --db db1 dump/db1
+# mongorestore --host myremotehost --port 27017 --db $DB_NAME dump/$DB_NAME
 # TODO: Restore all dbs from a compressed archive - If your archive was compressed (e.g., with gzip), decompress it while restoring:
 # gunzip -c mybackup.gz | mongorestore --archive
 # TODO: Restore from a Compressed Archive - If your archive is compressed, decompress while restoring:
-# gunzip -c mybackup.gz | mongorestore --archive --nsInclude=mydatabase.mycollection
+# gunzip -c mybackup.gz | mongorestore --archive --nsInclude=$DB_NAME.posts
+
+# If Authentication is Required - Add the authentication parameters as you did with mongodump:
+# mongorestore --host localhost --port 27017 --username my_user --password my_password --authenticationDatabase admin --db $DB_NAME dump/$DB_NAME
