@@ -53,9 +53,9 @@ FILENAME=dump.archive
 # * ✅ Importing a particular collection from specified `dump` directory [TESTED]
 # mongorestore --nsInclude $DB_NAME.posts dump
 
-# * (Works with warning) Import particular collection items to your collection of same name [TESTED] from default `dump` directory - (USING `--db` and `--collection`)
+# * ✅ Import particular collection items to your collection of same name [TESTED] from default `dump` directory - (USING `--db` and `--collection`)
 # mongorestore --db $DB_NAME --collection posts2 dump2/$DB_NAME/posts.bson
-# & ⛔️ We get WARNNING: `The --db and --collection flags are deprecated for this use-case; please use --nsInclude instead, i.e. with --nsInclude=${DATABASE}.${COLLECTION}``
+# OUTPUT: `The --db and --collection flags are deprecated for this use-case; please use --nsInclude instead, i.e. with --nsInclude=${DATABASE}.${COLLECTION}``
 
 # !NOTE: DO NOT USE BELOW COMAND because it has no effect, nothing is imported!
 # mongorestore --db ${DB_NAME}
