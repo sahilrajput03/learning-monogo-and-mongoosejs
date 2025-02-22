@@ -9,7 +9,7 @@ DB_NAME=db1
 # mongorestore dump2
 
 # * ✅  Restore particular DB from specified `dump` directory
-mongorestore --db ${DB_NAME} dump/${DB_NAME}
+# mongorestore --db ${DB_NAME} dump/${DB_NAME}
 # OUTPUT:
 # OUTPUT: The --db and --collection flags are deprecated for this use-case; please use --nsInclude instead, i.e. with --nsInclude=${DATABASE}.${COLLECTION}
 # OUTPUT: building a list of collections to restore from dump/db1 dir
@@ -51,29 +51,27 @@ FILENAME=dump.archive
 # mongorestore --nsInclude $DB_NAME.posts
 
 # * ✅ Importing a particular collection from specified `dump` directory [TESTED]
-# mongorestore --nsInclude $DB_NAME.posts dump
+# mongorestore --nsInclude $DB_NAME.posts dump2
 
-# * ✅ Import particular collection items to your collection of same name [TESTED] from default `dump` directory - (USING `--db` and `--collection`)
+# * ✅ Importing to a different collection from a specified collection bson file (from a `dump` directory) [TESTED]
+mongorestore --nsInclude $DB_NAME.posts2 dump/$DB_NAME/posts.bson
+
+# * ✅🔔 Import particular db from specified db directory (from a dump directory)
+# mongorestore --db $DB_NAME dump/$DB_NAME
+# OUTPUT: `The --db and --collection flags are deprecated for this use-case; please use --nsInclude instead, i.e. with --nsInclude=${DATABASE}.${COLLECTION}``
+
+# * ✅🔔  Import particular collection to your collection of same name from specified `dump` directory [TESTED] - [USING `--db` and `--collection`]
 # mongorestore --db $DB_NAME --collection posts2 dump2/$DB_NAME/posts.bson
 # OUTPUT: `The --db and --collection flags are deprecated for this use-case; please use --nsInclude instead, i.e. with --nsInclude=${DATABASE}.${COLLECTION}``
 
-# !NOTE: DO NOT USE BELOW COMAND because it has no effect, nothing is imported!
-# mongorestore --db ${DB_NAME}
-# OUTPUT: The --db and --collection flags are deprecated for this use-case; please use --nsInclude instead, i.e. with --nsInclude=${DATABASE}.${COLLECTION}
-# OUTPUT: don't know what to do with subdirectory "dump/admin", skipping...
-# OUTPUT: don't know what to do with subdirectory "dump/db1", skipping...
-# OUTPUT: don't know what to do with subdirectory "dump/db2", skipping...
 
-# !NOTE: DO NOT USE BELOW COMAND because it fails totally
-# mongorestore --db $DB_NAME --collection posts2
-# OUTPUT: Failed: error scanning filesystem: file dump is a directory, not a bson file
+# For dry run you can use below option:
+# --dryRun
 
-# !NOTE: DO NOT USE BELOW COMAND because it fails totally
-# mongorestore --db $DB_NAME --collection posts2 --nsInclude $DB_NAME.posts dump
-# OUTPUT: Failed: error scanning filesystem: file dump2 is a directory, not a bson file
 
 # !NOTE: DO NOT USE BELOW COMMAND because it imports all dbs instead of specified db via `--nsFrom` and `--nsTo`
 # mongorestore --archive=${FILENAME} --nsFrom="$DB_NAME.*" --nsTo="$DB_NAME.*"
+
 # !NOTE: DO NOT USE BELOW COMMAND because it imports all dbs (+collections) instead of specified db via `--nsFrom` and `--nsTo`
 # mongorestore --archive=${FILENAME} --nsFrom="db2" --nsTo="db2"
 # !NOTE: DO NOT USE BELOW COMMAND because it imports all dbs (+collections) instead of specified collection via `--nsFrom` and `--nsTo`
