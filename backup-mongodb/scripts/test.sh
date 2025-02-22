@@ -1,6 +1,4 @@
-
-
-# ✅ Run commadns in mongoosh.
+# ✅ Run mongosh commands
 # Note: A `_id` is automatically generated and added to the below document.
 mongosh <<EOF
 use mydb;
@@ -15,6 +13,3 @@ EOF
 
 # ! Does NOT work  (only the first command is executing)
 # mongosh --eval "use db2; db.cars.insertOne({name: 'Alice', age: 25});"
-
-# use myDb # Select a database
-# db.dropDatabase() # Drop selected database.
