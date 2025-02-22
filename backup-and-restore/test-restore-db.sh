@@ -105,7 +105,11 @@ SOURCE_COLLECTION=$DB_NAME.posts
 # OUTPUT: TIME_HERE     0 document(s) restored successfully. 0 document(s) failed to restore.
 
 
+# TODO -  Try below commands ---------------------------------------------------------------------------
 
-# TODO: Try to restore to a remote mongodb atlas (db and collections):
-# mongorestore --host myremotehost --port 27017 --archive=mybackup.archive
-# mongorestore --host myremotehost --port 27017 --db my_database /backup/my_database_backup/my_database
+# TODO: Restore db from archieve file to a remote mongodb server at atlas
+# mongorestore --host myremotehost --port 27017 --archive=dump.archive
+# TODO: Restore db from dump folder to a remote mongodb server at atlas
+# mongorestore --host myremotehost --port 27017 --db db1 dump/db1
+# TODO: Restore all dbs from a compressed archive - If your archive was compressed (e.g., with gzip), decompress it while restoring:
+# gunzip -c mybackup.gz | mongorestore --archive
