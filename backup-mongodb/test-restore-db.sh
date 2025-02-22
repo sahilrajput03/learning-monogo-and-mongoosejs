@@ -5,10 +5,10 @@ DB_NAME=db1
 # * ✅  Restore all dbs from `dump`
 # mongorestore
 
-# * ✅  Restore all dbs from specified `dump`
+# * ✅  Restore all dbs from specified `dump` directory
 # mongorestore dump2
 
-# * ✅  Restore particular DB from the a dump directory
+# * ✅  Restore particular DB from specified `dump` directory
 mongorestore --db ${DB_NAME} dump/${DB_NAME}
 # OUTPUT:
 # OUTPUT: The --db and --collection flags are deprecated for this use-case; please use --nsInclude instead, i.e. with --nsInclude=${DATABASE}.${COLLECTION}
