@@ -1,20 +1,3 @@
-date
-============================OUTPUT============================
-Sat Feb 22 18:08:21 IST 2025
-
-
-mongodump --version
-============================OUTPUT============================
-mongodump version: 100.9.5
-git version: 90481484c1783826fe26ca18bbdcd30e933f3b88
-Go version: go1.21.11
-   os: darwin
-   arch: amd64
-   compiler: gc
-
-
-mongodump --help
-============================OUTPUT============================
 Usage:
   mongodump <options> <connection-string>
 
