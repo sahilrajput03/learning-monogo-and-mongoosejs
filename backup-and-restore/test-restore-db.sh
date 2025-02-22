@@ -113,3 +113,5 @@ SOURCE_COLLECTION=$DB_NAME.posts
 # mongorestore --host myremotehost --port 27017 --db db1 dump/db1
 # TODO: Restore all dbs from a compressed archive - If your archive was compressed (e.g., with gzip), decompress it while restoring:
 # gunzip -c mybackup.gz | mongorestore --archive
+# TODO: Restore from a Compressed Archive - If your archive is compressed, decompress while restoring:
+# gunzip -c mybackup.gz | mongorestore --archive --nsInclude=mydatabase.mycollection
