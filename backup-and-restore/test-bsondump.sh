@@ -1,6 +1,7 @@
 # & Help of `mongodump` CLI - file:///./help-mongodump.txt
+# Using --quiet helps to not show unnecessary information
 
-mongosh <<EOF
+script='
 // DROP ALL DBS
 use db1
 db.dropDatabase()
@@ -11,15 +12,94 @@ db.dropDatabase()
 
 // CREATE db1 AND INSERT TWO DOCS
 use db1
-db.posts.insert({ title: 'Post 1' })
-db.posts.insert({ title: 'Post 2' })
-EOF
+db.posts.insert({ title: "Post 1" })
+db.posts.insert({ title: "Post 2" })
+'
+# Run above script
+# echo "$script" | mongosh --quiet > /dev/null 2>&1
+
+# Verbose 1
+# echo "$script" | mongosh --quiet
+
+# Verbose 2
+# echo "$script" | mongosh
+
 
 # & Print documents of a bson file
 echo -e "\n\nDocuments of ./dump/db1/posts.bson file"
-bsondump dump/db1/posts.bson 
+echo "======================================="
+bsondump dump/db1/posts.bson
+# bsondump dump/db1/posts.bson | jq
+echo -e "\n"
 # OUTPUT
-# {"_id":{"$oid":"67ba338fd767d6638481e36d"},"title":"Post 1"}
-# {"_id":{"$oid":"67ba338fd767d6638481e36e"},"title":"Post 2"}
-# 2025-02-23T01:59:30.087+0530    2 objects found
+# {"_id":{"$oid":"67ba460b79a31a2076e33e16"},"title":"Post 1"}
+# 2025-02-23T16:45:31.004+0530	1 objects found
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+############################ old code ##############################
+# mongosh --quiet <<EOF
+# // DROP ALL DBS
+# use db1
+# db.dropDatabase()
+# use db2
+# db.dropDatabase()
+# use db3
+# db.dropDatabase()
+
+# // CREATE db1 AND INSERT TWO DOCS
+# use db1
+# db.posts.insert({ title: 'Post 1' })
+# db.posts.insert({ title: 'Post 2' })
+# EOF > /dev/null
+# Note: I'm redirecting output of `mongosh` command /dev/null via `> /dev/null 2>&1`
