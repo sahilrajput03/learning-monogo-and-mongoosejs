@@ -72,3 +72,4 @@ FILENAME=dump.archive
 
 # TODO: Test running cronjob on linode server only as suggested in the end of this article - https://lizenshakya.medium.com/backup-your-database-using-cron-26e0fe40e41b
 # TODO: Another - Stackoverflow link for setting up cronjob - https://stackoverflow.com/questions/37245540/how-can-i-backup-mongodb-database-regularly-the-specific-time-of-a-day
+# TODO: Add db to db transfer list transfer for collection/db/dbs/all_dbs for e.g. atlas to local db server or vice versa.
