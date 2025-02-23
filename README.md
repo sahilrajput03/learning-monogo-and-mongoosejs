@@ -3,6 +3,7 @@
 **Quicks:**
 - **❤️Learn mongo CLI:** [Click here](./learn-mongo-cli.md)
 - **❤️Learn backup and restore mongodb:** [Click here](./backup-and-restore)
+- **❤️❤️ Learn Mongodb Doc: [Click here](https://docs.google.com/document/d/1OT6IMR600VjWteJ-kqM0jVQuqQQw308hkh3enZnu9tQ/edit?tab=t.0)**
   - Tags: #`mongodump`, #`mongorestore`, #`mongosh`, #`bsondump`
 - LinkedIn Quiz Solutions: [Click here](https://github.com/Ebazhanov/linkedin-skill-assessments-quizzes/blob/main/mongodb/mongodb-quiz.md)
 - **`flash` is my own testing library, the code is @ [`flash`](https://github.com/sahilrajput03/flash).**
