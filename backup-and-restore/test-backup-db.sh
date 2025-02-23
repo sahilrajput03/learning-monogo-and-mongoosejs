@@ -11,9 +11,9 @@ FILENAME=dump.archive
 # & Help of `mongodump` CLI - file:///./help-mongodump.txt
 # & Note: There is no dry run feature in mongodump cli.
 
-# ! Note when you backup to `dump` directory it not delete old files though it overwrites existing files so use `rm -rf dump` to start fresh each time.
-# ! BE careful to use below command as you can accidentally delete some backup too while testing so be extra careful!
-rm -rf dump
+# ! ⛔️⛔️⛔️ BE very very careful to use below command as you can accidentally delete some backup too while testing so be extra careful!
+# rm -rf dump
+# ! Note when you backup to `dump` directory via `mongodump` file -- it is not delete old files though it overwrites existing files so use `rm -rf dump` to start fresh each time.
 
 # See this help in `mongodump-help.txt` file
 # mongodump --help
