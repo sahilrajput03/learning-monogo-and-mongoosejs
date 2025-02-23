@@ -69,3 +69,5 @@ rm -rf dump
 # mongodump --host ${MONGO_HOST} --port ${MONGO_PORT} --db ${DB_NAME} ${AUTH_PARAM} --out ${DB_BACKUP_PATH}
 
 # TODO: Check the mongodump command from blulabs folder too.
+
+# TODO: Test running cronjob on linode server only as suggested in the end of this article - https://lizenshakya.medium.com/backup-your-database-using-cron-26e0fe40e41b
