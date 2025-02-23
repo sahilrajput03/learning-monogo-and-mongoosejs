@@ -88,6 +88,7 @@ echo -e "\n"
 
 
 ############################ old code ##############################
+# * The issues with EOF usage to pass query is that I am not able to supress STDOUT/STDERR when I try to redirect STDOUT and STDERR to /dev/null to hide the mongosh command's logs.
 # mongosh --quiet <<EOF
 # // DROP ALL DBS
 # use db1
