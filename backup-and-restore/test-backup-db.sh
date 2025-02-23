@@ -8,11 +8,17 @@ AUTH_PARAM="--username my_user --password" # (only needed if authentication is e
 DB_BACKUP_PATH=my_database_backup
 FILENAME=dump.archive
 
+SCRIPT_DIR="$(dirname -- "${BASH_SOURCE[0]}")"
+source "$SCRIPT_DIR/.env"
+
+
 # & Help of `mongodump` CLI - file:///./help-mongodump.txt
 # & Note: There is no dry run feature in mongodump cli.
 
 # ! ⛔️⛔️⛔️ BE very very careful to use below command as you can accidentally delete some backup too while testing so be extra careful!
-# rm -rf dump
+# ! ⛔️⛔️⛔️ BE very very careful to use below command as you can accidentally delete some backup too while testing so be extra careful!
+# ! ⛔️⛔️⛔️ BE very very careful to use below command as you can accidentally delete some backup too while testing so be extra careful!
+rm -rf dump
 # ! Note when you backup to `dump` directory via `mongodump` file -- it is not delete old files though it overwrites existing files so use `rm -rf dump` to start fresh each time.
 
 # See this help in `mongodump-help.txt` file
@@ -63,6 +69,21 @@ FILENAME=dump.archive
 # * ✅ Backup all dbs from local mongodb server to archive file
 # mongodump --archive=$FILENAME
 
+# & ---------- mongodb atlas --------------
+
+# ✅ BACKUP all dbs to dump directory
+# mongodump --uri="$p0c0URI"
+
+# ✅ BACKUP specified db to dump directory
+# mongodump --uri="$p0c0URI" --db $DB_NAME
+
+# ✅ RESTORE all dbs from dump directory
+# mongorestore --uri="$p0c0URI"
+
+# ✅ RESTORE particular db from dump directory
+# mongorestore --uri="$p0c0URI" --db $DB_NAME dump/$DB_NAME
+# & ---------- mongodb atlas --- ends here --------------
+
 
 # TODO: Try to backup mongodb atlas dbs and collections:
 # mongodump --host ${MONGO_HOST} --port ${MONGO_PORT} --db ${DB_NAME} --out ${DB_BACKUP_PATH}
@@ -70,6 +91,7 @@ FILENAME=dump.archive
 
 # TODO: Check the mongodump command from blulabs folder too.
 
-# TODO: Test running cronjob on linode server only as suggested in the end of this article - https://lizenshakya.medium.com/backup-your-database-using-cron-26e0fe40e41b
-# TODO: Another - Stackoverflow link for setting up cronjob - https://stackoverflow.com/questions/37245540/how-can-i-backup-mongodb-database-regularly-the-specific-time-of-a-day
+# TODO: cronjob setup - https://lizenshakya.medium.com/backup-your-database-using-cron-26e0fe40e41b
+# TODO: cronjob setup (stackoverflow) - https://stackoverflow.com/questions/37245540/how-can-i-backup-mongodb-database-regularly-the-specific-time-of-a-day
 # TODO: Add db to db transfer list transfer for collection/db/dbs/all_dbs for e.g. atlas to local db server or vice versa.
+# TODO: check if your can export to a zip file?
