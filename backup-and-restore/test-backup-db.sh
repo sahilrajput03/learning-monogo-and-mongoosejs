@@ -82,6 +82,9 @@ rm -rf dump
 
 # ✅ RESTORE particular db from dump directory
 # mongorestore --uri="$p0c0URI" --db $DB_NAME dump/$DB_NAME
+
+# TODO: TRY BACKING (+RESTORE) UP PARTICULAR COLLECTION from atlas
+
 # & ---------- mongodb atlas --- ends here --------------
 
 
