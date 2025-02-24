@@ -4,7 +4,7 @@ Use `cmd+shift+n` to run any bash script using `Code Runner` VsCode Extension. â
 
 ## From blul\*\*\*
 
-**Macos - ~/Documents/bspaces-api:**
+**Macos: ~/Documents/bspaces-api:** _(In hard drive you can check folder `backup-manjaro/reference-project`)_
 
 - `backups` - Database backups
 - `lambda` - JS files to upload to s3 bucket
