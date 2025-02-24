@@ -81,10 +81,10 @@ rm -rf dump
 # ✅ RESTORE all dbs from dump directory
 # mongorestore --uri="$p0c0URI"
 
-# ✅ RESTORE particular db from dump directory
+# ✅ RESTORE specified db from dump directory
 # mongorestore --uri="$p0c0URI" --db $DB_NAME dump/$DB_NAME
 
-# TODO: TRY BACKING (+RESTORE) UP PARTICULAR COLLECTION from atlas
+# TODO: TRY BACKING (+RESTORE) UP specified COLLECTION from atlas
 
 # & ---------- mongodb atlas --- ends here --------------
 
