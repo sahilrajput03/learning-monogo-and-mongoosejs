@@ -10,6 +10,13 @@
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 - Seems like a good read on efficient mongodb queries with mongoosejs: [Click here](https://climbtheladder.com/10-mongoose-populate-best-practices/)
 
+## Naming conventions in mongodb
+
+- Stackoverflow: [https://stackoverflow.com/a/45335909/10012446](https://stackoverflow.com/a/45335909/10012446)
+  - ❤️tldr:
+    - Use db names like `flipkartDB` (camelCase + append DB in the end)
+    - For collection names use `cameCase`
+
 ## Typegoose to help write mongoose schemas with classes
 
 - [github 2.2k*](https://github.com/typegoose/typegoose)
