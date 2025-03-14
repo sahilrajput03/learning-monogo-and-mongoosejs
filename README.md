@@ -10,6 +10,16 @@
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 - Seems like a good read on efficient mongodb queries with mongoosejs: [Click here](https://climbtheladder.com/10-mongoose-populate-best-practices/)
 
+## Skip/Bypass validation while saving to mongodb
+
+```ts
+const doc = new MyUserModel({
+    userId: null,
+    url: null,
+})
+await doc.save({ validateBeforeSave: false });
+```
+
 ## ❤️ View documents in reverse chronology order (recent documents order):
 
 ![image](https://github.com/user-attachments/assets/86ca0abe-1ccf-4bc9-8fc3-e6cfbea50f97)
