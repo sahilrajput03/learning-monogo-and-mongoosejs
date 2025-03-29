@@ -5,7 +5,7 @@
 - **❤️Learn backup and restore mongodb:** [Click here](./backup-and-restore)
 - **❤️❤️ Learn Mongodb Doc: [Click here](https://docs.google.com/document/d/1OT6IMR600VjWteJ-kqM0jVQuqQQw308hkh3enZnu9tQ/edit?tab=t.0)**
   - Tags: #`mongodump`, #`mongorestore`, #`mongosh`, #`bsondump`
-- LinkedIn Quiz Solutions: [Click here](https://github.com/Ebazhanov/linkedin-skill-assessments-quizzes/blob/main/mongodb/mongodb-quiz.md)
+- LinkedIn Quiz Solutions: [Click here](https://github.com/Ebazhanov/linkedin-skill-assessments-quizzes/blob/main/mongodb/mongodb-quiz.md)e
 - **`flash` is my own testing library, the code is @ [`flash`](https://github.com/sahilrajput03/flash).**
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 - Seems like a good read on efficient mongodb queries with mongoosejs: [Click here](https://climbtheladder.com/10-mongoose-populate-best-practices/)
@@ -14,12 +14,15 @@
 
 Run from Mongodb Compass Shell (Tested on both local and atlas cluster):
 
-![image](https://github.com/user-attachments/assets/e31778c1-33a9-42d8-add3-023535080e94)
-
 **From ChatGPT:**
 - current: Number of active connections.
 - available: Connections that can still be opened.
 - totalCreated: Total connections created since the server started.
+
+Command: `db.serverStatus().connections`
+
+![image](https://github.com/user-attachments/assets/394c5456-3d8e-4238-94c9-25efd89c801e)
+
 
 ## Skip/Bypass validation while saving to mongodb
 
