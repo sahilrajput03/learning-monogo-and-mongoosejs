@@ -10,6 +10,17 @@
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 - Seems like a good read on efficient mongodb queries with mongoosejs: [Click here](https://climbtheladder.com/10-mongoose-populate-best-practices/)
 
+## Viewing active connections of a database
+
+Run from Mongodb Compass Shell (Tested on both local and atlas cluster):
+
+![image](https://github.com/user-attachments/assets/e31778c1-33a9-42d8-add3-023535080e94)
+
+**From ChatGPT:**
+- current: Number of active connections.
+- available: Connections that can still be opened.
+- totalCreated: Total connections created since the server started.
+
 ## Skip/Bypass validation while saving to mongodb
 
 ```ts
