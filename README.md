@@ -14,6 +14,8 @@
 
 Docs: [Click here](https://mongoosejs.com/docs/connections.html#serverselectiontimeoutms)
 
+Recently used in repo - [andorid-loop](https://github.com/sahilrajput03/android-loop)
+
 *Below text is from above mongoose docs link.*
 
 The serverSelectionTimeoutMS option is extremely important: it controls how long the MongoDB Node.js driver will attempt to retry any operation before erroring out. This includes initial connection, like await mongoose.connect(), as well as any operations that make requests to MongoDB, like save() or find().
