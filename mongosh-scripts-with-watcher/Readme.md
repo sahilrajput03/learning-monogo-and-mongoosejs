@@ -55,12 +55,12 @@ db.collection.find({
 **Note** (_for Windows User_) : `git-bash` isn't performing good with mongo shell environment, so prefer cmd for now.
 
 ```bash
-# To open a mongo shell environment.
-mongo
+# To open a mongosh shell environment.
+mongosh
 # TIP: To clear logs in `mongo` shell, use ctrl+L hotkey or use command -> cls
 
 
-#close mongo shell
+#close mongosh shell
 Ctrl+c # or use`exit` command
 
 
