@@ -12,6 +12,14 @@ let findQuery = db.datingLikes.find({ to: { "$in": list } });
 print('Matches:');
 findQuery.forEach(printjson);
 
+// Execution time:
+// 	TODO: Official talk on .explain by mongodb itself: https://www.youtube.com/watch?v=UMzt4PbHtm8
+// 	- Docs: https://www.mongodb.com/docs/manual/reference/explain-results/
+// 	- https://www.youtube.com/watch?v=0WkJKa_Nv_o
+// 	- https://www.youtube.com/watch?v=IZ1k1BB_BWo
+// 	.explain() // gives us queryPlanner
+// 	.explain("executionStats") // gives us queryPlanner as well as executionStats
+
 // Get Time taken for the query
 printjson('Time took: query (ms): ' + query.explain('executionStats').executionStats.executionTimeMillis);
 printjson('Docs Examined: query: ' + query.explain('executionStats').executionStats.totalDocsExamined);
