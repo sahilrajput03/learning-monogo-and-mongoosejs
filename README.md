@@ -1,7 +1,7 @@
 # Readme
 
 **Quicks Links:**
-- **❤️Learn mongoosejs:** [Click here](./mongoosejs-with-flash-runner-cli/test1.test.js) (folder - `mongoosejs-with-flash-runner-cli`)
+- **❤️Learn mongoosejs:** [Click here](./mongoosejs-with-flash-runner-cli/test1.test.js) (`mongoosejs-with-flash-runner-cli`)
 - **❤️Learn mongo CLI:** [Click here](./learn-mongo-cli.md)
 - **❤️Learn backup and restore mongodb:** [Click here](./backup-and-restore)
 - **❤️Learn Mongodb Doc: [Click here](https://docs.google.com/document/d/1OT6IMR600VjWteJ-kqM0jVQuqQQw308hkh3enZnu9tQ/edit?tab=t.0)**
