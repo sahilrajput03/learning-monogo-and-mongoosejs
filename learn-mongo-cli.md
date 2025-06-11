@@ -80,7 +80,13 @@ db.createCollection('posts')
 
 #Drop a collection named `mycollection`
 use myDb # Select a database
-db.mycollection.drop() # Drop collection.
+
+# Drop collection
+#  - Deleting a existing collection
+db.mycollection.drop() # true
+
+#  - Deleting a non-existing collection
+db.mycollection.drop() # false
 
 
 # Dropping a db:
