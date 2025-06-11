@@ -1,6 +1,11 @@
 // @ts-nocheck
 use mydb
+
+// Drop a collection
+db.posts.drop() // true
+
 db.createCollection('posts')
+
 // show collections
 show collections
 
@@ -31,7 +36,7 @@ db.posts.insertMany([
 db.posts.find().pretty()
 
 // Drop a collection
-db.posts.drop() // true
+// db.posts.drop() // true
 
 // Drop a database
 // db.dropDatabase() // { "ok" : 1 }
