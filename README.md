@@ -1,10 +1,10 @@
 # Readme
 
 **Quicks Links:**
-- **❤️Learn Mongodb Doc: [Click here](https://docs.google.com/document/d/1OT6IMR600VjWteJ-kqM0jVQuqQQw308hkh3enZnu9tQ/edit?tab=t.0)**
-  - Tags: #`mongodump`, #`mongorestore`, #`mongosh`, #`bsondump`
+
+- **❤️Learn Mongodb Doc: [Click here](https://docs.google.com/document/d/1OT6IMR600VjWteJ-kqM0jVQuqQQw308hkh3enZnu9tQ/edit?tab=t.0)** [Tags: #`mongodump`, #`mongorestore`, #`mongosh`, #`bsondump`]
 - **❤️Learn mongoosejs:** [Click here](./mongoosejs-with-flash-runner-cli/test1.test.js) (`mongoosejs-with-flash-runner-cli`)
-- **❤️Learn mongo CLI:** [Click here](./learn-mongo-cli.md)
+- **❤️Learn mongosh:** [Click here](./mongosh-scripts-with-watcher/Readme.md) (`mongosh-scripts-with-watcher`)
 - **❤️Learn backup and restore mongodb:** [Click here](./backup-and-restore)
 - LinkedIn Quiz Solutions: [Click here](https://github.com/Ebazhanov/linkedin-skill-assessments-quizzes/blob/main/mongodb/mongodb-quiz.md)e
 - **`flash` is my own testing library, the code is @ [`flash`](https://github.com/sahilrajput03/flash).**
@@ -17,7 +17,7 @@ Docs: [Click here](https://mongoosejs.com/docs/connections.html#serverselectiont
 
 Recently used in repo - [andorid-loop](https://github.com/sahilrajput03/android-loop)
 
-*Below text is from above mongoose docs link.*
+_Below text is from above mongoose docs link._
 
 The serverSelectionTimeoutMS option is extremely important: it controls how long the MongoDB Node.js driver will attempt to retry any operation before erroring out. This includes initial connection, like await mongoose.connect(), as well as any operations that make requests to MongoDB, like save() or find().
 
@@ -25,7 +25,7 @@ By default, serverSelectionTimeoutMS is 30000 (30 seconds). This means that, for
 
 ```js
 // Throws an error "getaddrinfo ENOTFOUND doesnt.exist" after 30 seconds
-await mongoose.connect('mongodb://doesnt.exist:27017/test');
+await mongoose.connect('mongodb://doesnt.exist:27017/test')
 ```
 
 Similarly, if your standalone MongoDB server goes down after initial connection, any find() or save() calls will error out after 30 seconds, unless your MongoDB server is restarted.
@@ -36,8 +36,8 @@ To get faster feedback on failed connections, you can reduce serverSelectionTime
 
 ```js
 mongoose.connect(uri, {
-  serverSelectionTimeoutMS: 5000
-});
+	serverSelectionTimeoutMS: 5000,
+})
 ```
 
 There is no way to tune serverSelectionTimeoutMS independently for mongoose.connect() vs for queries. If you want to reduce serverSelectionTimeoutMS for queries and other operations, but still retry mongoose.connect() for longer, you are responsible for retrying the connect() calls yourself using a for loop or a tool like p-retry.
@@ -67,6 +67,7 @@ for (let i = 0; i < 3; ++i) {
 Run from Mongodb Compass Shell (Tested on both local and atlas cluster):
 
 **From ChatGPT:**
+
 - current: Number of active connections.
 - available: Connections that can still be opened.
 - totalCreated: Total connections created since the server started.
@@ -75,15 +76,14 @@ Command: `db.serverStatus().connections`
 
 ![image](https://github.com/user-attachments/assets/394c5456-3d8e-4238-94c9-25efd89c801e)
 
-
 ## Skip/Bypass validation while saving to mongodb
 
 ```ts
 const doc = new MyUserModel({
-    userId: null,
-    url: null,
+	userId: null,
+	url: null,
 })
-await doc.save({ validateBeforeSave: false });
+await doc.save({validateBeforeSave: false})
 ```
 
 ## ❤️ View documents in reverse chronology order (recent documents order):
@@ -99,11 +99,12 @@ await doc.save({ validateBeforeSave: false });
 
 ## Typegoose to help write mongoose schemas with classes
 
-- [github 2.2k*](https://github.com/typegoose/typegoose)
+- [github 2.2k\*](https://github.com/typegoose/typegoose)
 - [npm](https://www.npmjs.com/package/@typegoose/typegoose)
 - [npmtrends](https://npmtrends.com/@typegoose/typegoose-vs-mongoose) (downloads stats)
 
 **(18 Feb, 2025) Note from Sahi ✅:**
+
 - ❌ I feel its unnecessary to bring much code of foreign library (which which has its own [downsides](https://typegoose.github.io/typegoose/docs/guides/known-issues/) and [issues](https://github.com/typegoose/typegoose/issues) for sure) when we get all the type errors via typescript itself already 🚀.
 - ❌ Schema creation is one time job and changing schema is done very rarely and thus not make much deal about it.
 - ❌ I am heavily invested in ideology to not add complexity of any library unnecessary thus not use typegoose here. The tradeoffs are not much good for using this library.
@@ -127,10 +128,10 @@ await doc.save({ validateBeforeSave: false });
 
 # It takes 30ms to open connection to mongodb running locally
 
-***Thus if you have 33 test files and you open db for each test file then total time consumed for opening database connection is just 1 SECOND (33\*30ms = 1000ms).***
+**_Thus if you have 33 test files and you open db for each test file then total time consumed for opening database connection is just 1 SECOND (33\*30ms = 1000ms)._**
 
 - **"Premature optimization is the root of all evil" ~ Donald Knuth**
-    - Though, if you're still care about optimization then please refer my solution of `flash-runner`, which is a cli tool and you can open db connection and it is shared across all tests then and you can close the db once in the end. This is used in some repo in `learn-expressjs`, `learning-monogo-and-mongoosejs` and `learning_sql`. Thanks.*
+  - Though, if you're still care about optimization then please refer my solution of `flash-runner`, which is a cli tool and you can open db connection and it is shared across all tests then and you can close the db once in the end. This is used in some repo in `learn-expressjs`, `learning-monogo-and-mongoosejs` and `learning_sql`. Thanks.\*
 
 ```ts
 // Source - Check qr-solution backend.
@@ -156,22 +157,23 @@ Also, .populate() internally makes two queries just like we would manually query
 
 ## ❤️ Database schema for Google User details? (Claude and ChatGPT)
 
-*What is better?*
+_What is better?_
 
-*- having google user data to a nested field in mongodb or*
-*- having separate collection for google-users and link them to users collection.*
+_- having google user data to a nested field in mongodb or_
+_- having separate collection for google-users and link them to users collection._
 
-*Be concise.*
+_Be concise._
 
 **From ChatGPT:**
-  - **Having a separate collection for Google users and linking it to the users collection is better. It ensures better scalability, normalization, and easier management of relationships while avoiding duplication of data.**
+
+- **Having a separate collection for Google users and linking it to the users collection is better. It ensures better scalability, normalization, and easier management of relationships while avoiding duplication of data.**
 
 **❤️From Claude:**
 
-  - **For most applications, having a separate collection for Google users is better because:**
-    - **1. It maintains cleaner data separation and schema flexibility**
-    - **2. Enables easier querying of Google-specific data**
-    - **3. Follows MongoDB's principle of embedding vs referencing - reference when data can change independently or needs to be queried independently**
+- **For most applications, having a separate collection for Google users is better because:**
+  - **1. It maintains cleaner data separation and schema flexibility**
+  - **2. Enables easier querying of Google-specific data**
+  - **3. Follows MongoDB's principle of embedding vs referencing - reference when data can change independently or needs to be queried independently**
 
 **Use embedded nested fields only if the Google data is simple, rarely changes, and is always queried together with the user data.**
 
@@ -188,7 +190,7 @@ Suppose you have two collections: `users` and `posts`. A post may reference a us
 Example:
 
 ```js
-const post = await Post.findById(postId).populate("author");
+const post = await Post.findById(postId).populate('author')
 // Now, `post.author` contains the user document instead of just the ID.
 ```
 
@@ -206,7 +208,7 @@ Under the hood, `.populate()` performs the following steps:
 For instance:
 
 ```js
-const user = await User.findById(post.author);
+const user = await User.findById(post.author)
 ```
 
 3. **Merge the data:** The results of the separate query are merged into the original document, replacing the reference with the actual data.
@@ -230,9 +232,9 @@ After population, you get something like this:
 
 ```js
 Post.findById(postId).populate({
-  path: "author",
-  select: "name email",
-});
+	path: 'author',
+	select: 'name email',
+})
 ```
 
 **_Key Notes:_**
@@ -247,14 +249,14 @@ Post.findById(postId).populate({
 Example:
 
 ```js
-userSchema.virtual("posts", {
-  ref: "Post",
-  localField: "_id",
-  foreignField: "author",
-});
+userSchema.virtual('posts', {
+	ref: 'Post',
+	localField: '_id',
+	foreignField: 'author',
+})
 
 // now we can make below query and it works magically
-User.findById(userId).populate("posts");
+User.findById(userId).populate('posts')
 ```
 
 `.populate()` simplifies working with related data in MongoDB by abstracting the process of manually fetching and combining related documents.
@@ -264,42 +266,42 @@ User.findById(userId).populate("posts");
 In Mongoose, virtual populate is a feature that lets you set up virtual fields in your schema to populate related documents without storing references directly in the database. It works by dynamically pulling related data based on specified criteria.
 
 ```js
-const mongoose = require("mongoose");
+const mongoose = require('mongoose')
 
 // Define schemas
 const userSchema = new mongoose.Schema({
-  name: String,
-});
+	name: String,
+})
 
 const postSchema = new mongoose.Schema({
-  title: String,
-  content: String,
-  author: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User", // For regular populate
-  },
-});
+	title: String,
+	content: String,
+	author: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'User', // For regular populate
+	},
+})
 
 // Add virtual field to User schema
-userSchema.virtual("posts", {
-  ref: "Post", // Related model
-  localField: "_id", // Field in User model
-  foreignField: "author", // Field in Post model
-});
+userSchema.virtual('posts', {
+	ref: 'Post', // Related model
+	localField: '_id', // Field in User model
+	foreignField: 'author', // Field in Post model
+})
 
 // Enable virtuals in JSON output
-userSchema.set("toJSON", { virtuals: true });
-userSchema.set("toObject", { virtuals: true });
+userSchema.set('toJSON', {virtuals: true})
+userSchema.set('toObject', {virtuals: true})
 
 // Models
-const User = mongoose.model("User", userSchema);
-const Post = mongoose.model("Post", postSchema);
+const User = mongoose.model('User', userSchema)
+const Post = mongoose.model('Post', postSchema)
 
 // Usage
-(async () => {
-  const user = await User.findOne().populate("posts");
-  console.log(user.posts); // Virtual populate
-})();
+;(async () => {
+	const user = await User.findOne().populate('posts')
+	console.log(user.posts) // Virtual populate
+})()
 ```
 
 **Key Points:**
@@ -308,18 +310,17 @@ const Post = mongoose.model("Post", postSchema);
 - They are computed dynamically based on relationships.
 - Useful for simplifying queries without duplicating references.
 
-
 ## Piyush's Project vs. Slasher's Project
 
 - In piyush's project, we got `userSchema.pre('save', () => {...})` method and it updates `password` field to be hashed i.e., `User.create({ password: 'plain-text'})` automatically saved password to hash. This is cool, and the current note-zipper project has the implementation for the `userFactory`. The big difference b/w `userFactory` of piyush's project and slasher project is that slasher's project uses transient properties which is not needed at all when we have auto hashing of passwords set on the schema.
-- In slasher's project, we have defiend custom schema methods i.e, `UserSchema.methods.setUnhashedPassword = () => {...}`  which  works like below:
+- In slasher's project, we have defiend custom schema methods i.e, `UserSchema.methods.setUnhashedPassword = () => {...}` which works like below:
 
 ```js
-const user = new User(userRegisterDto);
+const user = new User(userRegisterDto)
 // set the hashed password manually on the user document
-user.setUnhashedPassword(userRegisterDto.password);
+user.setUnhashedPassword(userRegisterDto.password)
 // needed to updated in db
-await userDetails.save();
+await userDetails.save()
 ```
 
 ## mongodb - connection states
@@ -340,7 +341,7 @@ await userDetails.save();
 
 ```js
 // password field is only retrieved when explicitly asked for like below
-const user = await User.findOne({ email }).select('+password')
+const user = await User.findOne({email}).select('+password')
 ```
 
 ![image](https://github.com/sahilrajput03/learning-monogo-and-mongoosejs/assets/31458531/9c6bda7b-31ab-424a-9ee8-7dcf8597da82)
@@ -386,7 +387,6 @@ validateUser();
 
 <img src="https://github.com/sahilrajput03/learning-monogo-and-mongoosejs/assets/31458531/4b0ecf44-db9b-47f5-998c-b7f87c8227f0" width="800" />
 
-
 ## How can a store documents such that I can fetch them in a particular sequence
 
 Query: For e.g., we have a 10 classes in a school, then each class has students with defined roll numbers to them in ascending order. So, we need to fetch list of students in a particular order only, in other words we need to maintain their order/sequence.
@@ -420,7 +420,6 @@ Solution:
 
 ```
 
-
 ## Using `.exists()` method to check if one or more documents match with a given filter
 
 Note: `Model.exists(filter)` returns `{ _id: id_of_first_matched_document } | null`.
@@ -447,11 +446,11 @@ Problem: When we run a below script with a simple `console.log`, the app.close w
 ## Sort in mongodb
 
 Short notes:
+
 1. Default is ascending order ie., `sort: 1`
 2. Providing `sort: -1` to get in descending order.
 
 ![image](https://github.com/sahilrajput03/learning-monogo-and-mongoosejs/assets/31458531/1807c9c4-648e-4806-9697-a4e81d91a9c6)
-
 
 ## Amazing mongodb query
 
@@ -490,40 +489,46 @@ Specifies a rectangle for a geospatial $geoWithin query to return documents that
 **$box:** [Click here](https://www.mongodb.com/docs/manual/reference/operator/query/box/)
 
 ```js
-{/* using mongocompass's query, worked awesome! */}
-db.events.find(
-  {
-     location: {
-       $geoWithin: { $box: [ [topRightCoordinateLat, topRightCoordinateLng], [bottomLeftLat, bottomLeftLng]] }
-     }
-  }
-)
+{
+	/* using mongocompass's query, worked awesome! */
+}
+db.events.find({
+	location: {
+		$geoWithin: {
+			$box: [
+				[topRightCoordinateLat, topRightCoordinateLng],
+				[bottomLeftLat, bottomLeftLng],
+			],
+		},
+	},
+})
 ```
 
 ## Find documents within a given radius around a given coordinate
 
 ```js
 const results = await this.eventModel.aggregate([
-  {
-    $geoNear: {
-      near: {
-        type: 'Point',
-        coordinates: [lattitude, longitude],
-      },
-      maxDistance: maxDistanceMetres,
-      distanceField: 'distance',
-      // get distances of each event in miles
-      distanceMultiplier: METRES_TO_MILES_MULTIPLIER,
-    },
-  },
-  // any other optional query (NOTE: `$geoNear` must be the first query in the pipeline array of queries
-  { $match: query },
-]);
+	{
+		$geoNear: {
+			near: {
+				type: 'Point',
+				coordinates: [lattitude, longitude],
+			},
+			maxDistance: maxDistanceMetres,
+			distanceField: 'distance',
+			// get distances of each event in miles
+			distanceMultiplier: METRES_TO_MILES_MULTIPLIER,
+		},
+	},
+	// any other optional query (NOTE: `$geoNear` must be the first query in the pipeline array of queries
+	{$match: query},
+])
 ```
 
 ## `GeoJSON Objects` and `Geospatial Queries` in mongodb
 
 <ins>Docs:</ins>
+
 - GeoJSON Objects: [Click here](https://www.mongodb.com/docs/manual/reference/geojson/)
 - Geospatial Queries: [Click here](https://www.mongodb.com/docs/manual/geospatial-queries/)
 
@@ -621,26 +626,30 @@ Syntax:
 ## Typescript with mongoose
 
 Source (official mongoose docs):
+
 - 1. Schemas in TypeScript: [Click here](https://mongoosejs.com/docs/typescript/schemas.html)
 - 2. Statics and Methods in TypeScript: [Click here](https://mongoosejs.com/docs/typescript/statics-and-methods.html) (below screenshot)
 
 ![image](https://user-images.githubusercontent.com/31458531/224515793-2e843b81-4b5a-4779-984c-b3f8bab6d854.png)
 
-
 ## Getting all collecion names
 
 ```ts
 // getting names of all models
-const mongooseModelsNames = connection.modelNames();
+const mongooseModelsNames = connection.modelNames()
 
 // getting all models as an array
-const mongooseModels = connection.modelNames().map((modelName) => connection.model(modelName));
+const mongooseModels = connection
+	.modelNames()
+	.map((modelName) => connection.model(modelName))
 ```
 
 ## On demand creating an index for a collection
 
 ```ts
-(await connection.db.collections()).find((collection) => collection.collectionName === 'events').createIndex({ location: '2dsphere' });
+;(await connection.db.collections())
+	.find((collection) => collection.collectionName === 'events')
+	.createIndex({location: '2dsphere'})
 ```
 
 ## Using geospatial schema definition example
@@ -651,19 +660,19 @@ const mongooseModels = connection.modelNames().map((modelName) => connection.mod
 
 ```js
 const citySchema = new mongoose.Schema({
-  name: String,
-  location: {
-    type: {
-      type: String,
-      enum: ['Point'],
-      required: true
-    },
-    coordinates: {
-      type: [Number],
-      required: true
-    }
-  }
-});
+	name: String,
+	location: {
+		type: {
+			type: String,
+			enum: ['Point'],
+			required: true,
+		},
+		coordinates: {
+			type: [Number],
+			required: true,
+		},
+	},
+})
 
 // to add data use this format:
 // loc: { type: "Point", coordinates: [ longitude, latitude ] },
@@ -696,6 +705,7 @@ const doc = await Contact.findOneAndUpdate(
   { upsert: true, new: true }
 );
 ```
+
 ### LEARN: ♥ ❣♥ ❣♥ Difference between `upsert: true` and `new: true`. Source: https://stackoverflow.com/a/44794886
 
 ```txt
@@ -724,7 +734,6 @@ db.collection.aggregate([{$match: {car: {$ne: 20}}}])
   {"_id": ObjectId("5a934e000102030405000001"),"key": 2}
 ]
 ```
-
 
 With `$exists`:
 
@@ -780,17 +789,18 @@ But this is a issue that I faced myself and seems there's no such fix for this w
 
 ## useful `updateOne` method
 
-*Drawback:*
+_Drawback:_
+
 - We don't get created/updated document, so we need fo to make a `findOne` query explcitly
 - Do not rely on returned value i.e, `value.upsertedId` as this is only preset if document is created (not returned when its updated)
 
 ```ts
 // its useful as it creates the record with necessary values if it already doesn't exist
 await this.movieUserStatusModel.updateOne(
-  { movieId, userId },
-  { $set: { rating } },
-  { upsert: true },
-);
+	{movieId, userId},
+	{$set: {rating}},
+	{upsert: true}
+)
 ```
 
 ## Amazing feature of mongoplayground
@@ -834,6 +844,7 @@ db.collection.aggregate([
 ## Using `$avg` for calculating average from documents of a different collection
 
 Source:
+
 - [Mongoplayground](https://mongoplayground.net/) (**Template** > **Multiple Collections**)
 - [$Avg](https://www.mongodb.com/docs/manual/reference/operator/aggregation/avg/)
 - [$group](https://www.mongodb.com/docs/manual/reference/operator/aggregation/group/)
@@ -876,7 +887,6 @@ Source: [Click here](https://stackoverflow.com/a/41736477/10012446)
 
 ![image](https://user-images.githubusercontent.com/31458531/219715844-c78227d8-6e2d-4cbb-92f7-533ca0fdafbf.png)
 
-
 ## Deleting all `collections` or dropping `database` at once?
 
 ```js
@@ -884,12 +894,16 @@ import mongoose from 'mongoose'
 
 // TESTED: 6 Dec, 2023 (16.13.1), mongoose: ^7.6.3, mongodb (docker): mongo:4.0.9
 // Drop entire database (which will drop all collections in one operation)
-await mongoose.connection.dropDatabase();
+await mongoose.connection.dropDatabase()
 ```
 
 ```js
 // Delete all documents from the database
-await Promise.all((await connection.db.collections()).map((collection) => collection.deleteMany({})));
+await Promise.all(
+	(
+		await connection.db.collections()
+	).map((collection) => collection.deleteMany({}))
+)
 ```
 
 ## `currentOp` ?
@@ -898,13 +912,11 @@ Docs Mongodb: [Click here](https://www.mongodb.com/docs/manual/reference/method/
 
 ![image](https://user-images.githubusercontent.com/31458531/219519327-1d92727b-6f34-4723-a712-2f08d8b10a04.png)
 
-
 ## `$or`: collection scan vs. index scan
 
 Source: Official Docs Mongodb: [Click here](https://www.mongodb.com/docs/manual/reference/operator/query/or/)
 
 ![image](https://user-images.githubusercontent.com/31458531/218228634-6a059107-b188-4b41-90e1-0a42ddb203e5.png)
-
 
 ## you can give a simple queryFiler to the populated field's data as well like that
 
@@ -912,15 +924,14 @@ Source: [Click here](https://stackoverflow.com/a/27075782/10012446)
 
 ![image](https://user-images.githubusercontent.com/31458531/218228459-5813c991-c638-4aba-84af-c8967c847fb3.png)
 
-
 ## pagination over an array field of a document
 
 ```ts
 // TODO: Remove this comment: [offset=5, limit=5<numberOfItems>] i.e., {$slice: [5, 5]} will bring array i.e., [5,9]
 const [feedPost] = await this.feedPostModel.find(
-  { _id: new mongoose.Types.ObjectId(id) },
-  { likes: { $slice: [offset ?? 0, offset + limit] } },
-);
+	{_id: new mongoose.Types.ObjectId(id)},
+	{likes: {$slice: [offset ?? 0, offset + limit]}}
+)
 ```
 
 ## Pagination on array stored in a document field
@@ -951,13 +962,13 @@ Source: [Click here](https://stackoverflow.com/questions/38970835/mongodb-add-el
 
 ![image](https://user-images.githubusercontent.com/31458531/215793227-45f230f6-b870-4a62-b41c-89e42f37dd32.png)
 
-## Directly searching a document of a given _id can be done like that:
+## Directly searching a document of a given \_id can be done like that:
 
 ![image](https://user-images.githubusercontent.com/31458531/211829410-e66dadc1-2a1d-403f-9617-293043ce0857.png)
 
 ## Thats how we do transactions with mongoose
 
-*Transactions are new in MongoDB 4.0 and Mongoose 5.2.0. Transactions let you execute multiple operations in isolation and potentially undo all the operations if one of them fails. This guide will get you started using transactions with Mongoose.*
+_Transactions are new in MongoDB 4.0 and Mongoose 5.2.0. Transactions let you execute multiple operations in isolation and potentially undo all the operations if one of them fails. This guide will get you started using transactions with Mongoose._
 
 **Transactions in Mongoose DOCS:** [Click here](https://mongoosejs.com/docs/transactions.html)
 
@@ -1002,12 +1013,11 @@ db.collection.aggregate([
   { "$sort": { "duplicates": -1 } },
   { "$project": { "first_name": "$_id", "_id": 0, duplicates: 1 } }
 ])
-  
+
 # PRO Tip: You can filter some data using a $match stage in the front of the aggregate query as well, for e.g, `{$match: {car: 30}}`
 ```
 
 ![image](https://user-images.githubusercontent.com/31458531/211373136-ab404c81-77b1-4a09-a78a-f9dab7a88469.png)
-
 
 ## find duplicate#2 items in mongodb (finding unique items)
 
@@ -1036,7 +1046,7 @@ db.collection.aggregate([
       "_id": {
         "email": "$email",
         "deleted": "$deleted"// delete is *optional* here though
-        
+
       },
       "duplicates": { "$sum": 1 }
     }
@@ -1044,7 +1054,7 @@ db.collection.aggregate([
   { "$match": { "_id": { "$ne": null }, "duplicates": { "$gt": 1 } } },
 ])
 ```
-  
+
 ## Cursor in mongodb, Iterate over documents individualy using stream
 
 - Amazing - Mongodb Docs: [Click here](https://www.mongodb.com/docs/manual/tutorial/iterate-a-cursor/)
@@ -1065,7 +1075,6 @@ From ChatGPT:
 
 ![image](https://user-images.githubusercontent.com/31458531/211191847-c1859b2a-2c7a-40fd-9fbc-899ca3c15ed9.png)
 
-
 ## Import and export single collection in mongo using cmd ?
 
 Solution: [Click here](https://stackoverflow.com/questions/62696963/import-and-export-single-collection-in-mongo-using-cmd)
@@ -1083,7 +1092,6 @@ Solution of this problem: [Click here](https://www.mongodb.com/community/forums/
 
 ![image](https://user-images.githubusercontent.com/31458531/210137115-8fcbc0bc-2aa8-4ae4-a861-ede135959036.png)
 
-
 ## stackoverflow queston: `Is there a max limit to the $nin operator in MongoDB?`
 
 ![image](https://user-images.githubusercontent.com/31458531/210134154-7c41a90e-3804-4d8d-aff8-356ba08c2f23.png)
@@ -1096,24 +1104,24 @@ Stack overflow Anser: [Click here](https://stackoverflow.com/a/61833219/10012446
 
 ![image](https://user-images.githubusercontent.com/31458531/210085356-4b943271-10ae-4594-8749-e61af86edc49.png)
 
-
 ## post hooks with `mongoose`
 
 **Docs: [Click here](https://mongoosejs.com/docs/middleware.html#post)**
 
 ![image](https://user-images.githubusercontent.com/31458531/206688709-25396fc2-39f1-4a50-bc55-f67e1325a549.png)
 
-
 ## Clearing collections (can be used for better test without sideeffects)
 
 ```js
-import { Connection } from 'mongoose';
+import {Connection} from 'mongoose'
 
 export const dropCollections = async (connection: Connection) => {
-  await Promise.all(
-    (await connection.db.collections()).map((collection) => collection.deleteMany({})),
-  );
-};
+	await Promise.all(
+		(
+			await connection.db.collections()
+		).map((collection) => collection.deleteMany({}))
+	)
+}
 ```
 
 ## more
@@ -1161,18 +1169,17 @@ Even with this `$near` operator mongodb doesn't support calculating distance b/w
 
 ![image](https://user-images.githubusercontent.com/31458531/205103694-8196ed85-e719-44ff-a669-3a19367f71d9.png)
 
-
 links for eric:
+
 - Issue on Community (NOT RESOLVED): [Click here](https://www.mongodb.com/community/forums/t/how-to-calculate-distance-between-two-geolocation-points/173045)
 - Proposal on feeback forum (NOT RESOLVED): [Click here](https://feedback.mongodb.com/forums/924280-database/suggestions/45394135-add-operator-that-would-calculate-distance-between)
 - Issue on Jira (NOT RESOLVED): [Click here](https://jira.mongodb.org/browse/SERVER-2990)
-
 
 ## Finding distance between two gps locations (point to point and not the actual travelling distance by roads)
 
 **Source: [Click here](https://www.youtube.com/watch?v=qbge8Psdyrw)**
 
-*Also: In case you wanna calculate distance using Haversine formula: [Stackoverflow Question](https://stackoverflow.com/questions/27928/calculate-distance-between-two-latitude-longitude-points-haversine-formula/27943#27943)*
+_Also: In case you wanna calculate distance using Haversine formula: [Stackoverflow Question](https://stackoverflow.com/questions/27928/calculate-distance-between-two-latitude-longitude-points-haversine-formula/27943#27943)_
 
 Docs: $geoNear: [version4.0](https://www.mongodb.com/docs/v4.0/reference/operator/aggregation/geoNear/#pipe._S_geoNear), [ver6-latest](https://www.mongodb.com/docs/manual/reference/operator/aggregation/geoNear/)
 
@@ -1183,7 +1190,6 @@ I managed to calculate distance b/w two gps locations and returning the docs in 
 Find this code in `mongo-shell-with-watcher` folder, yikes! **TESTED with my custom gps locations as well. Yikes!!**
 
 ![image](https://user-images.githubusercontent.com/31458531/205132307-2ae1c56e-3ebe-446c-8b40-16132edf8b3e.png)
-
 
 ## Amazing and sweet explanation of document linking by mongodb
 
@@ -1196,4 +1202,3 @@ Source: [Click here](https://stackoverflow.com/questions/39622354/how-many-bson-
 Docs: [MongoDB Limits and Thresholds](https://www.mongodb.com/docs/manual/reference/limits/)
 
 ![image](https://user-images.githubusercontent.com/31458531/205167045-06deaa7d-9377-48a6-869d-7bcc4ec2eeb7.png)
-
