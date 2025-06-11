@@ -8,7 +8,8 @@ let query = db.datingLikes.find({ to: currentUserId });
 let list = query.toArray().map(item => item.from);
 let findQuery = db.datingLikes.find({ to: { "$in": list } });
 
-print('Matches:'); // Users who likes currentUser and currentUser also likes them:
+// Users who likes currentUser and currentUser also likes them:
+print('Matches:');
 findQuery.forEach(printjson);
 
 // Get Time taken for the query
