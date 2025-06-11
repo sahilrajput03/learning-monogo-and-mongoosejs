@@ -2,7 +2,7 @@
 
 ```bash
 # Watching a mongo shell script with mongo shell
-./watch.sh 1
+./watch.sh sh-1
 
 # Watching javascript file with mongo shell
 ./js-watch.sh ./01.js
