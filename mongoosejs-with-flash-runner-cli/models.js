@@ -1,8 +1,8 @@
-const {Schema, model} = require('mongoose')
+const { Schema, model } = require('mongoose');
 
-const PERSON_COLLECTION = 'persons' //* You should use pluras names, otherwise mongodb will itself change the name to plurals.
-const GADGET_COLLECTION = 'gadgets' //* You should use pluras names, otherwise mongodb will itself change the name to plurals.
-const CARS_COLLECTION = 'cars' //* You should use pluras names, otherwise mongodb will itself change the name to plurals.
+const personsCollectionName = 'persons'; //* You should use pluras names, otherwise mongodb will itself change the name to plurals.
+const gadgetsCollectionName = 'gadgets'; //* You should use pluras names, otherwise mongodb will itself change the name to plurals.
+const carsCollectionName = 'cars'; //* You should use pluras names, otherwise mongodb will itself change the name to plurals.
 
 // LEARN: General schema definition.
 // let personSchema = new Schema({name: String});
@@ -10,25 +10,25 @@ const CARS_COLLECTION = 'cars' //* You should use pluras names, otherwise mongod
 // LEARN: Using below personSchema is enables schemaless saving(i.e., strict: false) to db => https://stackoverflow.com/a/12389168
 let personSchema = new Schema(
 	{
-		gadgetList: [{type: Schema.Types.ObjectId, ref: GADGET_COLLECTION}],
-		favouriteGadget: {type: Schema.Types.ObjectId, ref: GADGET_COLLECTION},
+		gadgetList: [{ type: Schema.Types.ObjectId, ref: gadgetsCollectionName }],
+		favouriteGadget: { type: Schema.Types.ObjectId, ref: gadgetsCollectionName },
 	},
-	{strict: false} // since I disabled strict so any property can be saved irrespective of the schema definition ~Sahil
-)
+	{ strict: false } // since I disabled strict so any property can be saved irrespective of the schema definition ~Sahil
+);
 // ? Using above type of ref tells moongoose to treat, gadgets field as join from `GADGET_COLLECTION_NAME` collection.
 const personModel = model(
-	PERSON_COLLECTION, //LEARN: Model name(if third param is omiited, mongoose will pluralize `modelName` to get a `collectionName`.)
+	personsCollectionName, //LEARN: Model name(if third param is omiited, mongoose will pluralize `modelName` to get a `collectionName`.)
 	personSchema,
-	PERSON_COLLECTION //LEARN: Collection name(optional param but IMPORTANT) ensures that mongodb doesn't alter our name to pluras or sht thigs on itself.
-)
+	personsCollectionName //LEARN: Collection name(optional param but IMPORTANT) ensures that mongodb doesn't alter our name to pluras or sht thigs on itself.
+);
 
-let gadgetSchema = new Schema({deviceName: String}, {strict: false})
+let gadgetSchema = new Schema({ deviceName: String }, { strict: false });
 // ? Using above type of ref tells moongoose to treat, gadgets field as join from 'gadgetcollection' collection.
 const gadgetModel = model(
-	GADGET_COLLECTION,
+	gadgetsCollectionName,
 	gadgetSchema,
-	GADGET_COLLECTION //Using third parameter ensures that mongoose will only use this name as collection name, and won't pluralize it. Yikes!
-)
+	gadgetsCollectionName //Using third parameter ensures that mongoose will only use this name as collection name, and won't pluralize it. Yikes!
+);
 
 const carSchema = new Schema({
 	carName: {
@@ -36,11 +36,11 @@ const carSchema = new Schema({
 		validate: {
 			// Custom validator src: https://mongoosejs.com/docs/validation.html#custom-validators
 			validator: (value) => {
-				const isValid = value === 'audi' || value === 'bmw'
+				const isValid = value === 'audi' || value === 'bmw';
 				if (typeof isValid === 'undefined')
-					throw 'isValid got undefined value in carName validator function.'
+					throw 'isValid got undefined value in carName validator function.';
 
-				return isValid
+				return isValid;
 			},
 			message: (props) =>
 				`${props.value} is not allowed. Only audi and bmw cars are allowed.`,
@@ -52,21 +52,24 @@ const carSchema = new Schema({
 		unique: true, // `email` must be unique
 	},
 	report: [{
-		_id : Schema.Types.ObjectId,
-		reason : String
+		_id: Schema.Types.ObjectId,
+		reason: String
 	}]
-})
+});
+// carSchema.index(
+// 	{ email: 1 }
+// );
 
 const carModel = model(
-	CARS_COLLECTION,
+	carsCollectionName,
 	carSchema,
-	CARS_COLLECTION //Using third parameter ensures that mongoose will only use this name as collection name, and won't pluralize it. Yikes!
-)
+	carsCollectionName //Using third parameter ensures that mongoose will only use this name as collection name, and won't pluralize it. Yikes!
+);
 
 module.exports = {
 	personModel,
 	gadgetModel,
-	PERSON_COLLECTION,
-	GADGET_COLLECTION,
+	personsCollectionName,
+	gadgetsCollectionName,
 	carModel,
-}
+};

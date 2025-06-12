@@ -7,7 +7,7 @@ const { connectPromise, DB_NAME } = require('./initMongodb.js');
 const {
 	personModel,
 	gadgetModel,
-	PERSON_COLLECTION,
+	personsCollectionName,
 	carModel,
 } = require('./models');
 const { log } = console;
@@ -26,12 +26,25 @@ closeDb(async () => {
 });
 
 beforeAll(async () => {
-	log('::beforeAll::Dropping the database', DB_NAME);
+	log('🎉beforeAll::Dropping the database', DB_NAME);
 	const db = mongoose.connection;
 	const collectionArray = await (await mongoose.connection.db.listCollections().toArray()).map(col => col.name);
-	console.log('collection names?', collectionArray);
+	console.log('🎉collection names?', collectionArray);
 	await db.dropDatabase(); // This drops the currently connected database intelligently i.e., we don't need give the name of the db as it delete the same db to which we are connected to.
+
+	// Learn: We need to sync when we drop the database (above line)
+	//          otherwise we do not get unique email error on test -
+	//          "unique email test for car saving"
+	// Learn: Are indexes updated automatically? tldr: YES (source - https://chatgpt.com/c/684abfd3-945c-8007-bb9a-3226f9922e7d)
+	try {
+		await carModel.syncIndexes();
+		console.log('🎉Indexes synced for carModel');
+	} catch (err) {
+		console.error('❌Error syncing indexes for carModel:', err);
+	}
 });
+
+const sleep = async (timeMs = 1_000) => await new Promise((res) => setTimeout(res, timeMs));
 
 const _bruno = {
 	name: 'Bruno Mars',
@@ -46,14 +59,13 @@ const _pikachu = {
 };
 // LEARN: You may never use console.log but simply use debugger to debug values like reply below by placing breakpoint in the functin end brace.
 test('save bruno', async () => {
-	let bruno = new personModel(_bruno); // LEARN: Placing this in beforeAll or top scope causes issues.
-	expect(bruno).toHaveProperty('_id');
-	// log(bruno._id)// a dynamic _id is assigned here already!
+	let person = new personModel(_bruno); // LEARN: Placing this in beforeAll or top scope causes issues.
+	expect(person instanceof mongoose.Document).toBeTruthy();
 
-	expect(bruno).toMatchObject(_bruno);
-
-	let reply1 = await bruno.save();
-	expect(reply1).toMatchObject(_bruno);
+	expect(person).toMatchObject(_bruno);
+	expect(person).toHaveProperty('_id');
+	expect(person._id instanceof mongoose.Types.ObjectId).toBeTruthy();
+	await person.save();
 });
 
 test('save pikachu', async () => {
@@ -63,16 +75,26 @@ test('save pikachu', async () => {
 });
 
 test('find', async () => {
-	/** @type object */
-	let reply = await personModel.find(); // This may find multiple docuemnts
-	expect(() => {
-		reply.toObject(); // Since we can't call toObject directly to array so this throws error.
-	}).toThrow();
+	let personDocs = await personModel.find(); // This may find multiple docuemnts
 
-	reply = reply.map((doc) => doc.toObject());
+	// ✅`Mongoose document instance` (not a plain JavaScript object)
+	expect(personDocs[0] instanceof mongoose.Document).toBeTruthy();
 
-	expect(reply[0]).toMatchObject(_bruno);
-	expect(reply[1]).toMatchObject(_pikachu);
+	const persons = personDocs.map((doc) => doc.toObject());
+	expect(persons[0]).toMatchObject(_bruno);
+	expect(persons[1]).toMatchObject(_pikachu);
+});
+
+test('find with lean ❤️', async () => {
+	// Learn: lean() method above tells mongoose to call .toObject()
+	// 			method internally for this query.
+	let persons = await personModel.find().lean();
+
+	// ✅ We get a list of plain JavaScript objects instead of
+	// 		`Mongoose document instance`
+	expect(persons[0] instanceof mongoose.Document).toBeFalsy();
+	expect(persons[0]).toMatchObject(_bruno);
+	expect(persons[1]).toMatchObject(_pikachu);
 });
 
 test('findOne', async () => {
@@ -158,7 +180,9 @@ test('populate', async () => {
 	await iphoneDoc.save();
 	await nokiaDoc.save();
 
-	let _id = new mongoose.Types.ObjectId(); // creating `_id` manually to be able to avoid confusion later on; src: https://stackoverflow.com/a/17899751/10012446
+	// We create `_id` manually to be able to avoid confusion later on;
+	// 		src: https://stackoverflow.com/a/17899751/10012446
+	let _id = new mongoose.Types.ObjectId();
 
 	let personDoc = new personModel({
 		_id,
@@ -256,8 +280,7 @@ test('update never delete older data', async () => {
 
 test('dropCollection', async () => {
 	const db = mongoose.connection;
-	// log(db)
-	let status = await db.dropCollection(PERSON_COLLECTION); // LEARN: This will throw error if the colleciton is already not there!
+	let status = await db.dropCollection(personsCollectionName); // LEARN: This will throw error if the colleciton is already not there!
 	expect(status).toBe(true);
 });
 
@@ -266,81 +289,89 @@ test('custom validator function with custom message', async () => {
 	let car1Doc = new carModel({
 		carName: 'audi',
 	});
-	let car1 = await car1Doc.save();
-	// log({car1})
-	// Above is car is saved successfully!
+	await car1Doc.save();
 
 	// Trying to get validation error message (custom validator defined in `carSchema` in models file).
-	let expectErrName = 'ValidatorError';
-	let expectedErrMessg = ' is not allowed. Only audi and bmw cars are allowed.';
+	const expectErrName = 'ValidatorError';
+	const expectedErrMessg = ' is not allowed. Only audi and bmw cars are allowed.';
 	let error;
 	let car2Doc;
 	try {
 		car2Doc = new carModel({
 			carName: 'random-audi',
 		});
-		let car2 = await car2Doc.save();
+		await car2Doc.save();
 	} catch (e) {
 		error = e;
 	}
 	expect(error.errors.carName instanceof Error).toBe(true);
 	expect(error.errors.carName.name).toBe(expectErrName);
 	expect(error.errors.carName.message).toBe(car2Doc.carName + expectedErrMessg);
-
-	// log(error.errors.carName.name)
-	// log(error.errors.carName.message)
 });
 
 test('Saving array of objects (for demo to eric)', async () => {
 	let g1 = new carModel({
 		carName: 'audi',
 		deviceId: 501,
-		report: [{ _id: new mongoose.Types.ObjectId(), reason: 'Inappropriate User' }]
+		report: [{ _id: new mongoose.Types.ObjectId(), reason: 'Inappropriate User' }],
+		email: 'sahil@rajput.com'
 	});
-
 	await g1.save();
 
-	// console.log(g1);
+	// Add more to `report` field
 	g1.report = g1.report.concat({ _id: new mongoose.Types.ObjectId(), reason: 'Seemed Scammer' });
 	await g1.save();
-	// console.log(g1);
 });
 
-//! Unique key doesn't seem to throw error in watch mode after first execution, why??
-// test('unique email test for car saving', async () => {
-// 	let car1Doc = new carModel({
-// 		carName: 'audi',
-// 		email: 'sahil@rajput.com',
-// 	})
-// 	let car1 = await car1Doc.save()
-// 	log({car1})
+test('unique email test for car saving', async () => {
+	const email = 'mohit@rajput.com';
+	let car1Doc = new carModel({
+		carName: 'audi',
+		email,
+	});
+	await car1Doc.save();
 
-// 	let expectedErrorName = 'MongoServerError'
+	let error;
+	try {
+		// Trying to save new car with an existing email id, should throw unique error:
+		let car2Doc = new carModel({
+			carName: 'bmw',
+			email,
+		});
+		await car2Doc.save();
+	} catch (e) {
+		error = e;
+		console.log('Successfully got error ✅');
+	}
+	let expectedErrorName = 'MongoServerError';
+	let expectedErrorMessageSlug = 'E11000 duplicate key error collection:';
+	expect(error.name).toBe(expectedErrorName);
+	expect(error.message).toContain(expectedErrorMessageSlug);
+});
 
-// 	let error
-// 	try {
-// 		// Trying to save new car with an existing email id, should throw unique error:
-// 		let car2Doc = new carModel({
-// 			carName: 'audi',
-// 			email: 'sahil@rajput.com',
-// 		})
-// 		let car2 = await car2Doc.save()
-// 		log({car2})
-// 	} catch (e) {
-// 		error = e
-// 	}
-// 	log('got e.name', error?.name)
-// 	log('got e.message', error?.message)
-// 	log('got e as:', error)
-// 	// expect(error?.name).toBe(expectedErrorName)
-// 	// expect(error.message).toBe(expectedErrorName)
-// })
+test('projection', async () => {
+	// Projection operator - It helps by fixing the overfetching
+	// 		issue. We can use projection with mongoose using select as
+	// 		shown below:
+	// LEARN: Using the select method we can limit the fields
+	//      fetched from the db directly, i.e., we can make use of
+	//      projection operator to fetch only the desired data only,
+	//      and we can verify the execution query form mongoose as
+	//      debug mode is on thereby it shows query as:
+	//      ```persons.find({}, { projection: { name: 1 } })```
+	const bruno = new personModel(_bruno); // LEARN: Placing this in beforeAll or top scope causes issues.
+	await bruno.save();
 
-// OTHERS
-// ? What is Projection operator ?
-// Ans. It helps in overfetching data.
-// We can use projection with mongoose using select as shown below:
+	// Without projection
+	const personDocs = await personModel.find({}).lean();
+	personDocs.forEach(doc => {
+		expect(Object.keys(doc)).toEqual(['_id', 'gadgetList', 'name', 'phoneNumber', 'address', '__v']);
+	});
 
-// let reply = await personModel.find({}).select('name')
-// LEARN: Using the select method we can limit the fields fetched from the db directly, i.e., we can make use of projection operator to fetch only the desired data only, and we can verify the execution query form mongoose as debug mode is on thereby it shows query as: ```persons.find({}, { projection: { name: 1 } })```
-// ? Docs of select method: https://mongoosejs.com/docs/api.html#query_Query-select
+	// With projection usign .select() in mongoose
+	// 		Docs - https://mongoosejs.com/docs/api.html#query_Query-select
+	const personDocsWithProjection = await personModel.find({}).lean().select('name');
+	personDocsWithProjection.forEach(doc => {
+		expect(Object.keys(doc)).toEqual(['_id', 'name']);
+	});
+});
