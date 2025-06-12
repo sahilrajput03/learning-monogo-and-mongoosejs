@@ -15,6 +15,7 @@
   - What is Indexing in a Database?: [Click here](https://www.mongodb.com/resources/basics/databases/database-index)
   - Article - Digital Ocean - How To Use Indexes in MongoDB: [Click here](https://www.digitalocean.com/community/tutorials/how-to-use-indexes-in-mongodb)
   - What is the difference between ‘index’ and ‘search index’?: [Click here](https://www.mongodb.com/community/forums/t/what-is-the-difference-between-index-and-search-index/200703)
+  - Article - An 80/20 Guide to Mongoose Plugins - The Code Barbarian: [Click here](https://thecodebarbarian.com/2015/03/06/guide-to-mongoose-plugins)
 
 ## ❤️ `serverSelectionTimeoutMS` in mongoose
 
