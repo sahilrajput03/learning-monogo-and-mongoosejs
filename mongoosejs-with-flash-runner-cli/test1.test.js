@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
 require('dotenv').config({ path: '.env.test' }); // Alway remember to use separate .env.test file for environment.
+
+// Learn Jest and Expect Google Doc - https://docs.google.com/document/d/1PU8G6tpEYLJxXMgHoK5c37UFMbSXtENzpyIOohVsD_I/edit?tab=t.0
+// 	Expect Docs: https://jestjs.io/docs/expect
 const { expect } = require('expect');
-// expect DOCS (from jest): https://jestjs.io/docs/expect
-// toMatchObject: (src: https://jestjs.io/docs/expect#tomatchobjectobject) Used to check that a JavaScript object matches a subset of the properties of an object
+
 const { connectPromise, DB_NAME } = require('./initMongodb.js');
 const {
 	PersonModel,
@@ -10,7 +12,6 @@ const {
 	personsCollectionName,
 	CarModel,
 } = require('./models');
-const { log } = console;
 
 // @ts-ignore
 const { connectToDb, closeDb, beforeAll, test } = global;
@@ -27,7 +28,7 @@ closeDb(async () => {
 });
 
 beforeAll(async () => {
-	log('🎉beforeAll::Dropping the database', DB_NAME);
+	console.log('🎉beforeAll::Dropping the database', DB_NAME);
 	const db = mongoose.connection;
 	const collectionArray = await (await mongoose.connection.db.listCollections().toArray()).map(col => col.name);
 	console.log('🎉collection names?', collectionArray);
@@ -58,7 +59,7 @@ const _pikachu = {
 	phoneNumber: 987654321,
 	address: 'New York City',
 };
-// LEARN: You may never use console.log but simply use debugger to debug values like reply below by placing breakpoint in the functin end brace.
+// Learn: You may never use console.log but simply use debugger to debug values like doc below by placing breakpoint in the functin end brace.
 test('save bruno', async () => {
 	let person = new PersonModel(_bruno); // LEARN: Placing this in beforeAll or top scope causes issues.
 	expect(person instanceof mongoose.Document).toBeTruthy();
@@ -71,8 +72,8 @@ test('save bruno', async () => {
 
 test('save pikachu', async () => {
 	let pikachu = new PersonModel(_pikachu);
-	let reply2 = await pikachu.save();
-	expect(reply2).toMatchObject(_pikachu);
+	let doc = await pikachu.save();
+	expect(doc).toMatchObject(_pikachu);
 });
 
 test('find', async () => {
@@ -111,12 +112,12 @@ test('findOne', async () => {
 test('findById', async () => {
 	let person = await PersonModel.findOne({ name: 'Bruno Mars' });
 	expect(() => {
-		expect(reply).toMatchObject(_bruno);
+		expect(doc).toMatchObject(_bruno);
 	}).toThrow();
 
 	let _id = person._id;
-	let reply = await PersonModel.findById(_id);
-	expect(reply.toObject()).toMatchObject(_bruno);
+	let doc = await PersonModel.findById(_id);
+	expect(doc.toObject()).toMatchObject(_bruno);
 });
 
 test('findByIdAndRemove', async () => {
@@ -133,34 +134,33 @@ test('deleteOne', async () => {
 	let person = await PersonModel.findOne({ name: 'Pikachu' });
 	let _id = person._id;
 
-	let reply = await PersonModel.deleteOne({ _id });
+	let doc = await PersonModel.deleteOne({ _id });
 });
 
 test('insertMany', async () => {
 	let arr = require('./data');
-	let reply = await PersonModel.insertMany(arr); // Docs (insertMany): https://mongoosejs.com/docs/api.html#model_Model.insertMany
+	let docs = await PersonModel.insertMany(arr); // Docs (insertMany): https://mongoosejs.com/docs/api.html#model_Model.insertMany
 
-	reply = reply.map((doc) => doc.toObject());
+	docs = docs.map((doc) => doc.toObject());
 
-	// log(reply)
-	reply.forEach((doc, idx) => {
+	docs.forEach((doc, idx) => {
 		expect(doc).toMatchObject(arr[idx]);
 	});
 });
 
 test('deleteMany', async () => {
-	let reply = await PersonModel.deleteMany({});
+	let doc = await PersonModel.deleteMany({});
 	let numberOfInsertedDoc = require('./data').length;
 
-	expect(reply.deletedCount).toBe(numberOfInsertedDoc); // For v6
-	// expect(reply.ok).toBe(1) // For v5
+	expect(doc.deletedCount).toBe(numberOfInsertedDoc); // For v6
+	// expect(doc.ok).toBe(1) // For v5
 });
 
 test('pagination', async () => {
 	const page = 3; // Values: 1, 2, 3, ...
 	const limit = 2;
 	const skip = (page - 1) * limit;
-	let reply = await PersonModel
+	const doc = await PersonModel
 		.find({})
 		.sort({ name: 'asc' })
 		.limit(limit)
@@ -197,7 +197,7 @@ test('populate', async () => {
 
 	// Way 1 - Inserting a ObjectId to array i.e., `gadgetList` property.
 	// Pushing item to array using $push method
-	// let reply = await personModel.findByIdAndUpdate(_id, {
+	// let doc = await personModel.findByIdAndUpdate(_id, {
 	// 	$push: {
 	// 		gadgetList: [nokiaDoc._id],
 	// 	},
@@ -221,7 +221,7 @@ test('populate', async () => {
 	}
 	/*
 	# Get a populated person
-	let replyPopulated = await personModel.findById(_id).populate('gadgetList
+	let docPopulated = await personModel.findById(_id).populate('gadgetList
 
 	# Get a populated person (populate after save, src: populate afer save: https://stackoverflow.com/a/50334013/10012446)
 	await personDoc.populate('gadgetList').execPopulate() // works in v5 but doesn't work in v6 as execPopulate is discarded for documents in v6.
