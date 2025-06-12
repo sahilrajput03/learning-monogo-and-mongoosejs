@@ -1,21 +1,22 @@
 const { Schema, model } = require('mongoose');
 
-const personsCollectionName = 'persons'; //* You should use pluras names, otherwise mongodb will itself change the name to plurals.
-const gadgetsCollectionName = 'gadgets'; //* You should use pluras names, otherwise mongodb will itself change the name to plurals.
-const carsCollectionName = 'cars'; //* You should use pluras names, otherwise mongodb will itself change the name to plurals.
+//* You should use pluras names, otherwise mongodb will itself change the name to plurals.
+const personsCollectionName = 'persons';
+const gadgetsCollectionName = 'gadgets';
+const carsCollectionName = 'cars';
 
-// LEARN: General schema definition.
-// let personSchema = new Schema({name: String});
-
-// LEARN: Using below personSchema is enables schemaless saving(i.e., strict: false) to db => https://stackoverflow.com/a/12389168
 let personSchema = new Schema(
 	{
 		gadgetList: [{ type: Schema.Types.ObjectId, ref: gadgetsCollectionName }],
 		favouriteGadget: { type: Schema.Types.ObjectId, ref: gadgetsCollectionName },
 	},
-	{ strict: false } // since I disabled strict so any property can be saved irrespective of the schema definition ~Sahil
+	// Learn: `strict: false` means any property can be saved
+	// 		irrespective of the schema definition. (https://stackoverflow.com/a/12389168)
+	{ strict: false }
 );
-// ? Using above type of ref tells moongoose to treat, gadgets field as join from `GADGET_COLLECTION_NAME` collection.
+
+// Using above type of ref tells moongoose to treat, gadgets field as
+// 		join from `GADGET_COLLECTION_NAME` collection.
 const PersonModel = model(
 	personsCollectionName, //LEARN: Model name(if third param is omiited, mongoose will pluralize `modelName` to get a `collectionName`.)
 	personSchema,

@@ -7,9 +7,6 @@
 		"test": "fr test1.test.js",
 		"test-watch": "fr -w test1.test.js"
 	},
-	"oldScripts": {
-		"start": "nodemon -w ./startTesting.js ./startTesting.js"
-	},
 	"dependencies": {
 		"dotenv": "^16.0.0",
 		"expect": "^28.1.0",

@@ -10,7 +10,8 @@ const DB_NAME = 'testdb';
 const DB_URI = 'mongodb://localhost/' + DB_NAME;
 
 async function connectFn() {
-	return await connect(DB_URI, {
+	console.log('🎉Connecting to mongodb now.');
+	await connect(DB_URI, {
 		// @ts-ignore
 		useNewUrlParser: true,
 		useUnifiedTopology: true,
@@ -19,8 +20,7 @@ async function connectFn() {
 		// useFindAndModify: false,
 		// useCreateIndex: true,
 	});
-
-	console.log(':INFO: CONNECTION TO DB SUCCESSFUL.');
+	console.log('🎉Db Connection Successful.');
 }
 
 let connectPromise = connectFn();
