@@ -16,7 +16,7 @@ let personSchema = new Schema(
 	{ strict: false } // since I disabled strict so any property can be saved irrespective of the schema definition ~Sahil
 );
 // ? Using above type of ref tells moongoose to treat, gadgets field as join from `GADGET_COLLECTION_NAME` collection.
-const personModel = model(
+const PersonModel = model(
 	personsCollectionName, //LEARN: Model name(if third param is omiited, mongoose will pluralize `modelName` to get a `collectionName`.)
 	personSchema,
 	personsCollectionName //LEARN: Collection name(optional param but IMPORTANT) ensures that mongodb doesn't alter our name to pluras or sht thigs on itself.
@@ -60,16 +60,16 @@ const carSchema = new Schema({
 // 	{ email: 1 }
 // );
 
-const carModel = model(
+const CarModel = model(
 	carsCollectionName,
 	carSchema,
 	carsCollectionName //Using third parameter ensures that mongoose will only use this name as collection name, and won't pluralize it. Yikes!
 );
 
 module.exports = {
-	personModel,
+	PersonModel,
 	gadgetModel,
 	personsCollectionName,
 	gadgetsCollectionName,
-	carModel,
+	CarModel,
 };

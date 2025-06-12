@@ -5,10 +5,10 @@ const { expect } = require('expect');
 // toMatchObject: (src: https://jestjs.io/docs/expect#tomatchobjectobject) Used to check that a JavaScript object matches a subset of the properties of an object
 const { connectPromise, DB_NAME } = require('./initMongodb.js');
 const {
-	personModel,
+	PersonModel,
 	gadgetModel,
 	personsCollectionName,
-	carModel,
+	CarModel,
 } = require('./models');
 const { log } = console;
 
@@ -37,10 +37,10 @@ beforeAll(async () => {
 	//          "unique email test for car saving"
 	// Learn: Are indexes updated automatically? tldr: YES (source - https://chatgpt.com/c/684abfd3-945c-8007-bb9a-3226f9922e7d)
 	try {
-		await carModel.syncIndexes();
-		console.log('🎉Indexes synced for carModel');
+		await CarModel.syncIndexes();
+		console.log('🎉Indexes synced for CarModel');
 	} catch (err) {
-		console.error('❌Error syncing indexes for carModel:', err);
+		console.error('❌Error syncing indexes for CarModel:', err);
 	}
 });
 
@@ -59,7 +59,7 @@ const _pikachu = {
 };
 // LEARN: You may never use console.log but simply use debugger to debug values like reply below by placing breakpoint in the functin end brace.
 test('save bruno', async () => {
-	let person = new personModel(_bruno); // LEARN: Placing this in beforeAll or top scope causes issues.
+	let person = new PersonModel(_bruno); // LEARN: Placing this in beforeAll or top scope causes issues.
 	expect(person instanceof mongoose.Document).toBeTruthy();
 
 	expect(person).toMatchObject(_bruno);
@@ -69,13 +69,13 @@ test('save bruno', async () => {
 });
 
 test('save pikachu', async () => {
-	let pikachu = new personModel(_pikachu);
+	let pikachu = new PersonModel(_pikachu);
 	let reply2 = await pikachu.save();
 	expect(reply2).toMatchObject(_pikachu);
 });
 
 test('find', async () => {
-	let personDocs = await personModel.find(); // This may find multiple docuemnts
+	let personDocs = await PersonModel.find(); // This may find multiple docuemnts
 
 	// ✅`Mongoose document instance` (not a plain JavaScript object)
 	expect(personDocs[0] instanceof mongoose.Document).toBeTruthy();
@@ -88,7 +88,7 @@ test('find', async () => {
 test('find with lean ❤️', async () => {
 	// Learn: lean() method above tells mongoose to call .toObject()
 	// 			method internally for this query.
-	let persons = await personModel.find().lean();
+	let persons = await PersonModel.find().lean();
 
 	// ✅ We get a list of plain JavaScript objects instead of
 	// 		`Mongoose document instance`
@@ -99,7 +99,7 @@ test('find with lean ❤️', async () => {
 
 test('findOne', async () => {
 	const documentFilter = { name: 'Bruno Mars' };
-	let person = await personModel.findOne(documentFilter); // This would only return first matching document only.
+	let person = await PersonModel.findOne(documentFilter); // This would only return first matching document only.
 	expect(person).toMatchObject(_bruno); // works in v6
 
 	// Learn: For v5 above test expectation throws error so one needs to call .toObject() method to get real js object like we do below:
@@ -108,34 +108,34 @@ test('findOne', async () => {
 });
 
 test('findById', async () => {
-	let person = await personModel.findOne({ name: 'Bruno Mars' });
+	let person = await PersonModel.findOne({ name: 'Bruno Mars' });
 	expect(() => {
 		expect(reply).toMatchObject(_bruno);
 	}).toThrow();
 
 	let _id = person._id;
-	let reply = await personModel.findById(_id);
+	let reply = await PersonModel.findById(_id);
 	expect(reply.toObject()).toMatchObject(_bruno);
 });
 
 test('findByIdAndRemove', async () => {
-	let person = await personModel.findOne({ name: 'Bruno Mars' });
+	let person = await PersonModel.findOne({ name: 'Bruno Mars' });
 	let _id = person._id;
 
-	let reply2 = await personModel.findByIdAndRemove(_id);
+	let reply2 = await PersonModel.findByIdAndRemove(_id);
 	// todo: add expectation here.
 });
 
 test('deleteOne', async () => {
-	let person = await personModel.findOne({ name: 'Pikachu' });
+	let person = await PersonModel.findOne({ name: 'Pikachu' });
 	let _id = person._id;
 
-	let reply = await personModel.deleteOne({ _id });
+	let reply = await PersonModel.deleteOne({ _id });
 });
 
 test('insertMany', async () => {
 	let arr = require('./data');
-	let reply = await personModel.insertMany(arr); // Docs (insertMany): https://mongoosejs.com/docs/api.html#model_Model.insertMany
+	let reply = await PersonModel.insertMany(arr); // Docs (insertMany): https://mongoosejs.com/docs/api.html#model_Model.insertMany
 
 	reply = reply.map((doc) => doc.toObject());
 
@@ -146,7 +146,7 @@ test('insertMany', async () => {
 });
 
 test('deleteMany', async () => {
-	let reply = await personModel.deleteMany({});
+	let reply = await PersonModel.deleteMany({});
 	let numberOfInsertedDoc = require('./data').length;
 
 	// For v6
@@ -160,7 +160,7 @@ test('pagination', async () => {
 	const page = 3; // Values: 1, 2, 3, ...
 	const limit = 2;
 	const skip = (page - 1) * limit;
-	let reply = await personModel
+	let reply = await PersonModel
 		.find({})
 		.sort({ name: 'asc' })
 		.limit(limit)
@@ -184,7 +184,7 @@ test('populate', async () => {
 	// 		src: https://stackoverflow.com/a/17899751/10012446
 	let _id = new mongoose.Types.ObjectId();
 
-	let personDoc = new personModel({
+	let personDoc = new PersonModel({
 		_id,
 		name: 'Bruno Mars',
 		phoneNumber: 123456789,
@@ -259,7 +259,7 @@ test('update never delete older data', async () => {
 		phoneNumber: 123456789,
 		address: 'Some address here',
 	};
-	let person = new personModel(_manchanda);
+	let person = new PersonModel(_manchanda);
 	person = await person.save();
 
 	expect(person).toMatchObject(_manchanda);
@@ -267,7 +267,7 @@ test('update never delete older data', async () => {
 	// LEARN: We are updating nothing, this is safe i.e., not data will be overwritten.
 	let newProperties = {}; // LEARN: In mongodb, updation of document happens like: newDocument = {...updateDocument ,...oldDocuemnt} , that means older proeperties will persist even if you omit in `updatedObject` while updating a document. Yikes!!
 
-	person = await personModel
+	person = await PersonModel
 		.findByIdAndUpdate(_id, newProperties)
 		.populate('gadgetList')
 		.lean();
@@ -286,7 +286,7 @@ test('dropCollection', async () => {
 
 test('custom validator function with custom message', async () => {
 	// Valid `carName` is `audi` or `bmw`.
-	let car1Doc = new carModel({
+	let car1Doc = new CarModel({
 		carName: 'audi',
 	});
 	await car1Doc.save();
@@ -297,7 +297,7 @@ test('custom validator function with custom message', async () => {
 	let error;
 	let car2Doc;
 	try {
-		car2Doc = new carModel({
+		car2Doc = new CarModel({
 			carName: 'random-audi',
 		});
 		await car2Doc.save();
@@ -310,7 +310,7 @@ test('custom validator function with custom message', async () => {
 });
 
 test('Saving array of objects (for demo to eric)', async () => {
-	let g1 = new carModel({
+	let g1 = new CarModel({
 		carName: 'audi',
 		deviceId: 501,
 		report: [{ _id: new mongoose.Types.ObjectId(), reason: 'Inappropriate User' }],
@@ -325,7 +325,7 @@ test('Saving array of objects (for demo to eric)', async () => {
 
 test('unique email test for car saving', async () => {
 	const email = 'mohit@rajput.com';
-	let car1Doc = new carModel({
+	let car1Doc = new CarModel({
 		carName: 'audi',
 		email,
 	});
@@ -334,7 +334,7 @@ test('unique email test for car saving', async () => {
 	let error;
 	try {
 		// Trying to save new car with an existing email id, should throw unique error:
-		let car2Doc = new carModel({
+		let car2Doc = new CarModel({
 			carName: 'bmw',
 			email,
 		});
@@ -359,18 +359,18 @@ test('projection', async () => {
 	//      and we can verify the execution query form mongoose as
 	//      debug mode is on thereby it shows query as:
 	//      ```persons.find({}, { projection: { name: 1 } })```
-	const bruno = new personModel(_bruno); // LEARN: Placing this in beforeAll or top scope causes issues.
+	const bruno = new PersonModel(_bruno); // LEARN: Placing this in beforeAll or top scope causes issues.
 	await bruno.save();
 
 	// Without projection
-	const personDocs = await personModel.find({}).lean();
+	const personDocs = await PersonModel.find({}).lean();
 	personDocs.forEach(doc => {
 		expect(Object.keys(doc)).toEqual(['_id', 'gadgetList', 'name', 'phoneNumber', 'address', '__v']);
 	});
 
 	// With projection usign .select() in mongoose
 	// 		Docs - https://mongoosejs.com/docs/api.html#query_Query-select
-	const personDocsWithProjection = await personModel.find({}).lean().select('name');
+	const personDocsWithProjection = await PersonModel.find({}).lean().select('name');
 	personDocsWithProjection.forEach(doc => {
 		expect(Object.keys(doc)).toEqual(['_id', 'name']);
 	});
