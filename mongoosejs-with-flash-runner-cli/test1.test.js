@@ -122,9 +122,11 @@ test('findById', async () => {
 test('findByIdAndRemove', async () => {
 	let person = await PersonModel.findOne({ name: 'Bruno Mars' });
 	let _id = person._id;
+	let personDeletedDoc = await PersonModel.findByIdAndRemove(_id);
+	expect(personDeletedDoc._id.toString()).toBe(_id.toString());
 
-	let reply2 = await PersonModel.findByIdAndRemove(_id);
-	// todo: add expectation here.
+	let doc = await PersonModel.findOne({ name: 'Bruno Mars' });
+	expect(doc).toBeNull();
 });
 
 test('deleteOne', async () => {
@@ -150,11 +152,8 @@ test('deleteMany', async () => {
 	let reply = await PersonModel.deleteMany({});
 	let numberOfInsertedDoc = require('./data').length;
 
-	// For v6
-	expect(reply.deletedCount).toBe(numberOfInsertedDoc);
-
-	// For v5
-	// expect(reply.ok).toBe(1)
+	expect(reply.deletedCount).toBe(numberOfInsertedDoc); // For v6
+	// expect(reply.ok).toBe(1) // For v5
 });
 
 test('pagination', async () => {
@@ -265,7 +264,7 @@ test('update never delete older data', async () => {
 
 	expect(person).toMatchObject(_manchanda);
 
-	// LEARN: We are updating nothing, this is safe i.e., not data will be overwritten.
+	// Learn: We are updating nothing, this is safe i.e., not data will be overwritten.
 	let newProperties = {}; // LEARN: In mongodb, updation of document happens like: newDocument = {...updateDocument ,...oldDocuemnt} , that means older proeperties will persist even if you omit in `updatedObject` while updating a document. Yikes!!
 
 	person = await PersonModel
@@ -354,7 +353,7 @@ test('projection', async () => {
 	// Projection operator - It helps by fixing the overfetching
 	// 		issue. We can use projection with mongoose using select as
 	// 		shown below:
-	// LEARN: Using the select method we can limit the fields
+	// Learn: Using the select method we can limit the fields
 	//      fetched from the db directly, i.e., we can make use of
 	//      projection operator to fetch only the desired data only,
 	//      and we can verify the execution query form mongoose as
