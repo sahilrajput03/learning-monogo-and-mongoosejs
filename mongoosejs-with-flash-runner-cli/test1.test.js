@@ -15,14 +15,15 @@ const { log } = console;
 // @ts-ignore
 const { connectToDb, closeDb, beforeAll, test } = global;
 
-// LEARN: ALL CONNECTION AND MODEL RELATED STUFF GOES HERE..
+// Learn: Open db connection
 connectToDb(async () => {
 	await connectPromise;
 });
 
+// Close db connection in non-watch mode.
 closeDb(async () => {
-	// Close connection asap in non-watch mode.
-	await mongoose.disconnect(); // Mongoose Docs: Runs .close() on all connections in parallel.
+	// Runs .close() on all connections (mongoose docs)
+	await mongoose.disconnect();
 });
 
 beforeAll(async () => {
