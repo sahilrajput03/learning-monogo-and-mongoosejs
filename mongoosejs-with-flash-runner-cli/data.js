@@ -34,4 +34,4 @@ module.exports = [
 		phoneNumber: 123456789,
 		address: 'Some address here',
 	},
-]
+];
