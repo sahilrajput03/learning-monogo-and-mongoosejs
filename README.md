@@ -10,6 +10,11 @@
 - **`flash` is my own testing library, the code is @ [`flash`](https://github.com/sahilrajput03/flash).**
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 - Seems like a good read on efficient mongodb queries with mongoosejs: [Click here](https://climbtheladder.com/10-mongoose-populate-best-practices/)
+- ❤️TODO Docs:
+  - Indexes: [Click here](https://www.mongodb.com/docs/manual/indexes/)
+  - What is Indexing in a Database?: [Click here](https://www.mongodb.com/resources/basics/databases/database-index)
+  - Article - Digital Ocean - How To Use Indexes in MongoDB: [Click here](https://www.digitalocean.com/community/tutorials/how-to-use-indexes-in-mongodb)
+  - What is the difference between ‘index’ and ‘search index’?: [Click here](https://www.mongodb.com/community/forums/t/what-is-the-difference-between-index-and-search-index/200703)
 
 ## ❤️ `serverSelectionTimeoutMS` in mongoose
 
