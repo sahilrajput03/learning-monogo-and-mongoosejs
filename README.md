@@ -1,14 +1,6 @@
 # Readme
 
-- Version Support: [Click here](https://mongoosejs.com/docs/version-support.html)
-  - 8.x (released October 31, 2023) is the current Mongoose major version. We ship all new bug fixes and features to 8.x.
-  - 7.x (released February 27, 2023) is currently in legacy support. We ship all new bug fixes and features to 7.x.
-  - 6.x (released August 24, 2021) is currently only receiving security fixes and requested bug fixes as of August 24, 2023. **End of life (EOL) is January 1, 2025**
-  - 5.x (released January 17, 2018) is **End-of-Life (EOL) since March 1, 2024.**
-- _EOL means that version will no longer receive any updates, security or otherwise._
-
 **Quicks Links:**
-
 - **❤️Learn Mongodb Doc: [Click here](https://docs.google.com/document/d/1OT6IMR600VjWteJ-kqM0jVQuqQQw308hkh3enZnu9tQ/edit?tab=t.0)** [Tags: `#mongodump`, `#mongorestore`, `#mongosh`, `#bsondump`]
 - **❤️Learn mongoosejs:** [Click here](./mongoosejs-with-flash-runner-cli/test1.test.js) (`mongoosejs-with-flash-runner-cli`)
 - **❤️Learn mongosh:** [Click here](./mongosh-scripts-with-watcher/Readme.md) (`mongosh-scripts-with-watcher`)
@@ -23,6 +15,11 @@
   - Article - Digital Ocean - How To Use Indexes in MongoDB: [Click here](https://www.digitalocean.com/community/tutorials/how-to-use-indexes-in-mongodb)
   - What is the difference between ‘index’ and ‘search index’?: [Click here](https://www.mongodb.com/community/forums/t/what-is-the-difference-between-index-and-search-index/200703)
   - Article - An 80/20 Guide to Mongoose Plugins - The Code Barbarian: [Click here](https://thecodebarbarian.com/2015/03/06/guide-to-mongoose-plugins)
+- Mongoose Version Support: [Click here](https://mongoosejs.com/docs/version-support.html) _(EOL means that version will no longer receive any updates, security or otherwise.)_
+  - 8.x (released October 31, 2023) is the current Mongoose major version. We ship all new bug fixes and features to 8.x.
+  - 7.x (released February 27, 2023) is currently in legacy support. We ship all new bug fixes and features to 7.x.
+  - 6.x (released August 24, 2021) is currently only receiving security fixes and requested bug fixes as of August 24, 2023. **End of life (EOL) is January 1, 2025**
+  - 5.x (released January 17, 2018) is **End-of-Life (EOL) since March 1, 2024.**
 
 # mongoose().pluralize()('yourcollectionname')
 
