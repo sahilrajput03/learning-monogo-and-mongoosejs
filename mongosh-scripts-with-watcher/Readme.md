@@ -648,3 +648,5 @@ db.posts.find(
 
 <!-- MARKDOWN-AUTO-DOCS:START (CODE:src=./mongosh-scripts-with-watcher/00.js) -->
 <!-- MARKDOWN-AUTO-DOCS:END -->
+
+Thanks.
