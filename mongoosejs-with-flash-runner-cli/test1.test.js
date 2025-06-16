@@ -274,6 +274,31 @@ test('populate', async () => {
 	);
 });
 
+
+test('findByIdAndUpdate', async () => {
+	let _id = new mongoose.Types.ObjectId();
+
+	let _manchanda = {
+		_id,
+		name: 'Bruno Mars',
+		phoneNumber: 123456789,
+		address: 'Some address here',
+	};
+	const person = await PersonModel.create(_manchanda);
+
+	expect(person).toMatchObject(_manchanda);
+
+	let update = {
+		address: 'Taj Mahal, Agra, India',
+	};
+
+	const personUpdated = await PersonModel
+		.findByIdAndUpdate(_id, update)
+		.lean();
+
+	expect(personUpdated).toMatchObject({ ..._manchanda, ...update });
+});
+
 test('findByIdAndUpdate with update={} should show no sideeffect', async () => {
 	let _id = new mongoose.Types.ObjectId();
 
@@ -283,20 +308,18 @@ test('findByIdAndUpdate with update={} should show no sideeffect', async () => {
 		phoneNumber: 123456789,
 		address: 'Some address here',
 	};
-	let person = new PersonModel(_manchanda);
-	person = await person.save();
+	const person = await PersonModel.create(_manchanda);
 
 	expect(person).toMatchObject(_manchanda);
 
 	// Learn: We are updating nothing, this is safe i.e., not data will be overwritten.
 	let update = {}; // LEARN: In mongodb, updation of document happens like: newDocument = {...updateDocument ,...oldDocuemnt} , that means older proeperties will persist even if you omit in `updatedObject` while updating a document. Yikes!!
 
-	person = await PersonModel
+	const personUpdated = await PersonModel
 		.findByIdAndUpdate(_id, update)
-		.populate('gadgetList')
 		.lean();
 
-	expect(person).toMatchObject(_manchanda);
+	expect(personUpdated).toMatchObject(_manchanda);
 });
 
 test('dropCollection', async () => {
