@@ -5,12 +5,9 @@ const { Schema, model } = require('mongoose');
 // Note: We use pluras names, otherwise mongodb will itself change the
 // 		name to plurals and we might know only when changes are saved to
 // 		db.
-// @ts-ignore
-const personsCollectionName = mongoose.pluralize()('persons');
-// @ts-ignore
-const gadgetsCollectionName = mongoose.pluralize()('gadgets');
-// @ts-ignore
-const carsCollectionName = mongoose.pluralize()('cars');
+const personsCollectionName = mongoose.pluralize()?.('persons') || "";
+const gadgetsCollectionName = mongoose.pluralize()?.('gadgets') || "";
+const carsCollectionName = mongoose.pluralize()?.('cars') || "";
 
 let personSchema = new Schema(
 	{
