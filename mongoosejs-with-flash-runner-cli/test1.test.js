@@ -30,8 +30,7 @@ closeDb(async () => {
 beforeAll(async () => {
 	console.log('🎉beforeAll::Dropping the database', DB_NAME);
 	const db = mongoose.connection;
-	const collectionArray = await (await mongoose.connection.db.listCollections().toArray()).map(col => col.name);
-	console.log('🎉collection names?', collectionArray);
+	// const collectionNamesArray = await (await mongoose.connection.db.listCollections().toArray()).map(col => col.name);
 	await db.dropDatabase(); // This drops the currently connected database intelligently i.e., we don't need give the name of the db as it delete the same db to which we are connected to.
 
 	// Learn: We need to sync when we drop the database (above line)
@@ -128,6 +127,40 @@ test('findByIdAndRemove', async () => {
 
 	let doc = await PersonModel.findOne({ name: 'Bruno Mars' });
 	expect(doc).toBeNull();
+});
+
+test('findOneAndUpdate 🎯', async () => {
+	const db = mongoose.connection;
+	const collectioName = 'kids';
+	let status = await db.dropCollection(collectioName); // LEARN: This will throw error if the colleciton is already not there!
+	// console.log("✅ Drop kids collection:", status);
+
+	let kidSchema = new mongoose.Schema({
+		name: String,
+		age: Number,
+		height: Number,
+		weight: Number,
+	});
+
+	// Note: We need `mongoose.models[collectioName] ||` in below line else we get error - "OverwriteModelError: Cannot overwrite `cartoons` model once compiled.  at Mongoose.model"
+	// const KidModel = mongoose.models[collectioName] || mongoose.model(collectioName, kidSchema); // Way 1 ✅ [Works Tested but I fail to update schema in watch mode that's why prefering below 2nd way.]
+	if (mongoose.models[collectioName]) { delete mongoose.models[collectioName]; } // Way 2 ✅ [Works Tested]
+
+	const KidModel = mongoose.model(collectioName, kidSchema);
+
+	const kid = { name: 'Brian', age: 10, weight: null };
+	await KidModel.create(kid);
+
+	const filter = kid;
+	const update = { name: 'Bruno', height: 200 };
+	const kidUpdated = await KidModel.findOneAndUpdate(filter, update, { upsert: true, new: true }).lean();
+	const expected = { ...kid, ...update }; // ✅ ❤️
+
+	expect(kidUpdated).toEqual({
+		_id: expect.any(mongoose.Types.ObjectId),
+		__v: 0,
+		...expected,
+	});
 });
 
 test('deleteOne', async () => {
@@ -293,7 +326,7 @@ test('custom validator function with custom message', async () => {
 
 	// Trying to get validation error message (custom validator defined in `carSchema` in models file).
 	const expectErrName = 'ValidatorError';
-	const expectedErrMessg = ' is not allowed. Only audi and bmw cars are allowed.';
+	const expectedErrMessg = ' is not ❌ allowed. Only audi and bmw cars are allowed. ✅';
 	let error;
 	let car2Doc;
 	try {
@@ -307,6 +340,7 @@ test('custom validator function with custom message', async () => {
 	expect(error.errors.carName instanceof Error).toBe(true);
 	expect(error.errors.carName.name).toBe(expectErrName);
 	expect(error.errors.carName.message).toBe(car2Doc.carName + expectedErrMessg);
+	expect(error.errors.carName.reason).toBe('carName is not valid ⭕️');
 });
 
 test('Saving array of objects (for demo to eric)', async () => {
