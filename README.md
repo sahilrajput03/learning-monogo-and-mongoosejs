@@ -710,6 +710,7 @@ const citySchema = new mongoose.Schema({
 
 ## ❤️ `findOneAndUpdate`
 
+- ❤️For your test on findOneAndUpdate [please refer here](https://github.com/sahilrajput03/learning-monogo-and-mongoosejs/blob/master/mongoosejs-with-flash-runner-cli/test1.test.js) (`mongoosejs-with-flash-runner-cli`)
 - MongoDb Docs: [findOneAndUpdate](https://www.mongodb.com/docs/manual/reference/method/db.collection.findOneAndUpdate/)
 - MongooseJs: [How to Use findOneAndUpdate() in Mongoose](https://mongoosejs.com/docs/tutorials/findoneandupdate.html)
 - Source: [SO](https://stackoverflow.com/a/59491047/10012446)
