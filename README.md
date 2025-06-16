@@ -712,7 +712,9 @@ const doc = await Contact.findOneAndUpdate(
 );
 ```
 
-### LEARN: ♥ ❣♥ ❣♥ Difference between `upsert: true` and `new: true`. Source: https://stackoverflow.com/a/44794886
+**LEARN: ♥ ❣♥ ❣♥ Difference between `upsert: true` and `new: true`**
+
+Source: https://stackoverflow.com/a/44794886
 
 ```txt
 They are completely different flags
