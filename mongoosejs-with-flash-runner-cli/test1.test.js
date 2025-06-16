@@ -58,21 +58,24 @@ const _pikachu = {
 	phoneNumber: 987654321,
 	address: 'New York City',
 };
-// Learn: You may never use console.log but simply use debugger to debug values like doc below by placing breakpoint in the functin end brace.
-test('save bruno', async () => {
-	let person = new PersonModel(_bruno); // LEARN: Placing this in beforeAll or top scope causes issues.
+
+// & Learn: You may never use console.log but simply use debugger to debug values like doc below by placing breakpoint in the functin end brace.
+
+test('create', async () => {
+	// Bruno
+	const doc = await PersonModel.create(_bruno);
+	expect(doc).toMatchObject(_bruno);
+});
+
+test('save', async () => {
+	// Pikachu 
+	let person = new PersonModel(_pikachu); // LEARN: Placing this in beforeAll or top scope causes issues.
 	expect(person instanceof mongoose.Document).toBeTruthy();
 
-	expect(person).toMatchObject(_bruno);
+	expect(person).toMatchObject(_pikachu);
 	expect(person).toHaveProperty('_id');
 	expect(person._id instanceof mongoose.Types.ObjectId).toBeTruthy();
 	await person.save();
-});
-
-test('save pikachu', async () => {
-	let pikachu = new PersonModel(_pikachu);
-	let doc = await pikachu.save();
-	expect(doc).toMatchObject(_pikachu);
 });
 
 test('find', async () => {
@@ -285,7 +288,7 @@ test('populate', async () => {
 	);
 });
 
-test('update never delete older data', async () => {
+test('findByIdAndUpdate', async () => {
 	let _id = new mongoose.Types.ObjectId();
 
 	let _manchanda = {
@@ -345,7 +348,7 @@ test('custom validator function with custom message', async () => {
 	expect(error.errors.carName.reason).toBe('carName is not valid ⭕️');
 });
 
-test('Saving array of objects (for demo to eric)', async () => {
+test('Add to items to an array field using .concat() js method', async () => {
 	let g1 = new CarModel({
 		carName: 'audi',
 		deviceId: 501,
