@@ -1,7 +1,7 @@
 # Mongosh
 
 **Quick Links:**
-- Files: [Click here](#Code-from-script-files-via-autodocs)
+- ❤️Code from script files via autodocs: [Click here](#Code-from-script-files-via-autodocs)
 
 ## Watching scripts:
 
