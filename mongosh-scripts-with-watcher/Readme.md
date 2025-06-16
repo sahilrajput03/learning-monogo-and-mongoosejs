@@ -641,3 +641,10 @@ db.posts.find(
 #above will return all documents that has fruits property for it
 ##Note this will also return document with title "Post Six" @line7 too, as it has fruits property too.
 ```
+
+**Below code is generated automatically via autodocs.**
+
+## File - `mongosh-scripts-with-watcher/00.js`
+
+<!-- MARKDOWN-AUTO-DOCS:START (CODE:src=./mongosh-scripts-with-watcher/00.js) -->
+<!-- MARKDOWN-AUTO-DOCS:END -->

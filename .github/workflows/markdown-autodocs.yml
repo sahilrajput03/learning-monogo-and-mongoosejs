@@ -1,0 +1,34 @@
+name: Generate Report
+
+on:
+  push:
+    branches:
+      - '**' # Matches all branches, including nested ones like 'feature/xyz'
+  workflow_dispatch: # It is an event that allows you to manually trigger a workflow from github actions page
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Markdown autodocs
+        uses: dineshsonachalam/markdown-autodocs@v1.0.7
+        with:
+          # Optional, defaults to author of the commit that triggered the run
+          commit_author: Github Actions
+
+          # Optional, defaults to "actions@github.com"
+          commit_user_email: actions@github.com
+
+          # Optional, but recommended
+          # Defaults to "Apply automatic changes"
+          commit_message: Report generated to README
+          branch: main
+
+          # Optional output file paths, defaults to '[./README.md]'.
+          output_file_paths: '[./mongosh-scripts-with-watcher/README.md]'
+
+          # Categories to automatically sync or transform its contents in the markdown files.
+          # Defaults to '[code-block,json-to-html-table,workflow-artifact-table]'
+          categories: '[code-block,json-to-html-table,workflow-artifact-table]'

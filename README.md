@@ -1,9 +1,10 @@
 # Readme
 
 **Quicks Links:**
+
 - **❤️Learn Mongodb Doc: [Click here](https://docs.google.com/document/d/1OT6IMR600VjWteJ-kqM0jVQuqQQw308hkh3enZnu9tQ/edit?tab=t.0)** [Tags: `#mongodump`, `#mongorestore`, `#mongosh`, `#bsondump`]
 - **❤️Learn mongoosejs:** [Click here](./mongoosejs-with-flash-runner-cli/test1.test.js) (`mongoosejs-with-flash-runner-cli`)
-- **❤️Learn mongosh:** [Click here](./mongosh-scripts-with-watcher/Readme.md) (`mongosh-scripts-with-watcher`)
+- **❤️Learn mongosh:** [Click here](./mongosh-scripts-with-watcher/README.md) (`mongosh-scripts-with-watcher`)
 - **❤️Learn backup and restore mongodb:** [Click here](./backup-and-restore) (`backup-and-restore`)
 - LinkedIn Quiz Solutions: [Click here](https://github.com/Ebazhanov/linkedin-skill-assessments-quizzes/blob/main/mongodb/mongodb-quiz.md)
 - **`flash` is my own testing library, the code is @ [`flash`](https://github.com/sahilrajput03/flash).**
@@ -25,7 +26,7 @@
 
 ```js
 // @ts-ignore
-const pluralized = mongoose?.pluralize()?.('p') || ""
+const pluralized = mongoose?.pluralize()?.('p') || ''
 console.log(pluralized)
 // p => ps;		class => classes,
 // ps => ps (✅NO CHANGE),  	classes => classes (✅NO Change)
