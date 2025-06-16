@@ -28,17 +28,16 @@ const gadgetModel = model(gadgetsCollectionName, gadgetSchema);
 const carSchema = new Schema({
 	carName: {
 		type: String,
-		validate: {
-			validator: (value) => { // Custom validator src: https://mongoosejs.com/docs/validation.html#custom-validators
+		validate: { // Custom validator src: https://mongoosejs.com/docs/validation.html#custom-validators
+			validator: (value) => {
 				const isValid = value === 'audi' || value === 'bmw';
-				if (typeof isValid === 'undefined')
-					throw 'isValid got undefined value in carName validator function.';
-
+				// Note: If we do not throw error and `return false` we still get error but the `reason` key is `undefined`.
+				if (!isValid) { throw 'carName is not valid ⭕️'; }
 				return isValid;
 			},
-			message: (props) =>
-				`${props.value} is not allowed. Only audi and bmw cars are allowed.`,
+			message: (props) => `${props.value} is not ❌ allowed. Only audi and bmw cars are allowed. ✅`,
 		},
+		required: true,
 	},
 	email: {
 		type: String,
