@@ -14,13 +14,10 @@ const carsCollectionName = mongoose.pluralize()('cars');
 
 let personSchema = new Schema(
 	{
-		// Using "ref" tells moongoose to join gadget docs from 'gadgetsCollectionName' collection.
-		gadgetList: [{ type: Schema.Types.ObjectId, ref: gadgetsCollectionName }],
+		gadgetList: [{ type: Schema.Types.ObjectId, ref: gadgetsCollectionName }],  // Using "ref" tells moongoose to join gadget docs from 'gadgetsCollectionName' collection.
 		favouriteGadget: { type: Schema.Types.ObjectId, ref: gadgetsCollectionName },
 	},
-	// Learn: `strict: false` means any property can be saved
-	// 		irrespective of the schema definition. (https://stackoverflow.com/a/12389168)
-	{ strict: false }
+	{ strict: false } // Learn: `strict: false` means any property can be saved irrespective of the schema definition. (https://stackoverflow.com/a/12389168)
 );
 const PersonModel = model(personsCollectionName, personSchema);
 
@@ -32,8 +29,7 @@ const carSchema = new Schema({
 	carName: {
 		type: String,
 		validate: {
-			// Custom validator src: https://mongoosejs.com/docs/validation.html#custom-validators
-			validator: (value) => {
+			validator: (value) => { // Custom validator src: https://mongoosejs.com/docs/validation.html#custom-validators
 				const isValid = value === 'audi' || value === 'bmw';
 				if (typeof isValid === 'undefined')
 					throw 'isValid got undefined value in carName validator function.';
@@ -46,7 +42,7 @@ const carSchema = new Schema({
 	},
 	email: {
 		type: String,
-		unique: true, // `email` must be unique (validates on saving any doc)
+		unique: true, // `email` must be unique, it is validated before doc is saved.
 	},
 	report: [{
 		_id: Schema.Types.ObjectId,
