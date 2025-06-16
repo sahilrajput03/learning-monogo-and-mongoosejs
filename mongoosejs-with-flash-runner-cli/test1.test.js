@@ -64,7 +64,16 @@ const _pikachu = {
 test('create', async () => {
 	// Bruno
 	const doc = await PersonModel.create(_bruno);
+	expect(doc instanceof mongoose.Document).toBeTruthy();
+
 	expect(doc).toMatchObject(_bruno);
+
+	expect(doc.toObject()).toEqual({
+		..._bruno,
+		_id: expect.any(mongoose.Types.ObjectId),
+		__v: 0,
+		gadgetList: [],
+	});
 });
 
 test('save', async () => {
@@ -78,7 +87,7 @@ test('save', async () => {
 	await person.save();
 });
 
-test('find', async () => {
+test('find (without lean)', async () => {
 	let personDocs = await PersonModel.find(); // This may find multiple docuemnts
 
 	// ✅`Mongoose document instance` (not a plain JavaScript object)
@@ -103,32 +112,25 @@ test('find with lean ❤️', async () => {
 
 test('findOne', async () => {
 	const documentFilter = { name: 'Bruno Mars' };
-	let person = await PersonModel.findOne(documentFilter); // This would only return first matching document only.
-	expect(person).toMatchObject(_bruno); // works in v6
+	let person = await PersonModel.findOne(documentFilter).lean(); // This would only return first matching document only.
 
-	// Learn: For v5 above test expectation throws error so one needs to call .toObject() method to get real js object like we do below:
-	// person = person.toObject() //? LEARN: Without .toObject we can't access the properties at all. Src: https://stackoverflow.com/a/32634029/10012446
-	// expect(person).toMatchObject(_bruno)
+	expect(person).toMatchObject(_bruno); // works in v6
 });
 
 test('findById', async () => {
-	let person = await PersonModel.findOne({ name: 'Bruno Mars' });
-	expect(() => {
-		expect(doc).toMatchObject(_bruno);
-	}).toThrow();
-
+	let person = await PersonModel.findOne({ name: 'Bruno Mars' }).lean();
 	let _id = person._id;
-	let doc = await PersonModel.findById(_id);
-	expect(doc.toObject()).toMatchObject(_bruno);
+	let doc = await PersonModel.findById(_id).lean();
+	expect(doc).toMatchObject(_bruno);
 });
 
 test('findByIdAndRemove', async () => {
-	let person = await PersonModel.findOne({ name: 'Bruno Mars' });
+	let person = await PersonModel.findOne({ name: 'Bruno Mars' }).lean();
 	let _id = person._id;
 	let personDeletedDoc = await PersonModel.findByIdAndRemove(_id);
 	expect(personDeletedDoc._id.toString()).toBe(_id.toString());
 
-	let doc = await PersonModel.findOne({ name: 'Bruno Mars' });
+	let doc = await PersonModel.findOne({ name: 'Bruno Mars' }).lean();
 	expect(doc).toBeNull();
 });
 
@@ -169,7 +171,7 @@ test('findOneAndUpdate 🎯', async () => {
 });
 
 test('deleteOne', async () => {
-	let person = await PersonModel.findOne({ name: 'Pikachu' });
+	let person = await PersonModel.findOne({ name: 'Pikachu' }).lean();
 	let _id = person._id;
 
 	let doc = await PersonModel.deleteOne({ _id });
@@ -177,12 +179,12 @@ test('deleteOne', async () => {
 
 test('insertMany', async () => {
 	let arr = require('./data');
-	let docs = await PersonModel.insertMany(arr); // Docs (insertMany): https://mongoosejs.com/docs/api.html#model_Model.insertMany
+	let personDocs = await PersonModel.insertMany(arr); // Docs (insertMany): https://mongoosejs.com/docs/api.html#model_Model.insertMany
 
-	docs = docs.map((doc) => doc.toObject());
+	const persons = personDocs.map((doc) => doc.toObject());
 
-	docs.forEach((doc, idx) => {
-		expect(doc).toMatchObject(arr[idx]);
+	persons.forEach((person, idx) => {
+		expect(person).toMatchObject(arr[idx]);
 	});
 });
 
@@ -194,6 +196,7 @@ test('deleteMany', async () => {
 	// expect(doc.ok).toBe(1) // For v5
 });
 
+// TODO: Check if lean() function works with this as well? (already applied lean() to other tests)
 test('pagination', async () => {
 	const page = 3; // Values: 1, 2, 3, ...
 	const limit = 2;
@@ -206,23 +209,20 @@ test('pagination', async () => {
 });
 
 test('populate', async () => {
-	let iphoneDoc = new gadgetModel({
+	const iphoneDoc = await gadgetModel.create({
 		deviceName: 'Parineeti',
 		deviceId: 101,
 	});
-	let nokiaDoc = new gadgetModel({
+	const nokiaDoc = await gadgetModel.create({
 		deviceName: 'Alia Bhatt',
 		deviceId: 102,
 	});
-
-	await iphoneDoc.save();
-	await nokiaDoc.save();
 
 	// We create `_id` manually to be able to avoid confusion later on;
 	// 		src: https://stackoverflow.com/a/17899751/10012446
 	let _id = new mongoose.Types.ObjectId();
 
-	let personDoc = new PersonModel({
+	await PersonModel.create({
 		_id,
 		name: 'Bruno Mars',
 		phoneNumber: 123456789,
@@ -230,8 +230,6 @@ test('populate', async () => {
 		gadgetList: [iphoneDoc._id],
 		favouriteGadget: iphoneDoc._id,
 	});
-
-	await personDoc.save();
 
 	// Way 1 - Inserting a ObjectId to array i.e., `gadgetList` property.
 	// Pushing item to array using $push method
@@ -243,23 +241,14 @@ test('populate', async () => {
 
 	// Way 2 - FSO - Inserting a ObjectId to array i.e., `gadgetList` property.
 	// LEARN: Both `ARRAY.concat` and `spread operator` works well
-	personDoc.gadgetList = personDoc.gadgetList.concat(nokiaDoc._id);
-	// personDoc.gadgetList = [...personDoc.gadgetList, nokiaDoc._id]
-	await personDoc.save({ debug: true }); // this doesn't work ~Sahil
+	const p = await PersonModel.findById(_id);
+	p.gadgetList = p.gadgetList.concat([nokiaDoc._id]);
+	// personDoc.gadgetList = [...personDoc.gadgetList, nokiaDoc._id, ] // Works too ✅
+	await p.save();
 
-	let gadgetList = [iphoneDoc._id, nokiaDoc._id];
-
-	const includesAllIds = gadgetList.every((gadgetId) =>
-		personDoc.gadgetList.includes(gadgetId)
-	);
-
-	// First Assertion
-	if (!includesAllIds) {
-		throw new Error('gadget 1 or 2 or both are not there..!');
-	}
 	/*
 	# Get a populated person
-	let docPopulated = await personModel.findById(_id).populate('gadgetList
+	let docPopulated = await personModel.findById(_id).populate('gadgetList favouriteGadget')
 
 	# Get a populated person (populate after save, src: populate afer save: https://stackoverflow.com/a/50334013/10012446)
 	await personDoc.populate('gadgetList').execPopulate() // works in v5 but doesn't work in v6 as execPopulate is discarded for documents in v6.
@@ -267,28 +256,25 @@ test('populate', async () => {
 	# Mongoose: Migrating from v5 to v6: https://mongoosejs.com/docs/migrating_to_6.html#removed-execpopulate
 	*/
 
-	await personDoc.populate('gadgetList'); // will populate the array
-	await personDoc.populate('favouriteGadget'); // will populate favourite item
-	// log('personDoc?', personDoc)
+	let person = await PersonModel.findById(_id).populate('gadgetList favouriteGadget');
 
 	// GADGETLIST
 	const deviceNames = [iphoneDoc.deviceName, nokiaDoc.deviceName];
 	const includesAllNames = deviceNames.every((deviceName) =>
-		Boolean(personDoc.gadgetList.find((p) => p.deviceName === deviceName))
+		Boolean(person.gadgetList.find((p) => p.deviceName === deviceName))
 	);
 
-	// Second Assertion
 	if (!includesAllNames) {
 		throw new Error('Does not include any or all of the devices!');
 	}
 
 	// FAVOURITE GADGET
-	expect(personDoc.favouriteGadget.toObject()).toMatchObject(
+	expect(person.favouriteGadget).toMatchObject(
 		iphoneDoc.toObject()
 	);
 });
 
-test('findByIdAndUpdate', async () => {
+test('findByIdAndUpdate with update={} should show no sideeffect', async () => {
 	let _id = new mongoose.Types.ObjectId();
 
 	let _manchanda = {
@@ -303,16 +289,13 @@ test('findByIdAndUpdate', async () => {
 	expect(person).toMatchObject(_manchanda);
 
 	// Learn: We are updating nothing, this is safe i.e., not data will be overwritten.
-	let newProperties = {}; // LEARN: In mongodb, updation of document happens like: newDocument = {...updateDocument ,...oldDocuemnt} , that means older proeperties will persist even if you omit in `updatedObject` while updating a document. Yikes!!
+	let update = {}; // LEARN: In mongodb, updation of document happens like: newDocument = {...updateDocument ,...oldDocuemnt} , that means older proeperties will persist even if you omit in `updatedObject` while updating a document. Yikes!!
 
 	person = await PersonModel
-		.findByIdAndUpdate(_id, newProperties)
+		.findByIdAndUpdate(_id, update)
 		.populate('gadgetList')
 		.lean();
-	// LEARN: lean() method above tells mongoose to call .toObject() method internally for this query. So, we don't need as:
-	// xxx ^--> let updatePerson = person.toObject()
 
-	delete _manchanda.gadgetList; // this was necessary to pass next test!
 	expect(person).toMatchObject(_manchanda);
 });
 
@@ -364,28 +347,34 @@ test('Add to items to an array field using .concat() js method', async () => {
 
 test('unique email test for car saving', async () => {
 	const email = 'mohit@rajput.com';
-	let car1Doc = new CarModel({
-		carName: 'audi',
-		email,
-	});
-	await car1Doc.save();
+	await CarModel.create({ carName: 'audi', email });
+
+
+	// Trying to save new car with an existing email id, should throw unique error:
+	let car2Doc = new CarModel({ carName: 'bmw', email });
+
+	let expectedErrorName = 'MongoServerError';
+	let expectedErrorMessageSlug = 'E11000 duplicate key error collection:';
 
 	let error;
 	try {
-		// Trying to save new car with an existing email id, should throw unique error:
-		let car2Doc = new CarModel({
-			carName: 'bmw',
-			email,
-		});
 		await car2Doc.save();
 	} catch (e) {
 		error = e;
-		console.log('Successfully got error ✅');
+		// console.log('Successfully got error ✅');
 	}
-	let expectedErrorName = 'MongoServerError';
-	let expectedErrorMessageSlug = 'E11000 duplicate key error collection:';
 	expect(error.name).toBe(expectedErrorName);
 	expect(error.message).toContain(expectedErrorMessageSlug);
+
+	let error2;
+	try {
+		await CarModel.create({ carName: 'bmw', email });
+	} catch (e) {
+		error2 = e;
+		// console.log('Successfully got error ✅');
+	}
+	expect(error2.name).toBe(expectedErrorName);
+	expect(error2.message).toContain(expectedErrorMessageSlug);
 });
 
 test('projection', async () => {
