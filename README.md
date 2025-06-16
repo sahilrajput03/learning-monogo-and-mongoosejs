@@ -1,5 +1,12 @@
 # Readme
 
+- Version Support: [Click here](https://mongoosejs.com/docs/version-support.html)
+  - 8.x (released October 31, 2023) is the current Mongoose major version. We ship all new bug fixes and features to 8.x.
+  - 7.x (released February 27, 2023) is currently in legacy support. We ship all new bug fixes and features to 7.x.
+  - 6.x (released August 24, 2021) is currently only receiving security fixes and requested bug fixes as of August 24, 2023. **End of life (EOL) is January 1, 2025**
+  - 5.x (released January 17, 2018) is **End-of-Life (EOL) since March 1, 2024.**
+- _EOL means that version will no longer receive any updates, security or otherwise._
+
 **Quicks Links:**
 
 - **❤️Learn Mongodb Doc: [Click here](https://docs.google.com/document/d/1OT6IMR600VjWteJ-kqM0jVQuqQQw308hkh3enZnu9tQ/edit?tab=t.0)** [Tags: `#mongodump`, `#mongorestore`, `#mongosh`, `#bsondump`]
