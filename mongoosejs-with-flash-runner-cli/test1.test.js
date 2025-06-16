@@ -130,6 +130,7 @@ test('findByIdAndRemove', async () => {
 });
 
 test('findOneAndUpdate 🎯', async () => {
+	// ✅ Works exactly same in mongoose v8 as well. [✅Tested in qr soluion project]
 	const db = mongoose.connection;
 	const collectioName = 'kids';
 	let status = await db.dropCollection(collectioName); // LEARN: This will throw error if the colleciton is already not there!
