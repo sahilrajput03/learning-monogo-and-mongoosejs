@@ -7,7 +7,7 @@
 ./watch.sh sh-1
 
 # Watching javascript file with mongo shell
-./js-watch.sh ./01.js
+./js-watch.sh ./00.js
 ```
 
 **Some used mongodb operators**
