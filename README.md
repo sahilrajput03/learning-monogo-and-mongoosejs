@@ -24,6 +24,23 @@
   - What is the difference between ‘index’ and ‘search index’?: [Click here](https://www.mongodb.com/community/forums/t/what-is-the-difference-between-index-and-search-index/200703)
   - Article - An 80/20 Guide to Mongoose Plugins - The Code Barbarian: [Click here](https://thecodebarbarian.com/2015/03/06/guide-to-mongoose-plugins)
 
+# mongoose().pluralize()('yourcollectionname')
+
+```js
+// @ts-ignore
+const pluralized = mongoose?.pluralize()('p')
+console.log(pluralized)
+// p => ps;	 		pa => pas; 		pas (✅NO CHANGE), 	pass => passes, 	passes (✅NO Change)
+
+// Not: If you want mongoos to not pluralize the collection name at all you can pass third param again as collection name:
+// E.g.,
+const PersonModel = model(
+	personsCollectionName, //LEARN: Model name(if third param is omiited, mongoose will pluralize `modelName` to get a `collectionName`.)
+	personSchema,
+	personsCollectionName //LEARN: Collection name(optional param but IMPORTANT) ensures that mongodb doesn't alter our name to pluras or sht thigs on itself.
+)
+```
+
 ## ❤️ `serverSelectionTimeoutMS` in mongoose
 
 Docs: [Click here](https://mongoosejs.com/docs/connections.html#serverselectiontimeoutms)
@@ -698,19 +715,19 @@ const citySchema = new mongoose.Schema({
 - Source: [SO](https://stackoverflow.com/a/59491047/10012446)
 - Article on Mongoose Docs - How to Use findOneAndUpdate() in Mongoose: [Click here](https://mongoosejs.com/docs/6.x/docs/tutorials/findoneandupdate.html)
 
-`findOneAndUpdate()` finds the first document that matches a given `filter`, applies an `update`. 
+`findOneAndUpdate()` finds the first document that matches a given `filter`, applies an `update`.
 
 ```ts
-const filter = { phone: request.phone}
-const update = { status: request.status }
+const filter = {phone: request.phone}
+const update = {status: request.status}
 
 const doc = await Contact.findOneAndUpdate(
-  filter,
-  update,
-  // We use `new: true` to get updated document else we older document (before update)
-  // We use `upsert: true` so that a new document is inserted in case filter does not match at all.
-  { upsert: true, new: true } 
-);
+	filter,
+	update,
+	// We use `new: true` to get updated document else we older document (before update)
+	// We use `upsert: true` so that a new document is inserted in case filter does not match at all.
+	{upsert: true, new: true}
+)
 ```
 
 ## Usage of `$exists`
