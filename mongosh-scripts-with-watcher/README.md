@@ -679,4 +679,27 @@ print(typeof myObjectId.toString() === 'string'); // true
 ```
 <!-- MARKDOWN-AUTO-DOCS:END -->
 
-Thanks.
+## File - `01.js`
+
+<!-- MARKDOWN-AUTO-DOCS:START (CODE:src=./01.js) -->
+<!-- MARKDOWN-AUTO-DOCS:END -->
+
+## File - `02-1.js`
+
+<!-- MARKDOWN-AUTO-DOCS:START (CODE:src=./02-1.js) -->
+<!-- MARKDOWN-AUTO-DOCS:END -->
+
+## File - `02-2.js`
+
+<!-- MARKDOWN-AUTO-DOCS:START (CODE:src=./02-2.js) -->
+<!-- MARKDOWN-AUTO-DOCS:END -->
+
+## File - `sh-1`
+
+<!-- MARKDOWN-AUTO-DOCS:START (CODE:src=./sh-1) -->
+<!-- MARKDOWN-AUTO-DOCS:END -->
+
+## File - `sh-2`
+
+<!-- MARKDOWN-AUTO-DOCS:START (CODE:src=./sh-2) -->
+<!-- MARKDOWN-AUTO-DOCS:END -->
