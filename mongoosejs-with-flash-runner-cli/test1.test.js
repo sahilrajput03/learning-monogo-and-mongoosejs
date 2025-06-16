@@ -142,10 +142,11 @@ test('findOneAndUpdate 🎯', async () => {
 		weight: Number,
 	});
 
-	// Note: We need `mongoose.models[collectioName] ||` in below line else we get error - "OverwriteModelError: Cannot overwrite `cartoons` model once compiled.  at Mongoose.model"
+	// ✅ Two ways to fix for `OverwriteModelError` which happens for line - `const KidModel = mongoose.model(collectioName, kidSchema);`.
 	// const KidModel = mongoose.models[collectioName] || mongoose.model(collectioName, kidSchema); // Way 1 ✅ [Works Tested but I fail to update schema in watch mode that's why prefering below 2nd way.]
 	if (mongoose.models[collectioName]) { delete mongoose.models[collectioName]; } // Way 2 ✅ [Works Tested]
 
+	// For below line in watch mode we get error - "OverwriteModelError: Cannot overwrite `cartoons` model once compiled.  at Mongoose.model" that's why we need one of above two ways to fix this issue:
 	const KidModel = mongoose.model(collectioName, kidSchema);
 
 	const kid = { name: 'Brian', age: 10, weight: null };
