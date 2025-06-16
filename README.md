@@ -28,11 +28,11 @@
 
 ```js
 // @ts-ignore
-const pluralized = mongoose?.pluralize()('p')
+const pluralized = mongoose?.pluralize()?.('p') || ""
 console.log(pluralized)
 // p => ps;	 		pa => pas; 		pas (✅NO CHANGE), 	pass => passes, 	passes (✅NO Change)
 
-// Not: If you want mongoos to not pluralize the collection name at all you can pass third param again as collection name:
+// Not: If you want mongoose to not pluralize the collection name at all you can pass third param again as collection name:
 // E.g.,
 const PersonModel = model(
 	personsCollectionName, //LEARN: Model name(if third param is omiited, mongoose will pluralize `modelName` to get a `collectionName`.)
