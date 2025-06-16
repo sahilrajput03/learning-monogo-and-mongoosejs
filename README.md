@@ -132,7 +132,7 @@ await doc.save({validateBeforeSave: false})
 - Src - https://www.reddit.com/r/mongodb/comments/1fcsemu/mongodb_realm_deprecation/
 - Docs - https://www.mongodb.com/products/updates/product-support-deprecation
 
-# It takes 30ms to open connection to mongodb running locally
+## It takes 30ms to open connection to mongodb running locally
 
 **_Thus if you have 33 test files and you open db for each test file then total time consumed for opening database connection is just 1 SECOND (33\*30ms = 1000ms)._**
 
@@ -151,7 +151,7 @@ console.time('db-start')
         console.timeEnd('db-start') // db-start: 28.915ms
 ```
 
-# ❤️ ❤️ Avoid duplicate references when creating relationships
+## ❤️ ❤️ Avoid duplicate references when creating relationships
 
 ~ Written by Sahil Rajput.
 
