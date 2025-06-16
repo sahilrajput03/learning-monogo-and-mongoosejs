@@ -30,7 +30,8 @@
 // @ts-ignore
 const pluralized = mongoose?.pluralize()?.('p') || ""
 console.log(pluralized)
-// p => ps;	 		pa => pas; 		pas (✅NO CHANGE), 	pass => passes, 	passes (✅NO Change)
+// p => ps;		class => classes,
+// ps => ps (✅NO CHANGE),  	classes => classes (✅NO Change)
 
 // Not: If you want mongoose to not pluralize the collection name at all you can pass third param again as collection name:
 // E.g.,
