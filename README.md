@@ -5,7 +5,7 @@
 - **❤️Learn mongoosejs:** [Click here](./mongoosejs-with-flash-runner-cli/test1.test.js) (`mongoosejs-with-flash-runner-cli`)
 - **❤️Learn mongosh:** [Click here](./mongosh-scripts-with-watcher/Readme.md) (`mongosh-scripts-with-watcher`)
 - **❤️Learn backup and restore mongodb:** [Click here](./backup-and-restore) (`backup-and-restore`)
-- LinkedIn Quiz Solutions: [Click here](https://github.com/Ebazhanov/linkedin-skill-assessments-quizzes/blob/main/mongodb/mongodb-quiz.md)e
+- LinkedIn Quiz Solutions: [Click here](https://github.com/Ebazhanov/linkedin-skill-assessments-quizzes/blob/main/mongodb/mongodb-quiz.md)
 - **`flash` is my own testing library, the code is @ [`flash`](https://github.com/sahilrajput03/flash).**
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
 - Seems like a good read on efficient mongodb queries with mongoosejs: [Click here](https://climbtheladder.com/10-mongoose-populate-best-practices/)
