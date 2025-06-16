@@ -9,6 +9,7 @@ const personsCollectionName = mongoose.pluralize()?.('persons') || "";
 const gadgetsCollectionName = mongoose.pluralize()?.('gadgets') || "";
 const carsCollectionName = mongoose.pluralize()?.('cars') || "";
 
+// * Person Collection
 let personSchema = new Schema(
 	{
 		gadgetList: [{ type: Schema.Types.ObjectId, ref: gadgetsCollectionName }],  // Using "ref" tells moongoose to join gadget docs from 'gadgetsCollectionName' collection.
@@ -19,9 +20,11 @@ let personSchema = new Schema(
 const PersonModel = model(personsCollectionName, personSchema);
 
 
+// * Gadgets Collection
 let gadgetSchema = new Schema({ deviceName: String }, { strict: false });
 const gadgetModel = model(gadgetsCollectionName, gadgetSchema);
 
+// * Cars Collection
 const carSchema = new Schema({
 	carName: {
 		type: String,
