@@ -682,24 +682,231 @@ print(typeof myObjectId.toString() === 'string'); // true
 ## File - `01.js`
 
 <!-- MARKDOWN-AUTO-DOCS:START (CODE:src=./01.js) -->
+<!-- The below code snippet is automatically added from ./01.js -->
+```js
+// @ts-nocheck
+// LEARN: Javascript instructions are different from cli instructions.
+// Refer docs page to know the Javacript Equivalents of cli instructions: https://www.mongodb.com/docs/v5.0/tutorial/write-scripts-for-the-mongo-shell/
+
+// * We use `inser` to insert a doc in this script.
+
+db = db.getSiblingDB('testdb2');
+
+db.posts.drop();
+
+print('\n🚀Inserting one document in posts collection:');
+// * Below throws - DeprecationWarning: Collection.insert() is deprecated. Use insertOne, insertMany, or bulkWrite.
+// Learn: print() methods prints the info from the operation ~Sahil
+// Learn: If we use insert() below we get - DeprecationWarning: Collection.insert() is deprecated. Use insertOne, insertMany, or bulkWrite.
+print(
+    db.posts.insertOne({
+        title: 'Post One',
+        body: 'Body of post one',
+        category: 'News',
+        likes: 4,
+        tags: ['news', 'events'],
+        user: {
+            name: 'John Doe',
+            status: 'author',
+        },
+        data: Date(),
+    })
+);
+
+
+print('\n🚀Print each document in posts collection (one liner):');
+db.posts.find().forEach(printjson);
+
+print('\n🚀Print each document in posts collection:');
+let postsCursor = db.posts.find();
+postsCursor.forEach(printjson); // Works like a charm. Src: https://www.mongodb.com/docs/manual/reference/method/db.collection.find/
+```
 <!-- MARKDOWN-AUTO-DOCS:END -->
 
 ## File - `02-1.js`
 
 <!-- MARKDOWN-AUTO-DOCS:START (CODE:src=./02-1.js) -->
+<!-- The below code snippet is automatically added from ./02-1.js -->
+```js
+// * We use `insertMany` to insert docs in this script.
+
+// @ts-nocheck
+db = db.getSiblingDB('mydb');
+db.datingLikes.drop();
+
+//  Create index coz we're filtering on basis of these two fields while querying
+db.persons.createIndexes([{ from: 1 }, { to: 1 }]);
+
+// Insert large amount of likes documents
+db.datingLikes.insertMany(Array(10 * 100 * 1000).fill(0).map(u => ({ from: ObjectId(), to: ObjectId() })));
+// Insert 5 more likes documents
+db.datingLikes.insertMany([6, 7, 8, 9, 10].map(id => ({ from: id, to: ObjectId() })));
+
+let currentUserId = 100;
+let usersIds = [1, 2, 3, 4, 5]; // list of users (userIds) who liked `currentUser`
+
+// Insert 5 likes (users liked the current user)
+db.datingLikes.insertMany(usersIds.map(id => ({ from: id, to: currentUserId, isMonsterLike: false })));
+
+// Insert likes made by current user (to = 3,4,5 only)
+db.datingLikes.insertMany([3, 4, 5, 6, 7, 8, 9, 10].map(id => ({ from: currentUserId, to: id, isMonsterLike: true })));
+```
 <!-- MARKDOWN-AUTO-DOCS:END -->
 
 ## File - `02-2.js`
 
 <!-- MARKDOWN-AUTO-DOCS:START (CODE:src=./02-2.js) -->
+<!-- The below code snippet is automatically added from ./02-2.js -->
+```js
+// * We use `find` and `explain` to get execution time (time took) in this script.
+
+// @ts-nocheck
+db = db.getSiblingDB('mydb');
+
+let currentUserId = 100;
+
+// Get matches
+let query = db.datingLikes.find({ to: currentUserId });
+let list = query.toArray().map(item => item.from);
+let findQuery = db.datingLikes.find({ to: { "$in": list } });
+
+// Users who likes currentUser and currentUser also likes them:
+print('Matches:');
+findQuery.forEach(printjson);
+
+// Execution time:
+// 	TODO: Official talk on .explain by mongodb itself: https://www.youtube.com/watch?v=UMzt4PbHtm8
+// 	- Docs: https://www.mongodb.com/docs/manual/reference/explain-results/
+// 	- https://www.youtube.com/watch?v=0WkJKa_Nv_o
+// 	- https://www.youtube.com/watch?v=IZ1k1BB_BWo
+// 	.explain() // gives us queryPlanner
+// 	.explain("executionStats") // gives us queryPlanner as well as executionStats
+
+// Get Time taken for the query
+printjson('Time took: query (ms): ' + query.explain('executionStats').executionStats.executionTimeMillis);
+printjson('Docs Examined: query: ' + query.explain('executionStats').executionStats.totalDocsExamined);
+print();
+printjson('Time took: findQuery (ms): ' + findQuery.explain('executionStats').executionStats.executionTimeMillis);
+printjson('Docs Examined: findQuery: ' + findQuery.explain('executionStats').executionStats.totalDocsExamined);
+
+// PRINT ALL LIKES DOCS
+// db.datingLikes.find().forEach(printjson)
+```
 <!-- MARKDOWN-AUTO-DOCS:END -->
 
 ## File - `sh-1`
 
 <!-- MARKDOWN-AUTO-DOCS:START (CODE:src=./sh-1) -->
+<!-- The below code snippet is automatically added from ./sh-1 -->
+```
+// @ts-nocheck
+use mydb
+
+// Drop a collection
+db.posts.drop() // true
+
+db.createCollection('posts')
+
+// show collections
+show collections
+
+// Insert a single document
+db.posts.insert({
+	title: 'Post One',
+	body: 'Body of post one',
+	category: 'News',
+	date: Date()
+})
+
+// Insert many posts
+db.posts.insertMany([
+{
+	title: 'Post Two',
+	body: 'Body of post two',
+	category: 'Technology',
+	date: Date()
+},
+{
+	title: 'Post Three',
+	body: 'Body of post three',
+	category: 'News',
+	date: Date()
+}])
+
+// Find all documents
+db.posts.find().pretty()
+
+// Drop a collection
+// db.posts.drop() // true
+
+// Drop a database
+// db.dropDatabase() // { "ok" : 1 }
+```
 <!-- MARKDOWN-AUTO-DOCS:END -->
 
 ## File - `sh-2`
 
 <!-- MARKDOWN-AUTO-DOCS:START (CODE:src=./sh-2) -->
+<!-- The below code snippet is automatically added from ./sh-2 -->
+```
+// @ts-nocheck
+use mydb
+db.persons.drop() // true
+db.createCollection('persons')
+// cls
+
+// Learn: GeoJSON object: `{type: "Point", coordinates: [number, number]}`
+
+let fromCoordinates
+let turingLocation
+let teslaLocation
+
+const useMyLocation = true
+if(useMyLocation) {
+	fromCoordinates = [30.663794441117606, 76.84462298048282]
+	turingLocation = [30.668482493441893, 76.84996594056327]
+	teslaLocation = [30.679993722431135, 76.86150115968628]
+} else {
+	fromCoordinates = [-10.8, -10.8]
+	turingLocation = [-10.5, -10.5];
+	teslaLocation = [-10.6, -10.6]
+}
+
+db.persons.insertMany([
+	{
+		name: "Alan Turing",
+		location: {
+			type: "Point",
+			coordinates: turingLocation
+		}
+	},
+	{
+		name: "Nikola Tesla",
+		location: {
+			type: "Point",
+			coordinates: teslaLocation
+		}
+	}
+])
+
+// $geoNear requires to have a 2d or 2sdphere index (from mongo shell compiler)
+db.persons.createIndex({location: '2dsphere'})
+
+// Find all documents
+// db.persons.find().pretty()
+
+// cls
+db.persons.aggregate([
+	{
+		$geoNear: {
+			near: {
+				type: "Point",
+				coordinates: fromCoordinates // Distance wil be calculated from this point
+			},
+			maxDistance: 100000, // units is metres
+			distanceField: 'distance' // output field which will show the distance measured
+		}
+	}
+]).pretty()
+```
 <!-- MARKDOWN-AUTO-DOCS:END -->
