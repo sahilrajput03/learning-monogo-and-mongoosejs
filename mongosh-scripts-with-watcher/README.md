@@ -1,5 +1,8 @@
 # Mongosh
 
+**Quick Links:**
+- Files: [Click here](#Code-from-script-files-via-autodocs)
+
 ## Watching scripts:
 
 ```bash
@@ -643,6 +646,8 @@ db.posts.find(
 ```
 
 **Below code is generated automatically via autodocs.**
+
+# Code from script files via autodocs
 
 ## File - `00.js`
 
