@@ -1,23 +1,39 @@
 // @ts-nocheck
 use mydb
+db.persons.drop() // true
 db.createCollection('persons')
-cls
+// cls
 
 // Learn: GeoJSON object: `{type: "Point", coordinates: [number, number]}`
+
+let fromCoordinates
+let turingLocation
+let teslaLocation
+
+const useMyLocation = true
+if(useMyLocation) {
+	fromCoordinates = [30.663794441117606, 76.84462298048282]
+	turingLocation = [30.668482493441893, 76.84996594056327]
+	teslaLocation = [30.679993722431135, 76.86150115968628]
+} else {
+	fromCoordinates = [-10.8, -10.8]
+	turingLocation = [-10.5, -10.5];
+	teslaLocation = [-10.6, -10.6]
+}
 
 db.persons.insertMany([
 	{
 		name: "Alan Turing",
 		location: {
 			type: "Point",
-			coordinates: [-10.5, -10.5]
+			coordinates: turingLocation
 		}
 	},
 	{
 		name: "Nikola Tesla",
 		location: {
 			type: "Point",
-			coordinates: [-10.6, -10.6]
+			coordinates: teslaLocation
 		}
 	}
 ])
@@ -25,22 +41,19 @@ db.persons.insertMany([
 // $geoNear requires to have a 2d or 2sdphere index (from mongo shell compiler)
 db.persons.createIndex({location: '2dsphere'})
 
-cls
 // Find all documents
 // db.persons.find().pretty()
 
+// cls
 db.persons.aggregate([
 	{
 		$geoNear: {
 			near: {
 				type: "Point",
-				coordinates: [-10.8, -10.8] // Distance wil be calculated from this point
+				coordinates: fromCoordinates // Distance wil be calculated from this point
 			},
 			maxDistance: 100000, // units is metres
 			distanceField: 'distance' // output field which will show the distance measured
 		}
 	}
 ]).pretty()
-
-// Drop a collection
-db.persons.drop() // true

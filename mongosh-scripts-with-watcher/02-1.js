@@ -1,3 +1,6 @@
+
+// * We use `insertMany` to insert docs in this script.
+
 // @ts-nocheck
 db = db.getSiblingDB('mydb');
 db.datingLikes.drop();

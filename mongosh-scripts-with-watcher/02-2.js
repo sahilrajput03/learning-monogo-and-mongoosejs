@@ -1,3 +1,6 @@
+
+// * We use `find` and `explain` to get execution time (time took) in this script.
+
 // @ts-nocheck
 db = db.getSiblingDB('mydb');
 

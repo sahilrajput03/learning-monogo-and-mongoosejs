@@ -11,22 +11,13 @@ db.datingLikes.insertMany([
 	{ from: 5, to: 4 },
 ]);
 
-// print('\n🚀Printing each document of datingLikes collection:');
-// let myCursor = db.datingLikes.find();
-// myCursor.forEach(printjson);
-
-print('\n🚀Printing each document of datingLikes collection (oneliner):');
+print('\n🚀Print each document in datingLikes collection:');
 db.datingLikes.find().forEach(printjson);
 
 let filters = [1, 2, 3].map(item => ({ from: item, to: 9 }));
 
-let matches = db.datingLikes.find({
+let datingLikesCursor = db.datingLikes.find({
 	$or: filters
 });
 print('\n🚀Printing found matches:');
-matches.forEach(printjson);
-
-myObjectId = ObjectId("507c7f79bcf86cd7994f6c0e");
-print(typeof myObjectId == 'object'); // true
-print(myObjectId.toString() === '507c7f79bcf86cd7994f6c0e'); // true
-print(typeof myObjectId.toString() === 'string'); // true
+datingLikesCursor.forEach(printjson);
