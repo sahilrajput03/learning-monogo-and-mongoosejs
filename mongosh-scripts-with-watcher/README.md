@@ -644,9 +644,9 @@ db.posts.find(
 
 **Below code is generated automatically via autodocs.**
 
-## File - `mongosh-scripts-with-watcher/00.js`
+## File - `00.js`
 
-<!-- MARKDOWN-AUTO-DOCS:START (CODE:src=./mongosh-scripts-with-watcher/00.js) -->
+<!-- MARKDOWN-AUTO-DOCS:START (CODE:src=./00.js) -->
 <!-- MARKDOWN-AUTO-DOCS:END -->
 
 Thanks.
