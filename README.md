@@ -691,42 +691,26 @@ const citySchema = new mongoose.Schema({
 // loc: { type: "Point", coordinates: [ longitude, latitude ] },
 ```
 
-## ♥ ❣♥ ❣♥ ❣ `findOneAndUpdate` is best and how to use from the maintainer itself
+## ❤️ `findOneAndUpdate`
 
 - MongoDb Docs: [findOneAndUpdate](https://www.mongodb.com/docs/manual/reference/method/db.collection.findOneAndUpdate/)
 - MongooseJs: [How to Use findOneAndUpdate() in Mongoose](https://mongoosejs.com/docs/tutorials/findoneandupdate.html)
 - Source: [SO](https://stackoverflow.com/a/59491047/10012446)
+- Article on Mongoose Docs - How to Use findOneAndUpdate() in Mongoose: [Click here](https://mongoosejs.com/docs/6.x/docs/tutorials/findoneandupdate.html)
+
+`findOneAndUpdate()` finds the first document that matches a given `filter`, applies an `update`. 
 
 ```ts
-// creating new document if already doesn't exist (note: we're passing {} as second coz we just want a new document with required fields (search fields in 1st argument)
-await this.feedReplyLikeModel.findOneAndUpdate({ feedReplyId, userId }, {}, { upsert: true, new: true });
-
+const filter = { phone: request.phone}
+const update = { status: request.status }
 
 const doc = await Contact.findOneAndUpdate(
-  { phone: request.phone},
-  { status: request.status },
-  { upsert: true, new: true }
+  filter,
+  update,
+  // We use `new: true` to get updated document else we older document (before update)
+  // We use `upsert: true` so that a new document is inserted in case filter does not match at all.
+  { upsert: true, new: true } 
 );
-
-
-# Comment from here: https://stackoverflow.com/a/7486950/10012446
-# I don't think you need the {$set: ... } part here as its automatic form my reading
-# ~Sahil: People use $set as well:
-const doc = await Contact.findOneAndUpdate(
-  { phone: request.phone},
-  { $set: { status: request.status } },
-  { upsert: true, new: true }
-);
-```
-
-**LEARN: ♥ ❣♥ ❣♥ Difference between `upsert: true` and `new: true`**
-
-Source: https://stackoverflow.com/a/44794886
-
-```txt
-They are completely different flags
-- If upsert is true then if the row trying to be updated does not exist then a new row is inserted instead , if false then it does not do anything .
-- If new is true then the modified document is returned after the update rather than the original , if false then the original document is returned
 ```
 
 ## Usage of `$exists`
