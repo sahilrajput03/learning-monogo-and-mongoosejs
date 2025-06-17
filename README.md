@@ -26,15 +26,27 @@
 
 # mongoose().pluralize()('yourcollectionname')
 
-```js
+🤔How mongoose's pluralize option works:
+
+```ts
 // @ts-ignore
 const pluralized = mongoose?.pluralize()?.('p') || ''
 console.log(pluralized)
 // p => ps;		class => classes,
 // ps => ps (✅NO CHANGE),  	classes => classes (✅NO Change)
+```
 
-// Not: If you want mongoose to not pluralize the collection name at all you can pass third param again as collection name:
-// E.g.,
+**🛑We should never use pluralize in code because**
+
+```ts
+// Note: We can use pluralize fn learn how mongodb pluralizes the collection name on its internally on its own but pluralize also converts your collection name from camelCase to lowercase name (which is super bad 😭 that's why I always pass ✅ third arg to mongoose.model(..) fn so mongodb don't pluralize on its own and we avoid future surprises).
+// const collectionName = mongoose.pluralize()?.('pdfListings')!  
+// console.log("🚀 ~ collectionName:", collectionName) // pdflistings (Note: 😭 The case of L is changed to l)
+```
+
+**✅Always pass third param to mongoose.model(..) so that `mongoose` never pluralize your db name on its own:**
+
+```ts
 const PersonModel = model(
 	personsCollectionName, //LEARN: Model name(if third param is omiited, mongoose will pluralize `modelName` to get a `collectionName`.)
 	personSchema,
