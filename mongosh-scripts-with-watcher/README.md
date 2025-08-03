@@ -2,7 +2,7 @@
 
 ### 🚀❤️Code from script files via autodocs:
 
-[Click here](./#Code-from-script-files-via-autodocs)
+[Click here](./#Code-from-script-files-via-autodocs) (Intra page link)
 
 ## Watching scripts:
 
