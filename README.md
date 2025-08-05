@@ -1,5 +1,3 @@
-# Readme
-
 **Quicks Links:**
 
 - **Notes:**
@@ -7,4 +5,3 @@
 	- **❤️Learn mongoosejs:** [test1.test.js](https://github.com/sahilrajput03/learning-monogo-and-mongoosejs/blob/main/mongoosejs-with-flash-runner-cli/test1.test.js) (`mongoosejs-with-flash-runner-cli`)
 	- **❤️Learn mongosh:** [Click here](./mongosh-scripts-with-watcher/README.md) (`mongosh-scripts-with-watcher`)
 	- **❤️Learn backup and restore mongodb:** [Click here](./backup-and-restore) (`backup-and-restore`)
-
