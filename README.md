@@ -3,11 +3,13 @@
 **Quicks Links:**
 
 - **Notes:**
-	- **❤️Main Readme:** *(This file)*
 	- **❤️Learn Mongodb Doc: [Click here](https://docs.google.com/document/d/1OT6IMR600VjWteJ-kqM0jVQuqQQw308hkh3enZnu9tQ/edit?tab=t.0)** [Tags: `#mongodump`, `#mongorestore`, `#mongosh`, `#bsondump`]
-	- **❤️Learn mongoosejs:** [Click here](./mongoosejs-with-flash-runner-cli/test1.test.js) (`mongoosejs-with-flash-runner-cli`)
+	- **❤️Learn mongoosejs:** [test1.test.js](https://github.com/sahilrajput03/learning-monogo-and-mongoosejs/blob/main/mongoosejs-with-flash-runner-cli/test1.test.js) (`mongoosejs-with-flash-runner-cli`)
 	- **❤️Learn mongosh:** [Click here](./mongosh-scripts-with-watcher/README.md) (`mongosh-scripts-with-watcher`)
 	- **❤️Learn backup and restore mongodb:** [Click here](./backup-and-restore) (`backup-and-restore`)
+
+# MOVED TO Google Doc
+
 - LinkedIn Quiz Solutions: [Click here](https://github.com/Ebazhanov/linkedin-skill-assessments-quizzes/blob/main/mongodb/mongodb-quiz.md)
 - **`flash` is my own testing library, the code is @ [`flash`](https://github.com/sahilrajput03/flash).**
 - From `jest` official docs for testing mongodb database (using official `mongodb` library): https://jestjs.io/docs/mongodb
